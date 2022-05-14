@@ -48,7 +48,7 @@ public class MemberDAO extends DAO {
             conn = getConnection();
             pstmt = conn.prepareStatement(SQL);
 
-            pstmt.setObject(1, null); // id가 auto_increment filed 라서 column 명을 생략하고 insert 문을 사용하는 경우, null 값을 넣어주면 된다,
+            pstmt.setObject(1, member.getId()); // id가 auto_increment filed 라서 column 명을 생략하고 insert 문을 사용하는 경우, null 값을 넣어주면 된다,
             pstmt.setString(2, member.getEmail());
             pstmt.setString(3, member.getPassword());
             pstmt.setString(4, member.getNickname());

@@ -1,8 +1,10 @@
 package com.example.balance_game_community.member;
 
-import com.example.balance_game_community.DataSource;
 import com.example.balance_game_community.TestDataSource;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,7 +18,7 @@ class MemberDAOTest {
     }
 
     @AfterEach
-    void reset() {
+    void tearDown() {
         memberDAO.reset();
     }
 
