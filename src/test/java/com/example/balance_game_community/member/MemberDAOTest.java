@@ -1,6 +1,7 @@
 package com.example.balance_game_community.member;
 
 import com.example.balance_game_community.DataSource;
+import com.example.balance_game_community.TestDataSource;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,11 +12,11 @@ class MemberDAOTest {
 
     @BeforeAll
     static void init() {
-        memberDAO = new MemberDAO(new DataSource());
+        memberDAO = new MemberDAO(new TestDataSource());
     }
 
-    @AfterAll
-    static void reset() {
+    @AfterEach
+    void reset() {
         memberDAO.reset();
     }
 

@@ -8,7 +8,7 @@ public class DataSource {
     String dbURL, dbUser, dbPassword;
 
     public DataSource() {
-        this.dbURL = "jdbc:mysql://localhost:3307/balance_game_community?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false";
+        this.dbURL = "jdbc:mysql://localhost:3307/balance_game_community?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true";
         this.dbUser = "balance_game_community_dev";
         this.dbPassword = "1234";
     }
