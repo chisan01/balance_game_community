@@ -6,6 +6,7 @@ public class BalanceGameComment {
     private Long id;
     private Long memberId;
     private Long balanceGameId;
+    private String content;
     private Timestamp writeTime;
 
     public Long getId() {
@@ -30,6 +31,14 @@ public class BalanceGameComment {
 
     public void setBalanceGameId(Long balanceGameId) {
         this.balanceGameId = balanceGameId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Timestamp getWriteTime() {

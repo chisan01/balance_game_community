@@ -1,7 +1,6 @@
 package com.example.balance_game_community.balanceGame;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 public class BalanceGame {
     private Long id;
@@ -9,6 +8,8 @@ public class BalanceGame {
     private String question;
     private String answer1;
     private String answer2;
+    private String picture1;
+    private String picture2;
     private Timestamp enrollmentTime;
 
     public Long getId() {
@@ -49,6 +50,22 @@ public class BalanceGame {
 
     public void setAnswer2(String answer2) {
         this.answer2 = answer2;
+    }
+
+    public String getPicture1() {
+        return picture1;
+    }
+
+    public void setPicture1(String picture1) {
+        this.picture1 = picture1;
+    }
+
+    public String getPicture2() {
+        return picture2;
+    }
+
+    public void setPicture2(String picture2) {
+        this.picture2 = picture2;
     }
 
     public Timestamp getEnrollmentTime() {

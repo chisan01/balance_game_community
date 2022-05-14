@@ -1,10 +1,12 @@
-package com.example.balance_game_community.balanceGameDifficultyVote;
+package com.example.balance_game_community.balanceGameVote;
 
-public class BalanceGameDifficultyVote {
+public class BalanceGameVote {
     private Long id;
     private Long memberId;
     private Long balanceGameId;
+    private Integer answerNumber;
     private Difficulty difficulty;
+    private Preference preference;
 
     public Long getId() {
         return id;
@@ -30,11 +32,27 @@ public class BalanceGameDifficultyVote {
         this.balanceGameId = balanceGameId;
     }
 
+    public Integer getAnswerNumber() {
+        return answerNumber;
+    }
+
+    public void setAnswerNumber(Integer answerNumber) {
+        this.answerNumber = answerNumber;
+    }
+
     public Difficulty getDifficulty() {
         return difficulty;
     }
 
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public Preference getPreference() {
+        return preference;
+    }
+
+    public void setPreference(Preference preference) {
+        this.preference = preference;
     }
 }
