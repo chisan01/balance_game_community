@@ -2,14 +2,18 @@ package com.example.balance_game_community.balanceGame;
 
 import com.example.balance_game_community.DAO;
 import com.example.balance_game_community.DataSource;
+import com.example.balance_game_community.balanceGameVote.BalanceGameVoteDAO;
 
 import java.sql.*;
 import java.time.Instant;
 
 public class BalanceGameDAO extends DAO {
 
+    private final BalanceGameVoteDAO balanceGameVoteDAO;
+
     public BalanceGameDAO(DataSource dataSource) {
         super(dataSource);
+        balanceGameVoteDAO = new BalanceGameVoteDAO(dataSource);
     }
 
     // 테스트 용 DB table reset
@@ -59,7 +63,6 @@ public class BalanceGameDAO extends DAO {
         }
     }
 
-    // 특정 밸런스게임 id
     public BalanceGame findById(Long balanceGameId) {
         String SQL = "SELECT * FROM balancegame WHERE id = ?";
 
@@ -83,42 +86,8 @@ public class BalanceGameDAO extends DAO {
                 balanceGame.setPicture1(rs.getString(6));
                 balanceGame.setPicture2(rs.getString(7));
                 balanceGame.setEnrollmentTime(rs.getTimestamp(8));
-                return balanceGame;
+                return balanceGameVoteDAO.updatePreferenceCount(balanceGame);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            close(conn, pstmt, rs);
-        }
-        return null;
-    }
-
-    // 게임 결과 확인 (사람들의 투표 수, 선택 비율 확인) - 한번 투표한 경우 바로 게임 결과를 표시해야함
-    public BalanceGameResult getBalanceGameResult(Long balanceGameId) {
-        String SQL = "SELECT COUNT(*) AS voteCount\n" +
-                "FROM balancegamevote\n" +
-                "WHERE balanceGameId = ?\n" +
-                "GROUP BY answerNumber\n" +
-                "ORDER BY answerNumber;";
-
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-
-        try {
-            conn = getConnection();
-            pstmt = conn.prepareStatement(SQL);
-            pstmt.setLong(1, balanceGameId);
-
-            rs = pstmt.executeQuery();
-
-            Long[] voteCount = new Long[2];
-            for (int i = 0; i < 2; i++) {
-                rs.next();
-                voteCount[i] = rs.getLong(1);
-            }
-
-            return new BalanceGameResult(voteCount[0], voteCount[1]);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

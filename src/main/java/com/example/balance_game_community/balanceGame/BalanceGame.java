@@ -12,6 +12,9 @@ public class BalanceGame {
     private String picture2;
     private Timestamp enrollmentTime;
 
+    private Long likeNumber;
+    private Long dislikeNumber;
+
     public Long getId() {
         return id;
     }
@@ -74,5 +77,21 @@ public class BalanceGame {
 
     public void setEnrollmentTime(Timestamp enrollmentTime) {
         this.enrollmentTime = enrollmentTime;
+    }
+
+    public Long getLikeNumber() {
+        return likeNumber;
+    }
+
+    public void setLikeNumber(Long likeNumber) {
+        this.likeNumber = likeNumber;
+    }
+
+    public Long getDislikeNumber() {
+        return dislikeNumber;
+    }
+
+    public void setDislikeNumber(Long dislikeNumber) {
+        this.dislikeNumber = dislikeNumber;
     }
 }

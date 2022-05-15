@@ -60,8 +60,8 @@ public class BalanceGameVoteDAO extends DAO {
     }
 
     // 특정 밸런스게임에 대해 특정 회원이 이미 답변을 했는지 확인
-    public Boolean findByMemberIdAndBalanceGameId(Long memberId, Long balanceGameId) {
-        String SQL = "SELECT * FROM balancegamevote WHERE memberId = ? AND balanceGameId = ?";
+    public Long findByMemberIdAndBalanceGameId(Long memberId, Long balanceGameId) {
+        String SQL = "SELECT id FROM balancegamevote WHERE memberId = ? AND balanceGameId = ?";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -74,7 +74,106 @@ public class BalanceGameVoteDAO extends DAO {
             pstmt.setLong(2, balanceGameId);
 
             rs = pstmt.executeQuery();
-            return rs.next();
+
+            if (rs.next()) {
+                return rs.getLong(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(conn, pstmt, rs);
+        }
+        return null;
+    }
+
+
+    // 게임 결과 확인 (사람들의 투표 수, 선택 비율 확인) - 한번 투표한 경우 바로 게임 결과를 표시해야함
+    public BalanceGameResult getBalanceGameResult(Long balanceGameId) {
+        String SQL = "SELECT COUNT(*) AS voteCount\n" +
+                "FROM balancegamevote\n" +
+                "WHERE balanceGameId = ?\n" +
+                "GROUP BY answerNumber\n" +
+                "ORDER BY answerNumber;";
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setLong(1, balanceGameId);
+
+            rs = pstmt.executeQuery();
+
+            Long[] voteCount = new Long[2];
+            for (int i = 0; i < 2; i++) {
+                rs.next();
+                voteCount[i] = rs.getLong(1);
+            }
+
+            return new BalanceGameResult(voteCount[0], voteCount[1]);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(conn, pstmt, rs);
+        }
+        return null;
+    }
+
+    // 답변 후 해당 게임에 대한 선호도(좋아요/싫어요) 투표
+    public void votePreference(Long memberId, Long balanceGameId, Preference preference) {
+        Long balanceGameVoteId = findByMemberIdAndBalanceGameId(memberId, balanceGameId);
+
+        String SQL = "UPDATE balancegamevote SET preference = ? WHERE id = ?";
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(SQL);
+
+            pstmt.setString(1, preference.name()); // id가 auto_increment filed 라서 column 명을 생략하고 insert 문을 사용하는 경우, null 값을 넣어주면 된다,
+            pstmt.setLong(2, balanceGameVoteId);
+
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(conn, pstmt, rs);
+        }
+    }
+
+    // 특정 게임의 좋아요, 싫어요 개수 update
+    public BalanceGame updatePreferenceCount(BalanceGame balanceGame) {
+        String SQL = "SELECT COUNT(*) AS preferenceCount\n" +
+                "FROM balancegamevote\n" +
+                "WHERE balanceGameId = ?\n" +
+                "GROUP BY preference\n" +
+                "ORDER BY preference;";
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setLong(1, balanceGame.getId());
+
+            rs = pstmt.executeQuery();
+
+            Long[] preferenceCount = new Long[2];
+            for (int i = 0; i < 2; i++) {
+                rs.next();
+                preferenceCount[i] = rs.getLong(1);
+            }
+            balanceGame.setDislikeNumber(preferenceCount[0]);
+            balanceGame.setLikeNumber(preferenceCount[1]);
+
+            return balanceGame;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -84,7 +183,4 @@ public class BalanceGameVoteDAO extends DAO {
     }
 
     // 답변 후 난이도 투표
-
-    // 답변 후 해당 게임에 대한 선호도(좋아요/싫어요) 투표
-
 }
