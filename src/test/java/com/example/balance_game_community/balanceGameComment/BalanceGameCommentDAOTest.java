@@ -1,5 +1,6 @@
 package com.example.balance_game_community.balanceGameComment;
 
+import com.example.balance_game_community.AppConfig;
 import com.example.balance_game_community.TestDataSource;
 import com.example.balance_game_community.balanceGame.BalanceGame;
 import com.example.balance_game_community.balanceGame.BalanceGameDAO;
@@ -8,6 +9,7 @@ import com.example.balance_game_community.balanceGameVote.Preference;
 import com.example.balance_game_community.member.Member;
 import com.example.balance_game_community.member.MemberDAO;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,25 +19,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BalanceGameCommentDAOTest {
 
+    private static AppConfig appTestConfig;
     private static MemberDAO memberDAO;
     private static BalanceGameDAO balanceGameDAO;
     private static BalanceGameVoteDAO balanceGameVoteDAO;
     private static BalanceGameCommentDAO balanceGameCommentDAO;
 
-    @BeforeEach
-    void setUp() {
-        memberDAO = new MemberDAO(new TestDataSource());
-        balanceGameDAO = new BalanceGameDAO(new TestDataSource());
-        balanceGameVoteDAO = new BalanceGameVoteDAO(new TestDataSource());
-        balanceGameCommentDAO = new BalanceGameCommentDAO(new TestDataSource());
+    @BeforeAll
+    static void setUp() {
+        appTestConfig = new AppConfig(new TestDataSource());
+        memberDAO = appTestConfig.getMemberDAO();
+        balanceGameVoteDAO = appTestConfig.getBalanceGameVoteDAO();
+        balanceGameDAO = appTestConfig.getBalanceGameDAO();
+        balanceGameCommentDAO = appTestConfig.getBalanceGameCommentDAO();
     }
 
     @AfterEach
     void tearDown() {
-        memberDAO.reset();
-        balanceGameDAO.reset();
-        balanceGameVoteDAO.reset();
-        balanceGameCommentDAO.reset();
+        appTestConfig.resetAll();
     }
 
     @Test

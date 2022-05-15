@@ -1,9 +1,11 @@
 package com.example.balance_game_community.balanceGameVote;
 
+import com.example.balance_game_community.AppConfig;
 import com.example.balance_game_community.TestDataSource;
 import com.example.balance_game_community.balanceGame.BalanceGame;
 import com.example.balance_game_community.balanceGame.BalanceGameDAO;
 import com.example.balance_game_community.balanceGame.BalanceGameResult;
+import com.example.balance_game_community.balanceGameComment.BalanceGameCommentDAO;
 import com.example.balance_game_community.member.Member;
 import com.example.balance_game_community.member.MemberDAO;
 import org.junit.jupiter.api.*;
@@ -12,22 +14,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BalanceGameVoteDAOTest {
 
+    private static AppConfig appTestConfig;
     private static MemberDAO memberDAO;
     private static BalanceGameDAO balanceGameDAO;
     private static BalanceGameVoteDAO balanceGameVoteDAO;
+    private static BalanceGameCommentDAO balanceGameCommentDAO;
 
     @BeforeAll
-    static void init() {
-        memberDAO = new MemberDAO(new TestDataSource());
-        balanceGameDAO = new BalanceGameDAO(new TestDataSource());
-        balanceGameVoteDAO = new BalanceGameVoteDAO(new TestDataSource());
+    static void setUp() {
+        appTestConfig = new AppConfig(new TestDataSource());
+        memberDAO = appTestConfig.getMemberDAO();
+        balanceGameVoteDAO = appTestConfig.getBalanceGameVoteDAO();
+        balanceGameDAO = appTestConfig.getBalanceGameDAO();
+        balanceGameCommentDAO = appTestConfig.getBalanceGameCommentDAO();
     }
 
     @AfterEach
     void tearDown() {
-        balanceGameDAO.reset();
-        balanceGameVoteDAO.reset();
-        memberDAO.reset();
+        appTestConfig.resetAll();
     }
 
 //    @Test
@@ -175,5 +179,40 @@ class BalanceGameVoteDAOTest {
         balanceGame = balanceGameVoteDAO.updatePreferenceCount(balanceGame);
         assertEquals(balanceGame.getLikeNumber(), 1);
         assertEquals(balanceGame.getDislikeNumber(), 3);
+    }
+
+    @Test
+    @DisplayName("특정 밸런스 게임의 좋아요, 싫어요 개수 update - 좋아요, 싫어요 투표가 없는 경우")
+    public void updatePreferenceCountWhenZero() {
+        // given
+        Member member = new Member();
+        member.setId(2L);
+        member.setEmail("test@gmail.com");
+        member.setPassword("1234");
+        member.setNickname("test");
+        memberDAO.signIn(member);
+
+        Member member2 = new Member();
+        member2.setId(4L);
+        member2.setEmail("test2@gmail.com");
+        member2.setPassword("1234");
+        member2.setNickname("test2");
+        memberDAO.signIn(member2);
+
+        BalanceGame balanceGame = new BalanceGame();
+        balanceGame.setId(10L);
+        balanceGame.setQuestion("둘 중 하나만 골라야 한다면?");
+        balanceGame.setAnswer1("A");
+        balanceGame.setAnswer2("B");
+        balanceGameDAO.addBalanceGame(member.getId(), balanceGame);
+
+        // when
+        balanceGameVoteDAO.chooseAnswer(member.getId(), balanceGame.getId(), 2);
+        balanceGameVoteDAO.chooseAnswer(member2.getId(), balanceGame.getId(), 1);
+
+        // then
+        balanceGame = balanceGameVoteDAO.updatePreferenceCount(balanceGame);
+        assertEquals(0, balanceGame.getLikeNumber());
+        assertEquals(0, balanceGame.getDislikeNumber());
     }
 }

@@ -11,9 +11,9 @@ public class BalanceGameDAO extends DAO {
 
     private final BalanceGameVoteDAO balanceGameVoteDAO;
 
-    public BalanceGameDAO(DataSource dataSource) {
+    public BalanceGameDAO(DataSource dataSource, BalanceGameVoteDAO balanceGameVoteDAO) {
         super(dataSource);
-        balanceGameVoteDAO = new BalanceGameVoteDAO(dataSource);
+        this.balanceGameVoteDAO = balanceGameVoteDAO;
     }
 
     // 테스트 용 DB table reset

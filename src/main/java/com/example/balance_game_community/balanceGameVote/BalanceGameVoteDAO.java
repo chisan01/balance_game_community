@@ -7,6 +7,7 @@ import com.example.balance_game_community.balanceGame.BalanceGameResult;
 
 import java.sql.*;
 import java.time.Instant;
+import java.util.Arrays;
 
 public class BalanceGameVoteDAO extends DAO {
 
@@ -148,7 +149,7 @@ public class BalanceGameVoteDAO extends DAO {
 
     // 특정 게임의 좋아요, 싫어요 개수 update
     public BalanceGame updatePreferenceCount(BalanceGame balanceGame) {
-        String SQL = "SELECT COUNT(*) AS preferenceCount\n" +
+        String SQL = "SELECT preference, COUNT(*) AS preferenceCount\n" +
                 "FROM balancegamevote\n" +
                 "WHERE balanceGameId = ?\n" +
                 "GROUP BY preference\n" +
@@ -165,13 +166,18 @@ public class BalanceGameVoteDAO extends DAO {
 
             rs = pstmt.executeQuery();
 
-            Long[] preferenceCount = new Long[2];
-            for (int i = 0; i < 2; i++) {
-                rs.next();
-                preferenceCount[i] = rs.getLong(1);
+            long disLikeNumber = 0L;
+            long likeNumber = 0L;
+            while (rs.next()) {
+                if (rs.getString(1) == null) continue;
+                if (rs.getString(1).equals(Preference.DISLIKE.name())) {
+                    disLikeNumber = rs.getLong(2);
+                } else if (rs.getString(1).equals(Preference.LIKE.name())) {
+                    likeNumber = rs.getLong(2);
+                }
             }
-            balanceGame.setDislikeNumber(preferenceCount[0]);
-            balanceGame.setLikeNumber(preferenceCount[1]);
+            balanceGame.setDislikeNumber(disLikeNumber);
+            balanceGame.setLikeNumber(likeNumber);
 
             return balanceGame;
         } catch (Exception e) {
