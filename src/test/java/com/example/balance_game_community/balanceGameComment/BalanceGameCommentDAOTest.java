@@ -40,7 +40,7 @@ class BalanceGameCommentDAOTest {
     }
 
     @Test
-    void findAllByBalanceGameId() {
+    void findAllByBalanceGameId() throws Exception {
         // given
         Member member = new Member();
         member.setId(2L);
@@ -79,15 +79,18 @@ class BalanceGameCommentDAOTest {
 
         // when
         balanceGameCommentDAO.addComment(member.getId(), balanceGame.getId(), "1번째 댓글");
+        Thread.sleep(1000);
         balanceGameCommentDAO.addComment(member2.getId(), balanceGame.getId(), "2번째 댓글");
+        Thread.sleep(1000);
         balanceGameCommentDAO.addComment(member3.getId(), balanceGame.getId(), "3번째 댓글");
+        Thread.sleep(1000);
         balanceGameCommentDAO.addComment(member4.getId(), balanceGame.getId(), "4번째 댓글");
 
         // then
         List<BalanceGameComment> balanceGameCommentList = balanceGameCommentDAO.findAllByBalanceGameId(balanceGame.getId());
-        assertEquals(balanceGameCommentList.get(0).getContent(), "1번째 댓글");
-        assertEquals(balanceGameCommentList.get(1).getContent(), "2번째 댓글");
-        assertEquals(balanceGameCommentList.get(2).getContent(), "3번째 댓글");
-        assertEquals(balanceGameCommentList.get(3).getContent(), "4번째 댓글");
+        assertEquals("4번째 댓글", balanceGameCommentList.get(0).getContent());
+        assertEquals("3번째 댓글", balanceGameCommentList.get(1).getContent());
+        assertEquals("2번째 댓글", balanceGameCommentList.get(2).getContent());
+        assertEquals("1번째 댓글", balanceGameCommentList.get(3).getContent());
     }
 }
