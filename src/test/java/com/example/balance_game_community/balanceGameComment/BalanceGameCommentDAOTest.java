@@ -79,11 +79,8 @@ class BalanceGameCommentDAOTest {
 
         // when
         balanceGameCommentDAO.addComment(member.getId(), balanceGame.getId(), "1번째 댓글");
-        Thread.sleep(1000);
         balanceGameCommentDAO.addComment(member2.getId(), balanceGame.getId(), "2번째 댓글");
-        Thread.sleep(1000);
         balanceGameCommentDAO.addComment(member3.getId(), balanceGame.getId(), "3번째 댓글");
-        Thread.sleep(1000);
         balanceGameCommentDAO.addComment(member4.getId(), balanceGame.getId(), "4번째 댓글");
 
         // then

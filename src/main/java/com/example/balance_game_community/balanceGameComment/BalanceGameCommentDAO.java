@@ -61,12 +61,12 @@ public class BalanceGameCommentDAO extends DAO {
         }
     }
 
-    // 특정 밸런스게임에 대한 댓글 목록 (시간순 내림차순 정렬)
+    // 특정 밸런스게임에 대한 댓글 목록 (시간순 내림차순 정렬 - id가 auto_increment 하므로 id를 기준으로 내림차순 정렬해도 동일하다)
     public List<BalanceGameComment> findAllByBalanceGameId(Long balanceGameId) {
         String SQL = "SELECT *\n" +
                 "FROM balancegamecomment\n" +
                 "WHERE balanceGameId = ?\n" +
-                "ORDER BY writeTime DESC";
+                "ORDER BY id DESC";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
