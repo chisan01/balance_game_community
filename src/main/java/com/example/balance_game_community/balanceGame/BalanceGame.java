@@ -1,5 +1,7 @@
 package com.example.balance_game_community.balanceGame;
 
+import com.example.balance_game_community.balanceGameVote.Difficulty;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -14,20 +16,25 @@ public class BalanceGame {
     private String picture2;
     private Timestamp enrollmentTime;
 
-    private Long likeNumber;
-    private Long dislikeNumber;
+    private Difficulty difficulty;
+    private Long likeCount;
+    private Long dislikeCount;
 
     public BalanceGame() {}
 
     public BalanceGame(ResultSet rs) throws SQLException {
-        setId(rs.getLong(1));
-        setMemberId(rs.getLong(2));
-        setQuestion(rs.getString(3));
-        setAnswer1(rs.getString(4));
-        setAnswer2(rs.getString(5));
-        setPicture1(rs.getString(6));
-        setPicture2(rs.getString(7));
-        setEnrollmentTime(rs.getTimestamp(8));
+        this.id = rs.getLong(1);
+        this.memberId = rs.getLong(2);
+        this.question = rs.getString(3);
+        this.answer1 = rs.getString(4);
+        this.answer2 = rs.getString(5);
+        this.picture1 = rs.getString(6);
+        this.picture2 = rs.getString(7);
+        this.enrollmentTime = rs.getTimestamp(8);
+
+        this.difficulty = Difficulty.values()[rs.getInt(9)];
+        this.likeCount = rs.getLong(10);
+        this.dislikeCount = rs.getLong(11);
     }
 
     public Long getId() {
@@ -94,19 +101,27 @@ public class BalanceGame {
         this.enrollmentTime = enrollmentTime;
     }
 
-    public Long getLikeNumber() {
-        return likeNumber;
+    public Difficulty getDifficulty() {
+        return difficulty;
     }
 
-    public void setLikeNumber(Long likeNumber) {
-        this.likeNumber = likeNumber;
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 
-    public Long getDislikeNumber() {
-        return dislikeNumber;
+    public Long getLikeCount() {
+        return likeCount;
     }
 
-    public void setDislikeNumber(Long dislikeNumber) {
-        this.dislikeNumber = dislikeNumber;
+    public void setLikeCount(Long likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public Long getDislikeCount() {
+        return dislikeCount;
+    }
+
+    public void setDislikeCount(Long dislikeCount) {
+        this.dislikeCount = dislikeCount;
     }
 }

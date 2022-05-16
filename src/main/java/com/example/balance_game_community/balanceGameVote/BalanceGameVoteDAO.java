@@ -6,8 +6,6 @@ import com.example.balance_game_community.balanceGame.BalanceGame;
 import com.example.balance_game_community.balanceGame.BalanceGameResult;
 
 import java.sql.*;
-import java.time.Instant;
-import java.util.Arrays;
 
 public class BalanceGameVoteDAO extends DAO {
 
@@ -87,7 +85,6 @@ public class BalanceGameVoteDAO extends DAO {
         return null;
     }
 
-
     // 게임 결과 확인 (사람들의 투표 수, 선택 비율 확인) - 한번 투표한 경우 바로 게임 결과를 표시해야함
     public BalanceGameResult getBalanceGameResult(Long balanceGameId) {
         String SQL = "SELECT COUNT(*) AS voteCount\n" +
@@ -145,47 +142,6 @@ public class BalanceGameVoteDAO extends DAO {
         } finally {
             close(conn, pstmt, rs);
         }
-    }
-
-    // 특정 게임의 좋아요, 싫어요 개수 update
-    public BalanceGame updatePreferenceCount(BalanceGame balanceGame) {
-        String SQL = "SELECT preference, COUNT(*) AS preferenceCount\n" +
-                "FROM balancegamevote\n" +
-                "WHERE balanceGameId = ?\n" +
-                "GROUP BY preference\n" +
-                "ORDER BY preference;";
-
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-
-        try {
-            conn = getConnection();
-            pstmt = conn.prepareStatement(SQL);
-            pstmt.setLong(1, balanceGame.getId());
-
-            rs = pstmt.executeQuery();
-
-            long disLikeNumber = 0L;
-            long likeNumber = 0L;
-            while (rs.next()) {
-                if(rs.getString(1) == null) continue;
-                if (rs.getString(1).equals(Preference.DISLIKE.name())) {
-                    disLikeNumber = rs.getLong(2);
-                } else if (rs.getString(1).equals(Preference.LIKE.name())) {
-                    likeNumber = rs.getLong(2);
-                }
-            }
-            balanceGame.setDislikeNumber(disLikeNumber);
-            balanceGame.setLikeNumber(likeNumber);
-
-            return balanceGame;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            close(conn, pstmt, rs);
-        }
-        return null;
     }
 
     // 답변 후 난이도 투표

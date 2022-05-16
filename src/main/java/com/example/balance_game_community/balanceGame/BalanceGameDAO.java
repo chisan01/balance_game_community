@@ -2,7 +2,6 @@ package com.example.balance_game_community.balanceGame;
 
 import com.example.balance_game_community.DAO;
 import com.example.balance_game_community.DataSource;
-import com.example.balance_game_community.balanceGameComment.BalanceGameComment;
 import com.example.balance_game_community.balanceGameVote.BalanceGameVoteDAO;
 import com.example.balance_game_community.balanceGameVote.Difficulty;
 
@@ -67,7 +66,23 @@ public class BalanceGameDAO extends DAO {
     }
 
     public BalanceGame findById(Long balanceGameId) {
-        String SQL = "SELECT * FROM balancegame WHERE id = ?";
+
+        String SQL = "SELECT\n" +
+                "\tid, memberId, question, answer1, answer2, picture1, picture2, enrollmentTime, difficulty,\n" +
+                "\tMAX(case when preference='LIKE' then preferenceCount ELSE 0 END) AS likeCount,\n" +
+                "\tMAX(case when preference='DISLIKE' then preferenceCount ELSE 0 END) AS dislikeCount\n" +
+                "FROM (\n" +
+                "\tSELECT\n" +
+                "\t\tbalancegame.*,\n" +
+                "\t\tROUND(AVG(balancegamevote.difficulty), 0) AS difficulty,\n" +
+                "\t\tCOUNT(*) AS preferenceCount,\n" +
+                "\t\tbalancegamevote.preference\n" +
+                "\tFROM balancegame LEFT JOIN balancegamevote\n" +
+                "\t\tON balancegame.id = balancegamevote.balanceGameId\n" +
+                "\tGROUP BY balancegame.id, balancegamevote.preference\n" +
+                ") AS b\n" +
+                "WHERE id = ?\n" +
+                "GROUP BY b.id;";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -80,8 +95,7 @@ public class BalanceGameDAO extends DAO {
 
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                BalanceGame balanceGame = new BalanceGame(rs);
-                return balanceGameVoteDAO.updatePreferenceCount(balanceGame);
+                return new BalanceGame(rs);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,14 +140,23 @@ public class BalanceGameDAO extends DAO {
     }
 
     public List<BalanceGame> findAllByDifficulty(Difficulty difficulty) {
-        String SQL = "SELECT * \n" +
+
+        String SQL = "SELECT\n" +
+                "\tid, memberId, question, answer1, answer2, picture1, picture2, enrollmentTime, difficulty,\n" +
+                "\tMAX(case when preference='LIKE' then preferenceCount ELSE 0 END) AS likeCount,\n" +
+                "\tMAX(case when preference='DISLIKE' then preferenceCount ELSE 0 END) AS dislikeCount\n" +
                 "FROM (\n" +
-                "\tSELECT balancegame.*, ROUND(AVG(balancegamevote.difficulty), 0) AS difficulty\n" +
-                "\tFROM balancegame JOIN balancegamevote\n" +
+                "\tSELECT\n" +
+                "\t\tbalancegame.*,\n" +
+                "\t\tROUND(AVG(balancegamevote.difficulty), 0) AS difficulty,\n" +
+                "\t\tCOUNT(*) AS preferenceCount,\n" +
+                "\t\tbalancegamevote.preference\n" +
+                "\tFROM balancegame LEFT JOIN balancegamevote\n" +
                 "\t\tON balancegame.id = balancegamevote.balanceGameId\n" +
-                "\tGROUP BY balancegame.id\n" +
-                "\t) AS balancegame\n" +
-                "WHERE difficulty = ?";
+                "\tGROUP BY balancegame.id, balancegamevote.preference\n" +
+                ") AS b\n" +
+                "WHERE difficulty = ?\n" +
+                "GROUP BY b.id;";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -149,7 +172,49 @@ public class BalanceGameDAO extends DAO {
             List<BalanceGame> balanceGameList = new ArrayList<>();
             while (rs.next()) {
                 BalanceGame balanceGame = new BalanceGame(rs);
-                balanceGameList.add(balanceGameVoteDAO.updatePreferenceCount(balanceGame));
+                balanceGameList.add(balanceGame);
+            }
+            return balanceGameList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(conn, pstmt, rs);
+        }
+        return null;
+    }
+
+    public List<BalanceGame> findAllSortedBy(String sort) {
+        String SQL = "SELECT\n" +
+                "\tid, memberId, question, answer1, answer2, picture1, picture2, enrollmentTime, difficulty,\n" +
+                "\tMAX(case when preference='LIKE' then preferenceCount ELSE 0 END) AS likeCount,\n" +
+                "\tMAX(case when preference='DISLIKE' then preferenceCount ELSE 0 END) AS dislikeCount\n" +
+                "FROM (\n" +
+                "\tSELECT\n" +
+                "\t\tbalancegame.*,\n" +
+                "\t\tROUND(AVG(balancegamevote.difficulty), 0) AS difficulty,\n" +
+                "\t\tCOUNT(*) AS preferenceCount,\n" +
+                "\t\tbalancegamevote.preference\n" +
+                "\tFROM balancegame LEFT JOIN balancegamevote\n" +
+                "\t\tON balancegame.id = balancegamevote.balanceGameId\n" +
+                "\tGROUP BY balancegame.id, balancegamevote.preference\n" +
+                ") AS b\n" +
+                "GROUP BY b.id\n" +
+                "ORDER BY " + sort;
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(SQL);
+
+            rs = pstmt.executeQuery();
+
+            List<BalanceGame> balanceGameList = new ArrayList<>();
+            while (rs.next()) {
+                BalanceGame balanceGame = new BalanceGame(rs);
+                balanceGameList.add(balanceGame);
             }
             return balanceGameList;
         } catch (Exception e) {
