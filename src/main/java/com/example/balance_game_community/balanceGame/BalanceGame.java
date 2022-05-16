@@ -1,5 +1,7 @@
 package com.example.balance_game_community.balanceGame;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 public class BalanceGame {
@@ -14,6 +16,19 @@ public class BalanceGame {
 
     private Long likeNumber;
     private Long dislikeNumber;
+
+    public BalanceGame() {}
+
+    public BalanceGame(ResultSet rs) throws SQLException {
+        setId(rs.getLong(1));
+        setMemberId(rs.getLong(2));
+        setQuestion(rs.getString(3));
+        setAnswer1(rs.getString(4));
+        setAnswer2(rs.getString(5));
+        setPicture1(rs.getString(6));
+        setPicture2(rs.getString(7));
+        setEnrollmentTime(rs.getTimestamp(8));
+    }
 
     public Long getId() {
         return id;

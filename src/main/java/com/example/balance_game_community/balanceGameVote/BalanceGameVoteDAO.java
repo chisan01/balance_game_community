@@ -169,7 +169,7 @@ public class BalanceGameVoteDAO extends DAO {
             long disLikeNumber = 0L;
             long likeNumber = 0L;
             while (rs.next()) {
-                if (rs.getString(1) == null) continue;
+                if(rs.getString(1) == null) continue;
                 if (rs.getString(1).equals(Preference.DISLIKE.name())) {
                     disLikeNumber = rs.getLong(2);
                 } else if (rs.getString(1).equals(Preference.LIKE.name())) {
@@ -189,4 +189,27 @@ public class BalanceGameVoteDAO extends DAO {
     }
 
     // 답변 후 난이도 투표
+    public void voteDifficulty(Long memberId, Long balanceGameId, Difficulty difficulty) {
+        Long balanceGameVoteId = findByMemberIdAndBalanceGameId(memberId, balanceGameId);
+
+        String SQL = "UPDATE balancegamevote SET difficulty = ? WHERE id = ?";
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(SQL);
+
+            pstmt.setInt(1, difficulty.ordinal()); // id가 auto_increment filed 라서 column 명을 생략하고 insert 문을 사용하는 경우, null 값을 넣어주면 된다,
+            pstmt.setLong(2, balanceGameVoteId);
+
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(conn, pstmt, rs);
+        }
+    }
 }

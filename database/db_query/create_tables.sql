@@ -44,7 +44,7 @@ CREATE TABLE balanceGameVote
     memberId BIGINT,
     balanceGameId BIGINT,
     answerNumber INT NOT NULL,
-    difficulty VARCHAR(20),
+    difficulty INT,
     preference VARCHAR(20),
 
     PRIMARY KEY (id),

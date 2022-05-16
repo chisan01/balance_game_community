@@ -2,10 +2,14 @@ package com.example.balance_game_community.balanceGame;
 
 import com.example.balance_game_community.DAO;
 import com.example.balance_game_community.DataSource;
+import com.example.balance_game_community.balanceGameComment.BalanceGameComment;
 import com.example.balance_game_community.balanceGameVote.BalanceGameVoteDAO;
+import com.example.balance_game_community.balanceGameVote.Difficulty;
 
 import java.sql.*;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BalanceGameDAO extends DAO {
 
@@ -34,7 +38,6 @@ public class BalanceGameDAO extends DAO {
         }
     }
 
-    // 밸런스 게임 생성
     public void addBalanceGame(Long memberId, BalanceGame balanceGame) {
         String SQL = "INSERT INTO balancegame VALUES (?,?,?,?,?,?,?,?)";
 
@@ -77,15 +80,7 @@ public class BalanceGameDAO extends DAO {
 
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                BalanceGame balanceGame = new BalanceGame();
-                balanceGame.setId(rs.getLong(1));
-                balanceGame.setMemberId(rs.getLong(2));
-                balanceGame.setQuestion(rs.getString(3));
-                balanceGame.setAnswer1(rs.getString(4));
-                balanceGame.setAnswer2(rs.getString(5));
-                balanceGame.setPicture1(rs.getString(6));
-                balanceGame.setPicture2(rs.getString(7));
-                balanceGame.setEnrollmentTime(rs.getTimestamp(8));
+                BalanceGame balanceGame = new BalanceGame(rs);
                 return balanceGameVoteDAO.updatePreferenceCount(balanceGame);
             }
         } catch (Exception e) {
@@ -96,7 +91,6 @@ public class BalanceGameDAO extends DAO {
         return null;
     }
 
-    // 다음 게임 id 랜덤하게 반환 (현재 게임 제외)
     public Long getOtherRandomBalanceGameId(Long curBalanceGameId) {
         Long otherRandomBalanceGameId;
         Long lastBalanceGameId = getLastBalanceGameId();
@@ -123,6 +117,41 @@ public class BalanceGameDAO extends DAO {
             if (rs.next()) {
                 return rs.getLong(1);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(conn, pstmt, rs);
+        }
+        return null;
+    }
+
+    public List<BalanceGame> findAllByDifficulty(Difficulty difficulty) {
+        String SQL = "SELECT * \n" +
+                "FROM (\n" +
+                "\tSELECT balancegame.*, ROUND(AVG(balancegamevote.difficulty), 0) AS difficulty\n" +
+                "\tFROM balancegame JOIN balancegamevote\n" +
+                "\t\tON balancegame.id = balancegamevote.balanceGameId\n" +
+                "\tGROUP BY balancegame.id\n" +
+                "\t) AS balancegame\n" +
+                "WHERE difficulty = ?";
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setLong(1, difficulty.ordinal());
+
+            rs = pstmt.executeQuery();
+
+            List<BalanceGame> balanceGameList = new ArrayList<>();
+            while (rs.next()) {
+                BalanceGame balanceGame = new BalanceGame(rs);
+                balanceGameList.add(balanceGameVoteDAO.updatePreferenceCount(balanceGame));
+            }
+            return balanceGameList;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

@@ -4,10 +4,13 @@ import com.example.balance_game_community.AppConfig;
 import com.example.balance_game_community.TestDataSource;
 import com.example.balance_game_community.balanceGameComment.BalanceGameCommentDAO;
 import com.example.balance_game_community.balanceGameVote.BalanceGameVoteDAO;
+import com.example.balance_game_community.balanceGameVote.Difficulty;
 import com.example.balance_game_community.balanceGameVote.Preference;
 import com.example.balance_game_community.member.Member;
 import com.example.balance_game_community.member.MemberDAO;
 import org.junit.jupiter.api.*;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -175,5 +178,69 @@ class BalanceGameDAOTest {
         BalanceGame findBalanceGame = balanceGameDAO.findById(balanceGame.getId());
         assertEquals(findBalanceGame.getLikeNumber(), 1);
         assertEquals(findBalanceGame.getDislikeNumber(), 3);
+    }
+
+    @Test
+    public void findAllByDifficulty() {
+        // given
+        Member member = new Member();
+        member.setId(2L);
+        member.setEmail("test@gmail.com");
+        member.setPassword("1234");
+        member.setNickname("test");
+        memberDAO.signIn(member);
+
+        Member member2 = new Member();
+        member2.setId(4L);
+        member2.setEmail("test2@gmail.com");
+        member2.setPassword("1234");
+        member2.setNickname("test2");
+        memberDAO.signIn(member2);
+
+        BalanceGame balanceGame = new BalanceGame();
+        balanceGame.setId(10L);
+        balanceGame.setQuestion("둘 중 하나만 골라야 한다면?");
+        balanceGame.setAnswer1("A");
+        balanceGame.setAnswer2("B");
+        balanceGameDAO.addBalanceGame(member.getId(), balanceGame);
+
+        BalanceGame balanceGame2 = new BalanceGame();
+        balanceGame2.setId(11L);
+        balanceGame2.setQuestion("둘 중 하나만 골라야 한다면?");
+        balanceGame2.setAnswer1("A");
+        balanceGame2.setAnswer2("B");
+        balanceGameDAO.addBalanceGame(member.getId(), balanceGame2);
+
+        BalanceGame balanceGame3 = new BalanceGame();
+        balanceGame3.setId(12L);
+        balanceGame3.setQuestion("둘 중 하나만 골라야 한다면?");
+        balanceGame3.setAnswer1("A");
+        balanceGame3.setAnswer2("B");
+        balanceGameDAO.addBalanceGame(member.getId(), balanceGame3);
+
+        balanceGameVoteDAO.chooseAnswer(member.getId(), balanceGame.getId(), 2);
+        balanceGameVoteDAO.chooseAnswer(member2.getId(), balanceGame.getId(), 1);
+        balanceGameVoteDAO.voteDifficulty(member.getId(), balanceGame.getId(), Difficulty.EASY);
+        balanceGameVoteDAO.voteDifficulty(member2.getId(), balanceGame.getId(), Difficulty.EASY);
+
+        balanceGameVoteDAO.chooseAnswer(member.getId(), balanceGame2.getId(), 2);
+        balanceGameVoteDAO.chooseAnswer(member2.getId(), balanceGame2.getId(), 1);
+        balanceGameVoteDAO.voteDifficulty(member.getId(), balanceGame2.getId(), Difficulty.NORMAL);
+        balanceGameVoteDAO.voteDifficulty(member2.getId(), balanceGame2.getId(), Difficulty.NORMAL);
+
+        balanceGameVoteDAO.chooseAnswer(member.getId(), balanceGame3.getId(), 2);
+        balanceGameVoteDAO.chooseAnswer(member2.getId(), balanceGame3.getId(), 1);
+        balanceGameVoteDAO.voteDifficulty(member.getId(), balanceGame3.getId(), Difficulty.HARD);
+        balanceGameVoteDAO.voteDifficulty(member2.getId(), balanceGame3.getId(), Difficulty.HARD);
+
+        // when
+        List<BalanceGame> easyBalanceGameList = balanceGameDAO.findAllByDifficulty(Difficulty.EASY);
+        List<BalanceGame> normalBalanceGameList = balanceGameDAO.findAllByDifficulty(Difficulty.NORMAL);
+        List<BalanceGame> hardBalanceGameList = balanceGameDAO.findAllByDifficulty(Difficulty.HARD);
+
+        // then
+        assertEquals(balanceGame.getId(), easyBalanceGameList.get(0).getId());
+        assertEquals(balanceGame2.getId(), normalBalanceGameList.get(0).getId());
+        assertEquals(balanceGame3.getId(), hardBalanceGameList.get(0).getId());
     }
 }

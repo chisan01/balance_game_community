@@ -10,6 +10,8 @@ import com.example.balance_game_community.member.Member;
 import com.example.balance_game_community.member.MemberDAO;
 import org.junit.jupiter.api.*;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BalanceGameVoteDAOTest {
