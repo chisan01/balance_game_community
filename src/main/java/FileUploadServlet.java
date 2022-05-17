@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Blob;
 import java.time.LocalDateTime;
 
 @WebServlet(name = "FileUploadServlet", value = "/FileUploadServlet")
@@ -48,22 +47,30 @@ public class FileUploadServlet extends HttpServlet {
         balanceGame.setPicture1(request.getParameter("picture1"));
         balanceGame.setPicture2(request.getParameter("picture2"));
 
+        // 이미지 저장용 폴더가 존재하지 않는 경우, 해당 폴더 생성
+        File imageFolder = new File(AppConfig.IMAGE_FOLDER_PATH);
+        if (!imageFolder.exists()) {
+            imageFolder.mkdir();
+        }
+
+        // 첫번째 사진 저장
         Part filePart = request.getPart("picture1");
         if (filePart != null) {
             InputStream inputStream = filePart.getInputStream();
-            String filePath = "c:\\images\\" + member.getId() + LocalDateTime.now().toString().trim().replaceAll("[:.]", "-") + "1.png";
-            File file = new File(filePath);
+            String fileName = member.getId() + LocalDateTime.now().toString().trim().replaceAll("[:.]", "-") + "1.png";
+            File file = new File(AppConfig.IMAGE_FOLDER_PATH + "//" + fileName);
             copyInputStreamToFile(inputStream, file);
-            balanceGame.setPicture1(filePath);
+            balanceGame.setPicture1(fileName);
         }
 
+        // 두번째 사진 저장
         Part filePart2 = request.getPart("picture2");
         if (filePart2 != null) {
             InputStream inputStream2 = filePart2.getInputStream();
-            String filePath2 = "c:\\images\\" + member.getId() + LocalDateTime.now().toString().trim().replaceAll("[:.]", "-") + "2.png";
-            File file2 = new File(filePath2);
+            String fileName2 = member.getId() + LocalDateTime.now().toString().trim().replaceAll("[:.]", "-") + "2.png";
+            File file2 = new File(AppConfig.IMAGE_FOLDER_PATH + "//" + fileName2);
             copyInputStreamToFile(inputStream2, file2);
-            balanceGame.setPicture2(filePath2);
+            balanceGame.setPicture2(fileName2);
         }
 
         balanceGameDAO.addBalanceGame(member.getId(), balanceGame);
