@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>새로운 게임 등록</title>
+</head>
+<body>
+<form action="FileUploadServlet" method="post" enctype="multipart/form-data">
+    <table border="0">
+        <tr>
+            <td>사진 1 : </td>
+            <td><input type="file" name="picture1" size="50"/></td>
+        </tr>
+        <tr>
+            <td>사진 2 : </td>
+            <td><input type="file" name="picture2" size="50"/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Save">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
