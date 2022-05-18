@@ -32,6 +32,7 @@ public class FileUploadServlet extends HttpServlet {
         BalanceGameCommentDAO balanceGameCommentDAO = testAppConfig.getBalanceGameCommentDAO();
         testAppConfig.resetAll();
 
+        // TODO 로그인, 회원가입 구현 후 로그인 된 멤버 id 사용
         Member member = new Member();
         member.setId(1L);
         member.setPassword("1234");
@@ -41,11 +42,9 @@ public class FileUploadServlet extends HttpServlet {
 
         BalanceGame balanceGame = new BalanceGame();
         balanceGame.setId(1L);
-        balanceGame.setQuestion("둘 중 하나만 골라야 한다면?");
-        balanceGame.setAnswer1("A");
-        balanceGame.setAnswer2("B");
-        balanceGame.setPicture1(request.getParameter("picture1"));
-        balanceGame.setPicture2(request.getParameter("picture2"));
+        balanceGame.setQuestion(request.getParameter("question"));
+        balanceGame.setAnswer1(request.getParameter("answer1"));
+        balanceGame.setAnswer2(request.getParameter("answer2"));
 
         // 이미지 저장용 폴더가 존재하지 않는 경우, 해당 폴더 생성
         File imageFolder = new File(AppConfig.IMAGE_FOLDER_PATH);
