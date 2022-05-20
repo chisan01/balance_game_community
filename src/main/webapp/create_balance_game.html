@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>새로운 게임 등록</title>
+</head>
+<body>
+<form action="/addBalanceGameServlet" method="post" enctype="multipart/form-data">
+    <table border="1">
+        <tr>
+            <td>Question</td>
+            <td colspan="2"><input type="text" name="question"/></td>
+        </tr>
+        <tr>
+            <td>Answer 1</td>
+            <td><input type="text" name="answer1"/></td>
+            <td><input type="file" name="picture1" size="50"/></td>
+        </tr>
+        <tr>
+            <td>Answer 2</td>
+            <td><input type="text" name="answer2"/></td>
+            <td><input type="file" name="picture2" size="50"/></td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <input type="submit" value="Save">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

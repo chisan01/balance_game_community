@@ -29,6 +29,8 @@ dependencies {
 
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.29'
+    // https://mvnrepository.com/artifact/servlets.com/cos
+    implementation group: 'servlets.com', name: 'cos', version: '05Nov2002'
 }
 
 test {
