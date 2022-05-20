@@ -1,3 +1,5 @@
+package com.example.balance_game_community.fileIO;
+
 import com.example.balance_game_community.AppConfig;
 import com.example.balance_game_community.TestDataSource;
 import com.example.balance_game_community.balanceGame.BalanceGame;
@@ -16,9 +18,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 
-@WebServlet(name = "FileUploadServlet", value = "/FileUploadServlet")
+@WebServlet("/addBalanceGameServlet")
 @MultipartConfig(maxFileSize = 16177216) // 파일 크기 최대 16MB
-public class FileUploadServlet extends HttpServlet {
+public class addBalanceGameServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
@@ -60,7 +62,7 @@ public class FileUploadServlet extends HttpServlet {
             String fileName = member.getId() + LocalDateTime.now().toString().trim().replaceAll("[:.]", "-") + "1.png";
             File file = new File(AppConfig.IMAGE_FOLDER_PATH + "//" + fileName);
             copyInputStreamToFile(inputStream, file);
-            balanceGame.setPicture1(fileName);
+            balanceGame.setAnswer1PictureUrl(fileName);
         }
 
         // 두번째 사진 저장
@@ -70,7 +72,7 @@ public class FileUploadServlet extends HttpServlet {
             String fileName2 = member.getId() + LocalDateTime.now().toString().trim().replaceAll("[:.]", "-") + "2.png";
             File file2 = new File(AppConfig.IMAGE_FOLDER_PATH + "//" + fileName2);
             copyInputStreamToFile(inputStream2, file2);
-            balanceGame.setPicture2(fileName2);
+            balanceGame.setAnswer2PictureUrl(fileName2);
         }
 
         balanceGameDAO.addBalanceGame(member.getId(), balanceGame);

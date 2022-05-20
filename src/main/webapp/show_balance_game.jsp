@@ -29,7 +29,7 @@
 
     BalanceGame balanceGame = balanceGameDAO.findById(balanceGameId);
 %>
-<table border="0">
+<table border="1">
     <tr>
         <td>Question</td>
         <td colspan="2"><%=balanceGame.getQuestion()%></td>
@@ -37,12 +37,12 @@
     <tr>
         <td>Answer 1</td>
         <td><%=balanceGame.getAnswer1()%></td>
-        <td><img src="/files/<%=balanceGame.getPicture1()%>" alt="picture1"></td>
+        <td><img src="/files/<%=balanceGame.getAnswer1PictureUrl()%>" alt="picture1"></td>
     </tr>
     <tr>
         <td>Answer 2</td>
         <td><%=balanceGame.getAnswer2()%></td>
-        <td><img src="/files/<%=balanceGame.getPicture2()%>" alt="picture1"></td>
+        <td><img src="/files/<%=balanceGame.getAnswer2PictureUrl()%>" alt="picture1"></td>
     </tr>
 </table>
 </body>

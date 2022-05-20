@@ -12,8 +12,8 @@ public class BalanceGame {
     private String question;
     private String answer1;
     private String answer2;
-    private String picture1;
-    private String picture2;
+    private String answer1PictureUrl;
+    private String answer2PictureUrl;
     private Timestamp enrollmentTime;
 
     private Difficulty difficulty;
@@ -28,8 +28,8 @@ public class BalanceGame {
         this.question = rs.getString(3);
         this.answer1 = rs.getString(4);
         this.answer2 = rs.getString(5);
-        this.picture1 = rs.getString(6);
-        this.picture2 = rs.getString(7);
+        this.answer1PictureUrl = rs.getString(6);
+        this.answer2PictureUrl = rs.getString(7);
         this.enrollmentTime = rs.getTimestamp(8);
 
         this.difficulty = Difficulty.values()[rs.getInt(9)];
@@ -77,20 +77,20 @@ public class BalanceGame {
         this.answer2 = answer2;
     }
 
-    public String getPicture1() {
-        return picture1;
+    public String getAnswer1PictureUrl() {
+        return answer1PictureUrl;
     }
 
-    public void setPicture1(String picture1) {
-        this.picture1 = picture1;
+    public void setAnswer1PictureUrl(String answer1PictureUrl) {
+        this.answer1PictureUrl = answer1PictureUrl;
     }
 
-    public String getPicture2() {
-        return picture2;
+    public String getAnswer2PictureUrl() {
+        return answer2PictureUrl;
     }
 
-    public void setPicture2(String picture2) {
-        this.picture2 = picture2;
+    public void setAnswer2PictureUrl(String answer2PictureUrl) {
+        this.answer2PictureUrl = answer2PictureUrl;
     }
 
     public Timestamp getEnrollmentTime() {

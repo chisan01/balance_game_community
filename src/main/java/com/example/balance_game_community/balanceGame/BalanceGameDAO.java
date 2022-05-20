@@ -53,8 +53,8 @@ public class BalanceGameDAO extends DAO {
             pstmt.setString(3, balanceGame.getQuestion());
             pstmt.setString(4, balanceGame.getAnswer1());
             pstmt.setString(5, balanceGame.getAnswer2());
-            pstmt.setString(6, balanceGame.getPicture1());
-            pstmt.setString(7, balanceGame.getPicture2());
+            pstmt.setString(6, balanceGame.getAnswer1PictureUrl());
+            pstmt.setString(7, balanceGame.getAnswer2PictureUrl());
             pstmt.setTimestamp(8, Timestamp.from(Instant.now()));
 
             pstmt.executeUpdate();

@@ -1,3 +1,5 @@
+package com.example.balance_game_community.fileIO;
+
 import com.example.balance_game_community.AppConfig;
 
 import javax.servlet.ServletException;
@@ -11,7 +13,7 @@ import java.net.URLDecoder;
 import java.nio.file.Files;
 
 @WebServlet("/files/*")
-public class FileServlet extends HttpServlet {
+public class getFileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
