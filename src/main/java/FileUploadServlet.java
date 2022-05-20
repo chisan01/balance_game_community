@@ -25,6 +25,7 @@ public class FileUploadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO 로그인 기능 구현 후 : TestDataSource -> DataSource
         AppConfig testAppConfig = new AppConfig(new TestDataSource());
         MemberDAO memberDAO = testAppConfig.getMemberDAO();
         BalanceGameVoteDAO balanceGameVoteDAO = testAppConfig.getBalanceGameVoteDAO();
@@ -32,7 +33,7 @@ public class FileUploadServlet extends HttpServlet {
         BalanceGameCommentDAO balanceGameCommentDAO = testAppConfig.getBalanceGameCommentDAO();
         testAppConfig.resetAll();
 
-        // TODO 로그인, 회원가입 구현 후 로그인 된 멤버 id 사용
+        // TODO 로그인 기능 구현 후 : 로그인 된 멤버 id 사용
         Member member = new Member();
         member.setId(1L);
         member.setPassword("1234");
@@ -73,6 +74,10 @@ public class FileUploadServlet extends HttpServlet {
         }
 
         balanceGameDAO.addBalanceGame(member.getId(), balanceGame);
+
+        request.setAttribute("balanceGameId", balanceGame.getId());
+        RequestDispatcher rd = request.getRequestDispatcher("/show_balance_game.jsp");
+        rd.forward(request, response);
     }
 
     // file system에 저장
