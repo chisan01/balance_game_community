@@ -27,6 +27,8 @@ public class addBalanceGameServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+
         // TODO 로그인 기능 구현 후 : TestDataSource -> DataSource
         AppConfig testAppConfig = new AppConfig(new TestDataSource());
         MemberDAO memberDAO = testAppConfig.getMemberDAO();
