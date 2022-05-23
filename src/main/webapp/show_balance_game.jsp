@@ -37,12 +37,12 @@
     <tr>
         <td>Answer 1</td>
         <td><%=balanceGame.getAnswer1()%></td>
-        <td><img src="/files/<%=balanceGame.getAnswer1PictureUrl()%>" alt="picture1"></td>
+        <td><img src="/files/<%=balanceGame.getAnswer1PictureUrl()%>" alt="picture1" width="100px"></td>
     </tr>
     <tr>
         <td>Answer 2</td>
         <td><%=balanceGame.getAnswer2()%></td>
-        <td><img src="/files/<%=balanceGame.getAnswer2PictureUrl()%>" alt="picture1"></td>
+        <td><img src="/files/<%=balanceGame.getAnswer2PictureUrl()%>" alt="picture2" width="100px"></td>
     </tr>
 </table>
 </body>
