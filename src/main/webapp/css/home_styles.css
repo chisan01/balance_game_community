@@ -1,0 +1,223 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    /* 폰트 크기 상속 */
+    font-size: inherit;
+}
+
+a{
+    text-decoration: none;
+}
+
+html {
+    font-family: -apple-system,
+    BlinkMacSystemFont,
+        /* 한글 폰트 들어갈 자리 */
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    /* `font` 속성 리셋 */
+    font-size                  : 16px;
+    /* 기본 글꼴 사이즈 정의            : 16x => 1rem */
+    font-weight                : normal;
+    line-height                : 1.5;
+    /* 단위 쓰지 말것 */
+    background-color           : #fff;
+    color                      : #4d5058;
+    /* 글꼴 크기 조정을 방지 */
+    -webkit-text-size-adjust   : 100%;
+    /* 폰트를 부드럽게 */
+    -webkit-font-smoothing     : antialiased;
+    -moz-osx-font-smoothing    : grayscale;
+    /* 웹킷 마음대로 눌림 하이라이트 막음 */
+    -webkit-tap-highlight-color: transparent;
+}
+
+/*navbar*/
+.navbar{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+
+    justify-content: flex-start;
+    align-items: center;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+.nav-container{
+    width: 100%;
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-right: 10rem !important;
+    padding-left: 10rem !important;
+}
+
+.navbar-brand{
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    color: #f0506e;
+}
+
+.navbarSupportedContent{
+}
+
+.navbar-nav{
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+
+    margin-left: auto !important;
+    margin-right: 2.5rem; !important;
+}
+
+.nav-item{
+    margin-right: 1rem;
+}
+
+.nav-link{
+    color: rgba(0, 0, 0, 0.55);
+}
+
+.cloudbtn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 60px;
+
+    font-weight: 500 !important;
+
+    color: #fff;
+    background-color: #0061f2;
+    border-color: #0061f2;
+}
+
+/*page header */
+.page-header{
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+    display: flex;
+    justify-content: center;
+}
+
+.startimgcontent{
+    vertical-align: middle;
+    max-width: 100%;
+    height: auto;
+}
+
+/*section*/
+section{
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+
+/*dropdown*/
+body {
+    height: 100vh;
+}
+.dropdown_wrapper {
+    /*height: 100vh;*/
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.dropdown_content_hang {
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-duration: calc(1s * 2);
+    animation-duration: calc(1s * 2);
+    -webkit-animation-duration: calc(var(--animate-duration) * 2);
+    animation-duration: calc(var(--animate-duration) * 2);
+    -webkit-animation-name: hang;
+    animation-name: hang;
+    -webkit-transform-origin: top left;
+    -ms-transform-origin: top left;
+    transform-origin: top left;
+}
+.dropdown-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    cursor: pointer;
+}
+.dropdown-item:hover {
+    background: red;
+    color: #fff;
+}
+.dropdown-item span {
+    margin-left: 10px;
+}
+@-webkit-keyframes hang {
+    0% {
+        -webkit-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out;
+    }
+    20%,
+    60% {
+        -webkit-transform: rotate3d(0, 0, 1, 80deg);
+        transform: rotate3d(0, 0, 1, 80deg);
+        -webkit-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out;
+    }
+    40%,
+    80% {
+        -webkit-transform: rotate3d(0, 0, 1, 60deg);
+        transform: rotate3d(0, 0, 1, 60deg);
+        -webkit-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out;
+        opacity: 1;
+    }
+    to {
+        -webkit-transform: rotate3d(0, 0, 1, 0deg);
+        transform: rotate3d(0, 0, 1, 0deg);
+        -webkit-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out;
+        opacity: 1;
+    }
+}
+@keyframes hang {
+    0% {
+        -webkit-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out;
+    }
+    20%,
+    60% {
+        -webkit-transform: rotate3d(0, 0, 1, 80deg);
+        transform: rotate3d(0, 0, 1, 80deg);
+        -webkit-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out;
+    }
+    40%,
+    80% {
+        -webkit-transform: rotate3d(0, 0, 1, 60deg);
+        transform: rotate3d(0, 0, 1, 60deg);
+        -webkit-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out;
+        opacity: 1;
+    }
+    to {
+        -webkit-transform: rotate3d(0, 0, 1, 0deg);
+        transform: rotate3d(0, 0, 1, 0deg);
+        -webkit-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out;
+        opacity: 1;
+    }
+}

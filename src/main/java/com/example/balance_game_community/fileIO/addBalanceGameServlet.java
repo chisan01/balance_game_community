@@ -35,7 +35,7 @@ public class addBalanceGameServlet extends HttpServlet {
         BalanceGameVoteDAO balanceGameVoteDAO = testAppConfig.getBalanceGameVoteDAO();
         BalanceGameDAO balanceGameDAO = testAppConfig.getBalanceGameDAO();
         BalanceGameCommentDAO balanceGameCommentDAO = testAppConfig.getBalanceGameCommentDAO();
-        testAppConfig.resetAll();
+//        testAppConfig.resetAll();
 
         // TODO 로그인 기능 구현 후 : 로그인 된 멤버 id 사용
         Member member = new Member();
@@ -46,7 +46,6 @@ public class addBalanceGameServlet extends HttpServlet {
         memberDAO.signIn(member);
 
         BalanceGame balanceGame = new BalanceGame();
-        balanceGame.setId(1L);
         balanceGame.setQuestion(request.getParameter("question"));
         balanceGame.setAnswer1(request.getParameter("answer1"));
         balanceGame.setAnswer2(request.getParameter("answer2"));
@@ -79,7 +78,7 @@ public class addBalanceGameServlet extends HttpServlet {
 
         balanceGameDAO.addBalanceGame(member.getId(), balanceGame);
 
-        request.setAttribute("balanceGameId", balanceGame.getId());
+        request.setAttribute("balanceGameId", balanceGameDAO.getLastBalanceGameId());
         RequestDispatcher rd = request.getRequestDispatcher("/show_balance_game.jsp");
         rd.forward(request, response);
     }
