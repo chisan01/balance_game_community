@@ -141,7 +141,7 @@ body {
     animation-iteration-count: infinite;
     -webkit-animation-duration: calc(1s * 2);
     animation-duration: calc(1s * 2);
-    -webkit-animation-duration: calc(var(--animate-duration) * 2);
+    -webkit-animation-duration: calc(var(--animatie-duration) * 2);
     animation-duration: calc(var(--animate-duration) * 2);
     -webkit-animation-name: hang;
     animation-name: hang;
