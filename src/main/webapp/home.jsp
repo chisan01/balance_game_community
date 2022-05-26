@@ -19,6 +19,7 @@
     <link href="css/home_styles.css" rel="stylesheet"/>
 </head>
 <body>
+<script src="./swing.js"></script>
 <%
     AppConfig appConfig = new AppConfig(new TestDataSource());
     MemberDAO memberDAO = appConfig.getMemberDAO();
@@ -61,6 +62,12 @@
             </header>
 
             <!--빨래 -->
+            <div class="svg-border-rounded">
+                <svg viewBox="0 0 144.54 18" preserveAspectRatio="none" fill="white">
+                    <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 17.34, 72.27, 17.34, 144.54, 0, 144.54, 0" fill="transparent" style="stroke:rgb(0, 0, 0);" ></path>
+                </svg>
+            </div>
+
             <!--모든 밸런스게임-->
             <section class="today-best">
                 <div class="container">
@@ -80,6 +87,7 @@
                                     </span>
                                 </button>
                             </div>
+
                             <div class="dropdown-menu" id="dropdown-menu2" role="menu">
                                 <div class="dropdown-content animate__animated dropdown_content_hang"
                                      id="dropdown_item1">
@@ -100,12 +108,23 @@
 
                 </div>
             </section>
+            <div class="svg-border-rounded">
+                <svg viewBox="0 0 144.54 18" preserveAspectRatio="none" fill="white">
+                    <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 17.34, 72.27, 17.34, 144.54, 0, 144.54, 0" fill="transparent" style="stroke:rgb(0, 0, 0);"></path>
+                </svg>
+            </div>
+
             <!--지금 사람들이 많이 하고 있는 밸런스 게임-->
             <section class="this-time-best">
                 <div class="container">
 
                 </div>
             </section>
+            <div class="svg-border-rounded">
+                <svg viewBox="0 0 144.54 18" preserveAspectRatio="none" fill="white">
+                    <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 17.34, 72.27, 17.34, 144.54, 0, 144.54, 0" fill="transparent" style="stroke:rgb(0, 0, 0);"></path>
+                </svg>
+            </div>
         </main>
     </div>
 </div>
