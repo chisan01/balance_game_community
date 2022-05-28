@@ -5,7 +5,8 @@
 <%@ page import="com.example.balance_game_community.balanceGameComment.BalanceGameCommentDAO" %>
 <%@ page import="com.example.balance_game_community.DataSource" %>
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGame" %>
-<%@ page import="com.example.balance_game_community.TestDataSource" %><%--
+<%@ page import="com.example.balance_game_community.TestDataSource" %>
+<%@ page import="java.util.Random" %><%--
   Created by IntelliJ IDEA.
   User: kmj
   Date: 2022-05-22
@@ -61,56 +62,67 @@
                 </div>
             </header>
 
-            <!--빨래 -->
-            <div class="svg-border-rounded">
-                <svg viewBox="0 0 144.54 18" preserveAspectRatio="none" fill="white">
-                    <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 17.34, 72.27, 17.34, 144.54, 0, 144.54, 0" fill="transparent" style="stroke:rgb(0, 0, 0);" ></path>
-                </svg>
-            </div>
+            <span class="svg-border-rounded">
+                        <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
+                            <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0" fill="transparent"
+                                  style="stroke:rgb(0, 0, 0);"></path>
+                        </svg>
+                    </span>
 
             <!--모든 밸런스게임-->
             <section class="today-best">
                 <div class="container">
-                    <div class="dropdown_wrapper">
-                        <%
-                            long maxIndex = balanceGameDAO.getLastBalanceGameId();
-                            for (int i = 1; i <= maxIndex; i++) {
-                                BalanceGame balanceGame = balanceGameDAO.findById((long) i);
-                        %>
-                        <div class="dropdown" id="dropdown">
-                            <div class="dropdown-trigger">
-                                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2"
-                                        id="dropdown_btn">
-                                    <span><%=balanceGame.getQuestion()%></span>
-                                    <span class="icon is-small">
-                                        <i class="fa fa-angle-down" aria-hidden="true"></i>
-                                    </span>
-                                </button>
-                            </div>
+                    <%
+                        long maxIndex = balanceGameDAO.getLastBalanceGameId();
+                        int index=4;
+                        int flag=2;
+                        for (int i = 1; i <= maxIndex; i++) {
+                            BalanceGame balanceGame = balanceGameDAO.findById((long) i);
+                            if (i==index) {
+                                index+=flag;
+                                if (flag == 2){ flag=3;}
+                                else{ flag=2;}
+                    %>
+                    <span class="svg-border-rounded">
+                        <svg width="100vw" height="auto" viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
+                            <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0" fill="transparent"
+                                  style="stroke:rgb(0, 0, 0);"></path>
+                        </svg>
+                    </span>
+                    <%
+                    }
+                %>
+                    <a class="towel-page" href="index.jsp">
+                        <div class="towel">
+                            <%
+                                Random rand = new Random();
+                                int randnum = 0;
+                                String[] clothes = {"clothes", "clothes1", "clothes2", "clothes3", "clothes4", "clothes5", "clothes6", "clothes7", "clothes8", "clothes9", "towel"};
+                                randnum = rand.nextInt(11);
+                                String selectclothes = "./img/" + clothes[randnum] + ".png";
 
-                            <div class="dropdown-menu" id="dropdown-menu2" role="menu">
-                                <div class="dropdown-content animate__animated dropdown_content_hang"
-                                     id="dropdown_item1">
-                                    <div class="dropdown-item">
-                                        <img src="<%=balanceGame.getAnswer1PictureUrl()%>" width="30px">
-                                        <span><%=balanceGame.getAnswer1()%></span>
-                                    </div>
-                                    <span>vs</span>
-                                    <div class="dropdown-item">
-                                        <img src="<%=balanceGame.getAnswer1PictureUrl()%>" width="30px">
-                                        <span><%=balanceGame.getAnswer2()%></span>
-                                    </div>
-                                </div>
+                            %>
+                            <image class="towel" src="<%=selectclothes%>" width="450" height="470"></image>
+                            <div class="balancegame">
+                                <p style="font-size: 22px;"><%=balanceGame.getQuestion()%>
+                                </p>
+                                <h4><br/></h4>
+                                <p><%=balanceGame.getAnswer1()%>
+                                </p>
+                                <p style="color: saddlebrown">vs</p>
+                                <p><%=balanceGame.getAnswer2()%>
+                                </p>
                             </div>
                         </div>
-                        <%}%>
-                    </div>
-
+                    </a>
+                    <%}%>
                 </div>
             </section>
+
             <div class="svg-border-rounded">
-                <svg viewBox="0 0 144.54 18" preserveAspectRatio="none" fill="white">
-                    <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 17.34, 72.27, 17.34, 144.54, 0, 144.54, 0" fill="transparent" style="stroke:rgb(0, 0, 0);"></path>
+                <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
+                    <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0" fill="transparent"
+                          style="stroke:rgb(0, 0, 0);"></path>
                 </svg>
             </div>
 
@@ -121,8 +133,9 @@
                 </div>
             </section>
             <div class="svg-border-rounded">
-                <svg viewBox="0 0 144.54 18" preserveAspectRatio="none" fill="white">
-                    <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 17.34, 72.27, 17.34, 144.54, 0, 144.54, 0" fill="transparent" style="stroke:rgb(0, 0, 0);"></path>
+                <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
+                    <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0" fill="transparent"
+                          style="stroke:rgb(0, 0, 0);"></path>
                 </svg>
             </div>
         </main>
