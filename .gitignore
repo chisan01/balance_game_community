@@ -1,3 +1,6 @@
+src/main/java/com/example/balance_game_community/DataSource.java
+src/main/java/com/example/balance_game_community/TestDataSource.java
+
 # Default ignored files
 /shelf/
 /.idea/workspace.xml
