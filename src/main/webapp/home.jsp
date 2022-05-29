@@ -111,7 +111,7 @@
                 <%
                     }
                 %>
-                <a class="towel-page" href="index.jsp">
+                <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=i%>">
                     <div class="towel">
                         <%
                             Random rand = new Random();
