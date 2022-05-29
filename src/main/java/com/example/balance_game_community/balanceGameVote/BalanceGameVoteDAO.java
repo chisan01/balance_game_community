@@ -6,6 +6,7 @@ import com.example.balance_game_community.balanceGame.BalanceGame;
 import com.example.balance_game_community.balanceGame.BalanceGameResult;
 
 import java.sql.*;
+import java.util.Arrays;
 
 public class BalanceGameVoteDAO extends DAO {
 
@@ -130,9 +131,9 @@ public class BalanceGameVoteDAO extends DAO {
             rs = pstmt.executeQuery();
 
             Long[] voteCount = new Long[2];
+            Arrays.fill(voteCount, 0L);
             for (int i = 0; i < 2; i++) {
-                rs.next();
-                voteCount[i] = rs.getLong(1);
+                if (rs.next()) voteCount[i] = rs.getLong(1);
             }
 
             return new BalanceGameResult(voteCount[0], voteCount[1]);
