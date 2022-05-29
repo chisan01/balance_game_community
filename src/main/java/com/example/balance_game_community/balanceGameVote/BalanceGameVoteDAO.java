@@ -58,6 +58,31 @@ public class BalanceGameVoteDAO extends DAO {
         }
     }
 
+    public BalanceGameVote findById(Long balanceGameVoteId) {
+        String SQL = "SELECT * FROM balancegamevote WHERE id = ?";
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setLong(1, balanceGameVoteId);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return new BalanceGameVote(rs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(conn, pstmt, rs);
+        }
+        return null;
+    }
+
     // 특정 밸런스게임에 대해 특정 회원이 이미 답변을 했는지 확인
     public Long findByMemberIdAndBalanceGameId(Long memberId, Long balanceGameId) {
         String SQL = "SELECT id FROM balancegamevote WHERE memberId = ? AND balanceGameId = ?";
