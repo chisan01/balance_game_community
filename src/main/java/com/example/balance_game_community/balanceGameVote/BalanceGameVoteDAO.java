@@ -6,6 +6,7 @@ import com.example.balance_game_community.balanceGame.BalanceGame;
 import com.example.balance_game_community.balanceGame.BalanceGameResult;
 
 import java.sql.*;
+import java.util.Arrays;
 
 public class BalanceGameVoteDAO extends DAO {
 
@@ -58,6 +59,31 @@ public class BalanceGameVoteDAO extends DAO {
         }
     }
 
+    public BalanceGameVote findById(Long balanceGameVoteId) {
+        String SQL = "SELECT * FROM balancegamevote WHERE id = ?";
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setLong(1, balanceGameVoteId);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return new BalanceGameVote(rs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(conn, pstmt, rs);
+        }
+        return null;
+    }
+
     // 특정 밸런스게임에 대해 특정 회원이 이미 답변을 했는지 확인
     public Long findByMemberIdAndBalanceGameId(Long memberId, Long balanceGameId) {
         String SQL = "SELECT id FROM balancegamevote WHERE memberId = ? AND balanceGameId = ?";
@@ -87,7 +113,7 @@ public class BalanceGameVoteDAO extends DAO {
 
     // 게임 결과 확인 (사람들의 투표 수, 선택 비율 확인) - 한번 투표한 경우 바로 게임 결과를 표시해야함
     public BalanceGameResult getBalanceGameResult(Long balanceGameId) {
-        String SQL = "SELECT COUNT(*) AS voteCount\n" +
+        String SQL = "SELECT answerNumber, COUNT(*) AS voteCount\n" +
                 "FROM balancegamevote\n" +
                 "WHERE balanceGameId = ?\n" +
                 "GROUP BY answerNumber\n" +
@@ -105,9 +131,9 @@ public class BalanceGameVoteDAO extends DAO {
             rs = pstmt.executeQuery();
 
             Long[] voteCount = new Long[2];
-            for (int i = 0; i < 2; i++) {
-                rs.next();
-                voteCount[i] = rs.getLong(1);
+            Arrays.fill(voteCount, 0L);
+            while (rs.next()) {
+                voteCount[rs.getInt(1) - 1] = rs.getLong(2);
             }
 
             return new BalanceGameResult(voteCount[0], voteCount[1]);
