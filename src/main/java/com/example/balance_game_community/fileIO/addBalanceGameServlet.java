@@ -78,8 +78,7 @@ public class addBalanceGameServlet extends HttpServlet {
 
         balanceGameDAO.addBalanceGame(member.getId(), balanceGame);
 
-        request.setAttribute("balanceGameId", balanceGameDAO.getLastBalanceGameId());
-        RequestDispatcher rd = request.getRequestDispatcher("/show_balance_game.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/show_balance_game.jsp?balanceGameId=" + balanceGameDAO.getLastBalanceGameId());
         rd.forward(request, response);
     }
 

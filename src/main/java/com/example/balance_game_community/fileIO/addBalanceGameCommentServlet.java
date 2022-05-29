@@ -42,7 +42,7 @@ public class addBalanceGameCommentServlet extends HttpServlet {
         BalanceGameCommentDAO balanceGameCommentDAO = testAppConfig.getBalanceGameCommentDAO();
 
         // TODO 로그인 기능 구현 후 : 로그인 된 멤버 id 사용
-        Long memberId = 1L;
+        Long memberId = 10L;
 
         Long balanceGameId = Long.parseLong(request.getParameter("balanceGameId"));
 

@@ -16,8 +16,11 @@ public class BalanceGameVote {
         this.memberId = rs.getLong(2);
         this.balanceGameId = rs.getLong(3);
         this.answerNumber = rs.getInt(4);
+
         this.difficulty = Difficulty.values()[rs.getInt(5)];
-        this.preference = Preference.valueOf(rs.getString(6));
+
+        if(rs.getString(6) == null) this.preference = null;
+        else this.preference = Preference.valueOf(rs.getString(6));
     }
 
     public Long getId() {

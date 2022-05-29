@@ -113,7 +113,7 @@ public class BalanceGameVoteDAO extends DAO {
 
     // 게임 결과 확인 (사람들의 투표 수, 선택 비율 확인) - 한번 투표한 경우 바로 게임 결과를 표시해야함
     public BalanceGameResult getBalanceGameResult(Long balanceGameId) {
-        String SQL = "SELECT COUNT(*) AS voteCount\n" +
+        String SQL = "SELECT answerNumber, COUNT(*) AS voteCount\n" +
                 "FROM balancegamevote\n" +
                 "WHERE balanceGameId = ?\n" +
                 "GROUP BY answerNumber\n" +
@@ -132,8 +132,8 @@ public class BalanceGameVoteDAO extends DAO {
 
             Long[] voteCount = new Long[2];
             Arrays.fill(voteCount, 0L);
-            for (int i = 0; i < 2; i++) {
-                if (rs.next()) voteCount[i] = rs.getLong(1);
+            while (rs.next()) {
+                voteCount[rs.getInt(1) - 1] = rs.getLong(2);
             }
 
             return new BalanceGameResult(voteCount[0], voteCount[1]);
