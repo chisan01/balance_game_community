@@ -21,29 +21,22 @@
                 <img class="loginFormBackground laundry" src="./image/laundry_towel(1).png" alt="background">
             <form class="loginForm" action="" method="post">
                     
-                        <h2 style="font-size: 48px; color: #564c4d; margin-bottom: 90px;">Login</h2>
+                        <h2 style="font-size: 48px; color: #564c4d; margin-bottom: 90px;">Register</h2>
                         <div class="container">
                             <div class="input">
                                 <div class="input">
-                                    <input type="text" placeholder="ID" name="userId" required>
+                                    <input type="text" placeholder="이메일을 입력하세요" name="userId" required>
                                 </div>
                             </div>
 
                             <div class="input">
-                                <input type="password" placeholder="Password" name="userPassword" requrired>
-                            </div>
-
-                            <div class="checkbox" align="left" style="margin: 20px 60px;">
-                                <button onclick="toggleImage()" style="vertical-align: middle;">
-                                    <img id="loginMaintainCheckbox" src="./image/checkbox_blank.png" alt="check box">
-                                </button>
-                                <span style="vertical-align: middle; font-size: 14px; color: #BDBDBD;">로그인 유지하기</span>
+                                <input type="password" placeholder="비밀번호를 입력하세요" name="userPassword" requrired>
                             </div>
                             
-                            <button id="login" type="submit">로그인</button>
+                            <button id="login" type="submit">회원가입</button>
                         </div>
 
-                        <button type="button" class="togglePage" onclick="location.href='register.html'">회원가입</button>
+                        <button class="togglePage" type="button" onclick="location.href='login.html'">로그인</button>
                 
 
         </form>
