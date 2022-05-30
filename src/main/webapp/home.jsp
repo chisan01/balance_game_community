@@ -44,7 +44,7 @@
                             <a class="nav-link" href="login.html">로그인</a>
                         </li>
                         <%
-                            } else {
+                        } else {
                         %>
                         <li class="nav-item">
                             <a class="nav-link" href="/logout.jsp">로그아웃</a>
