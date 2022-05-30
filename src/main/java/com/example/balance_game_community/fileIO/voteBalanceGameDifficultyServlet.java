@@ -33,13 +33,9 @@ public class voteBalanceGameDifficultyServlet extends HttpServlet {
         BalanceGameDAO balanceGameDAO = testAppConfig.getBalanceGameDAO();
         BalanceGameCommentDAO balanceGameCommentDAO = testAppConfig.getBalanceGameCommentDAO();
 
-        // TODO 로그인 기능 구현 후 : 로그인 된 멤버 id 사용
-        Long memberId = 10L;
-
+        Long memberId = (Long) request.getSession().getAttribute("memberId");
         Long balanceGameId = Long.parseLong(request.getParameter("balanceGameId"));
-
         Difficulty difficulty = Difficulty.valueOf(request.getParameter("difficulty"));
-
         balanceGameVoteDAO.voteDifficulty(memberId, balanceGameId, difficulty);
 
         System.out.println("difficulty = " + difficulty.name());

@@ -26,7 +26,6 @@
     BalanceGameVoteDAO balanceGameVoteDAO = appConfig.getBalanceGameVoteDAO();
     BalanceGameDAO balanceGameDAO = appConfig.getBalanceGameDAO();
     BalanceGameCommentDAO balanceGameCommentDAO = appConfig.getBalanceGameCommentDAO();
-
 %>
 
 <div id="layoutDefault">
@@ -37,9 +36,22 @@
                 <a class="navbar-brand" href="home.jsp">세모밸</a>
                 <div class="navbarSupportedContent">
                     <ul class="navbar-nav">
+                        <%
+                            Long memberId = (Long) session.getAttribute("memberId");
+                            if (memberId == null) {
+                        %>
                         <li class="nav-item">
                             <a class="nav-link" href="login.html">로그인</a>
                         </li>
+                        <%
+                            } else {
+                        %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout.jsp">로그아웃</a>
+                        </li>
+                        <%
+                            }
+                        %>
                         <li class="nav-item">
                             <a class="nav-link" href="index.jsp">랜덤 시작</a>
                         </li>
@@ -142,7 +154,7 @@
                         ang = -5;
                     }%>
 
-                <a class="towel-page" href="index.jsp" style="transform: rotate(<%=ang%>deg)">
+                <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=i%>" style="transform: rotate(<%=ang%>deg)">
                     <div class="towel">
                         <%
                             Random rand = new Random();
