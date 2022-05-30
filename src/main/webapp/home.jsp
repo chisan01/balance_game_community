@@ -38,7 +38,7 @@
                 <div class="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.jsp">로그인</a>
+                            <a class="nav-link" href="login.html">로그인</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="index.jsp">랜덤 시작</a>
