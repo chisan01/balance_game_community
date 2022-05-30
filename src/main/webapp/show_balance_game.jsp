@@ -5,8 +5,6 @@
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGameDAO" %>
 <%@ page import="com.example.balance_game_community.balanceGameComment.BalanceGameCommentDAO" %>
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGame" %>
-<<<<<<< HEAD
-=======
 <%@ page import="com.example.balance_game_community.member.Member" %>
 <%@ page import="com.example.balance_game_community.balanceGameVote.BalanceGameVote" %>
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGameResult" %>
@@ -14,7 +12,6 @@
 <%@ page import="com.example.balance_game_community.balanceGameVote.Difficulty" %>
 <%@ page import="com.example.balance_game_community.balanceGameComment.BalanceGameComment" %>
 <%@ page import="java.util.List" %>
->>>>>>> upstream/main
 <%--
   Created by IntelliJ IDEA.
   User: chisanahn
@@ -52,21 +49,18 @@
             <div class="bubble x3">
                 <div class="menu">
                     <h1>메뉴</h1>
-                    <a href="create_balance_game.html">인기순</a>
-                    <a href="index.jsp">마이페이지</a>
                     <a href="create_balance_game.html">글쓰기</a>
+                    <a href="index.jsp">오늘의 밸런스게임</a>
+                    <a href="create_balance_game.html">인기순 밸런스게임</a>
+                    <a href="create_balance_game.html">최신순 밸런스게임</a>
+                    <a href="create_balance_game.html">난이도별 밸런스게임</a>
                 </div>
             </div>
             <div class="bubble x4"></div>
         </div>
 
         <%
-<<<<<<< HEAD
-            Long balanceGameId = (Long) request.getAttribute("balanceGameId");
-            if (balanceGameId == null) balanceGameId = 1L;
-=======
             Long balanceGameId = Long.parseLong(request.getParameter("balanceGameId"));
->>>>>>> upstream/main
 
             AppConfig testAppConfig = new AppConfig(new TestDataSource());
             MemberDAO memberDAO = testAppConfig.getMemberDAO();
@@ -74,9 +68,6 @@
             BalanceGameDAO balanceGameDAO = testAppConfig.getBalanceGameDAO();
             BalanceGameCommentDAO balanceGameCommentDAO = testAppConfig.getBalanceGameCommentDAO();
 
-<<<<<<< HEAD
-            BalanceGame balanceGame = balanceGameDAO.findById(balanceGameId);
-=======
             // TODO 로그인 기능 구현 후 : 로그인 된 멤버 id 사용
             Long memberId = 10L;
 
@@ -84,80 +75,54 @@
 
             Long balanceGameVoteId = balanceGameVoteDAO.findByMemberIdAndBalanceGameId(memberId, balanceGameId);
             BalanceGameVote balanceGameVote = balanceGameVoteDAO.findById(balanceGameVoteId);
->>>>>>> upstream/main
         %>
 
         <div id="newWriting">
+            <p style="font-size: 50px; padding-top: 20px; padding-bottom: 20px;"><%=balanceGame.getQuestion()%>
+            </p>
+
+            <div class="create-game-vs" style="padding-right: 50px;">
+                <img src="/files/<%=balanceGame.getAnswer1PictureUrl()%>" alt="picture1"
+                     width="800px" height="800px">
+                <img src="/files/<%=balanceGame.getAnswer2PictureUrl()%>" alt="picture2"
+                     width="800px" height="800px">
+            </div>
+
+            <div class="create-game-vs" style="padding-right: 50px;">
+                <%
+                    if (balanceGameVote != null) {
+                        BalanceGameResult balanceGameResult = balanceGameVoteDAO.getBalanceGameResult(balanceGameId);
+                        if (balanceGameVote.getAnswerNumber() == 1) {
+                %>
+                <p bgcolor="#ff8c00"><%=balanceGame.getAnswer1()%></p>
+                <p><%=balanceGame.getAnswer2()%></p>
+                <%
+                } else {
+                %>
+                <p><%=balanceGame.getAnswer1()%></p>
+                <p bgcolor="#ff8c00"><%=balanceGame.getAnswer2()%></p>
+                <%
+                    }
+                } else {
+                %>
+                <form action="/chooseAnswerServlet" method="post" accept-charset="UTF-8">
+                    <input type="hidden" name="balanceGameId" value="<%=balanceGameId%>"/>
+                    <ul style="list-style: none;">
+                        <li class="nav-item">
+                            <input type="radio" name="answer" value="1"><%=balanceGame.getAnswer1()%>
+                        </li>
+                        <li class="nav-item">
+                            <input type="radio" name="answer" value="2"><%=balanceGame.getAnswer2()%>
+                        </li>
+                    </ul>
+                    <button type="submit">선택 완료</button>
+                </form>
+                <%
+                    }
+                %>
+            </div>
+
             <table border="1">
-                <tr height="50px">
-<<<<<<< HEAD
-                    <td colspan="2"><%=balanceGame.getQuestion()%></td>
-                </tr>
-                <tr height="50px">
-                    <td>Answer 1</td>
-                    <td>Answer 2</td>
-                </tr>
-                <tr height="900px">
-                    <td><img src="/files/<%=balanceGame.getAnswer1PictureUrl()%>" alt="picture1" width="800px"></td>
-                    <td><img src="/files/<%=balanceGame.getAnswer2PictureUrl()%>" alt="picture2" width="800px"></td>
-                </tr>
-                <tr height="200px">
-                    <td><%=balanceGame.getAnswer1()%></td>
-                    <td><%=balanceGame.getAnswer2()%></td>
-                </tr>
-=======
-                    <td colspan="4"><%=balanceGame.getQuestion()%>
-                    </td>
-                </tr>
-                <tr height="50px">
-                    <td colspan="2">Answer 1</td>
-                    <td colspan="2">Answer 2</td>
-                </tr>
-                <tr height="100px">
-                    <td colspan="2"><img src="/files/<%=balanceGame.getAnswer1PictureUrl()%>" alt="picture1"
-                                         width="100px"></td>
-                    <td colspan="2"><img src="/files/<%=balanceGame.getAnswer2PictureUrl()%>" alt="picture2"
-                                         width="100px"></td>
-                </tr>
-                <tr height="100px">
-                    <%
-                        if (balanceGameVote != null) {
-                            BalanceGameResult balanceGameResult = balanceGameVoteDAO.getBalanceGameResult(balanceGameId);
-                            if (balanceGameVote.getAnswerNumber() == 1) {
-                    %>
-                    <td colspan="2" bgcolor="#ff8c00"><%=balanceGame.getAnswer1()%>
-                    </td>
-                    <td colspan="2"><%=balanceGame.getAnswer2()%>
-                    </td>
-                    <%
-                    } else {
-                    %>
-                    <td colspan="2"><%=balanceGame.getAnswer1()%>
-                    </td>
-                    <td colspan="2" bgcolor="#ff8c00"><%=balanceGame.getAnswer2()%>
-                    </td>
-                    <%
-                        }
-                    } else {
-                    %>
-                    <td colspan="4">
-                        <form action="/chooseAnswerServlet" method="post" accept-charset="UTF-8">
-                            <input type="hidden" name="balanceGameId" value="<%=balanceGameId%>"/>
-                            <ul style="list-style: none;">
-                                <li class="nav-item">
-                                    <input type="radio" name="answer" value="1"><%=balanceGame.getAnswer1()%>
-                                </li>
-                                <li class="nav-item">
-                                    <input type="radio" name="answer" value="2"><%=balanceGame.getAnswer2()%>
-                                </li>
-                            </ul>
-                            <button type="submit">선택 완료</button>
-                        </form>
-                    </td>
-                    <%
-                        }
-                    %>
-                </tr>
 
                 <%--            게임 결과 출력--%>
                 <%
@@ -328,7 +293,6 @@
                 <%
                     }
                 %>
->>>>>>> upstream/main
             </table>
         </div>
     </main>

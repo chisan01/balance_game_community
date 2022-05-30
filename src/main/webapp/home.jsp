@@ -86,9 +86,11 @@
             <div class="bubble x3">
                 <div class="menu">
                     <h1>메뉴</h1>
-                    <a href="create_balance_game.html">인기순</a>
-                    <a href="index.jsp">마이페이지</a>
                     <a href="create_balance_game.html">글쓰기</a>
+                    <a href="index.jsp">오늘의 밸런스게임</a>
+                    <a href="create_balance_game.html">인기순 밸런스게임</a>
+                    <a href="create_balance_game.html">최신순 밸런스게임</a>
+                    <a href="create_balance_game.html">난이도별 밸런스게임</a>
                 </div>
             </div>
             <div class="bubble x4"></div>
@@ -184,7 +186,7 @@
 
             </div>
         </section>
-        <div class="svg-border-rounded">
+        <div class="svg-border-rounded" style="padding-bottom: 100px;">
             <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
                 <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0" fill="transparent"
                       style="stroke:rgb(0, 0, 0);"></path>
