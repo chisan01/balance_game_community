@@ -2,75 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="laundry.css">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="css/laundry.css">
+    <link rel="stylesheet" href="css/login.css">
     <title>세상의 모든 밸런스 게임</title>
 </head>
 <body>
-<button id="loginFormOpen">팝업 열기</button>
 <div class="background">
     <div class="window">
         <div class="popup">
             <div align="right">
-                <button id="loginFormClose">
+                <button type="button" id="loginFormClose" onclick="location.href='home.jsp'">
                     <img src="./image/white x.png" alt="close" style="width: 50px; height: 50px;">
                 </button>
             </div>
-            
+
             <div class="content">
                 <img class="loginFormBackground laundry" src="./image/laundry_towel(1).png" alt="background">
-            <form class="loginForm" action="" method="post">
-                    
-                        <h2 style="font-size: 48px; color: #564c4d; margin-bottom: 90px;">Login</h2>
-                        <div class="container">
-                            <div class="input">
-                                <div class="input">
-                                    <input type="text" placeholder="ID" name="userId" required>
-                                </div>
-                            </div>
-
-                            <div class="input">
-                                <input type="password" placeholder="Password" name="userPassword" requrired>
-                            </div>
-
-                            <div class="checkbox" align="left" style="margin: 20px 60px;">
-                                <button onclick="toggleImage()" style="vertical-align: middle;">
-                                    <img id="loginMaintainCheckbox" src="./image/checkbox_blank.png" alt="check box">
-                                </button>
-                                <span style="vertical-align: middle; font-size: 14px; color: #BDBDBD;">로그인 유지하기</span>
-                            </div>
-                            
-                            <button id="login" type="submit">로그인</button>
+                <form class="loginForm" action="/loginServlet" method="post">
+                    <h2 style="font-size: 48px; color: #564c4d; margin-bottom: 90px;">Login</h2>
+                    <div class="container">
+                        <div class="input">
+                            <input type="text" placeholder="ID" name="email" required>
+                        </div>
+                        <div class="input">
+                            <input type="password" placeholder="Password" name="password" required>
                         </div>
 
-                        <button type="button" class="togglePage" onclick="location.href='register.html'">회원가입</button>
-                
+                        <button id="login" type="submit">로그인</button>
+                    </div>
 
-        </form>
+                    <button type="button" id="register" onclick="location.href='register.jsp'">회원가입</button>
+                </form>
             </div>
-            
+
+        </div>
     </div>
-</div>
 </div>
 </body>
 <script>
+
+    /*
 function show () {
   document.querySelector(".background").className = "background show";
-}
+}*/
 
-function close () { 
-  document.querySelector(".background").className = "background";
-}
+    function close() {
+        document.querySelector(".background").className = "background";
+    }
 
-function toggleImage() {
-    const src = document.querySelector('#loginMaintainCheckbox').src;
-    if(src.indexOf('filled') != -1)
-    document.querySelector("#loginMaintainCheckbox").src="./image/checkbox_blank.png";
-    else if(src.indexOf('blank') != -1)
-        document.querySelector("#loginMaintainCheckbox").src="./image/checkbox_filled.png";
-}
+    function toggleImage() {
+        const src = document.querySelector('#loginMaintainCheckbox').src;
+        if (src.indexOf('filled') != -1)
+            document.querySelector("#loginMaintainCheckbox").src = "./image/checkbox_blank.png";
+        else if (src.indexOf('blank') != -1)
+            document.querySelector("#loginMaintainCheckbox").src = "./image/checkbox_filled.png";
+    }
 
-document.querySelector("#loginFormOpen").addEventListener('click', show);
-document.querySelector("#loginFormClose").addEventListener('click', close);
+    //document.querySelector("#loginFormOpen").addEventListener('click', show);
+    document.querySelector("#loginFormClose").addEventListener('click', close);
 </script>
 </html>
