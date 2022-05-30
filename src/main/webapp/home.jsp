@@ -128,7 +128,6 @@
                                   style="stroke:rgb(0, 0, 0);"></path>
                         </svg>
                     </span>
-
                 <%
                     }
                     if (i % 5 == 1) {

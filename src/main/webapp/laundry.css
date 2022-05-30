@@ -1,0 +1,36 @@
+.laundry {
+    animation: swing 4s infinite;
+    -webkit-animation: swing 4s infinite;
+    position: relative;
+    z-index: -1;
+}
+
+@keyframes swing {
+    /* 0% { transform: rotate(1deg); }
+    50% { transform: rotate(-1deg); }
+    100% { transform: rotate(1deg); } */
+    0% { transform:skewX(-2deg); }
+    15% { transform:skewX(0deg); }
+    20% { transform:skewX(-1deg); }
+    30% { transform:skewX(0deg); }
+    40% { transform:skewX(-1deg); }
+    50% { transform:skewX(0deg); }
+    60% { transform:skewX(-1deg); }
+    85% { transform:skewX(0deg); }
+    100% { transform:skewX(-2deg); }
+}
+
+@-webkit-keyframes swing {
+    /* 0% { transform: rotate(1deg); }
+    50% { transform: rotate(-1deg); }
+    100% { transform: rotate(1deg); } */
+    0% { transform:skewX(-2deg); }
+    15% { transform:skewX(0deg); }
+    20% { transform:skewX(-1deg); }
+    30% { transform:skewX(0deg); }
+    40% { transform:skewX(-1deg); }
+    50% { transform:skewX(0deg); }
+    60% { transform:skewX(-1deg); }
+    85% { transform:skewX(0deg); }
+    100% { transform:skewX(-2deg); }
+}

@@ -236,6 +236,7 @@ section{
     bottom: -200px;
     animation: animate_x3 2s linear;
 }
+
 @keyframes animate_x3 {
     40%{
         transform: translateY(10%);
@@ -266,6 +267,7 @@ section{
     bottom: 700px;
     animation: animate_x4 2s linear;
 }
+
 @keyframes animate_x4 {
     0%{
         transform: translateY(50%);

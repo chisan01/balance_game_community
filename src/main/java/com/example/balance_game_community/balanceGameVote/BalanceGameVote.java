@@ -1,5 +1,8 @@
 package com.example.balance_game_community.balanceGameVote;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class BalanceGameVote {
     private Long id;
     private Long memberId;
@@ -7,6 +10,18 @@ public class BalanceGameVote {
     private Integer answerNumber;
     private Difficulty difficulty;
     private Preference preference;
+
+    public BalanceGameVote(ResultSet rs) throws SQLException {
+        this.id = rs.getLong(1);
+        this.memberId = rs.getLong(2);
+        this.balanceGameId = rs.getLong(3);
+        this.answerNumber = rs.getInt(4);
+
+        this.difficulty = Difficulty.values()[rs.getInt(5)];
+
+        if(rs.getString(6) == null) this.preference = null;
+        else this.preference = Preference.valueOf(rs.getString(6));
+    }
 
     public Long getId() {
         return id;

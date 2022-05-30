@@ -108,6 +108,10 @@ public class BalanceGameDAO extends DAO {
     public Long getOtherRandomBalanceGameId(Long curBalanceGameId) {
         Long otherRandomBalanceGameId;
         Long lastBalanceGameId = getLastBalanceGameId();
+
+        // 게임이 1개만 있는 경우
+        if(lastBalanceGameId == 1) return 1L;
+
         while (true) {
             otherRandomBalanceGameId = (long) (Math.random() * lastBalanceGameId) + 1;
             if(!otherRandomBalanceGameId.equals(curBalanceGameId)) break;
