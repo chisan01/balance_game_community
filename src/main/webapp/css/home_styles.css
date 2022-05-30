@@ -115,27 +115,18 @@ html {
     top: 70px;
 }
 
-form{
-    display: flex;
-    justify-content: center;
-}
-
-table{
-    width: 1200px;
-    background-color: white;
-    margin: auto;
-    text-align: center;
-}
-
-/* 테이블에서 일렬로 정렬하고싶을 때 */
-.table-line{
-    display: flex;
-    align-items: center ;
-}
-
 .data{
     width: 100%;
     height: 100%;
+
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom-color: #493F40;
+}
+
+.create-game{
+    display: inline-block;
 }
 
 /*page header */
