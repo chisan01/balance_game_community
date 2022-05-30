@@ -5,16 +5,12 @@
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGameDAO" %>
 <%@ page import="com.example.balance_game_community.balanceGameComment.BalanceGameCommentDAO" %>
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGame" %>
-<<<<<<< HEAD
-=======
-<%@ page import="com.example.balance_game_community.member.Member" %>
 <%@ page import="com.example.balance_game_community.balanceGameVote.BalanceGameVote" %>
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGameResult" %>
-<%@ page import="com.example.balance_game_community.balanceGameVote.Preference" %>
-<%@ page import="com.example.balance_game_community.balanceGameVote.Difficulty" %>
 <%@ page import="com.example.balance_game_community.balanceGameComment.BalanceGameComment" %>
 <%@ page import="java.util.List" %>
->>>>>>> upstream/main
+<%@ page import="com.example.balance_game_community.balanceGameVote.Difficulty" %>
+<%@ page import="com.example.balance_game_community.balanceGameVote.Preference" %>
 <%--
   Created by IntelliJ IDEA.
   User: chisanahn
@@ -61,51 +57,23 @@
         </div>
 
         <%
-<<<<<<< HEAD
-            Long balanceGameId = (Long) request.getAttribute("balanceGameId");
-            if (balanceGameId == null) balanceGameId = 1L;
-=======
-            Long balanceGameId = Long.parseLong(request.getParameter("balanceGameId"));
->>>>>>> upstream/main
-
             AppConfig testAppConfig = new AppConfig(new TestDataSource());
             MemberDAO memberDAO = testAppConfig.getMemberDAO();
             BalanceGameVoteDAO balanceGameVoteDAO = testAppConfig.getBalanceGameVoteDAO();
             BalanceGameDAO balanceGameDAO = testAppConfig.getBalanceGameDAO();
             BalanceGameCommentDAO balanceGameCommentDAO = testAppConfig.getBalanceGameCommentDAO();
 
-<<<<<<< HEAD
-            BalanceGame balanceGame = balanceGameDAO.findById(balanceGameId);
-=======
-            // TODO 로그인 기능 구현 후 : 로그인 된 멤버 id 사용
-            Long memberId = 10L;
-
+            Long memberId = (Long) request.getSession().getAttribute("memberId");
+            Long balanceGameId = Long.parseLong(request.getParameter("balanceGameId"));
             BalanceGame balanceGame = balanceGameDAO.findById(balanceGameId);
 
             Long balanceGameVoteId = balanceGameVoteDAO.findByMemberIdAndBalanceGameId(memberId, balanceGameId);
             BalanceGameVote balanceGameVote = balanceGameVoteDAO.findById(balanceGameVoteId);
->>>>>>> upstream/main
         %>
 
         <div id="newWriting">
             <table border="1">
                 <tr height="50px">
-<<<<<<< HEAD
-                    <td colspan="2"><%=balanceGame.getQuestion()%></td>
-                </tr>
-                <tr height="50px">
-                    <td>Answer 1</td>
-                    <td>Answer 2</td>
-                </tr>
-                <tr height="900px">
-                    <td><img src="/files/<%=balanceGame.getAnswer1PictureUrl()%>" alt="picture1" width="800px"></td>
-                    <td><img src="/files/<%=balanceGame.getAnswer2PictureUrl()%>" alt="picture2" width="800px"></td>
-                </tr>
-                <tr height="200px">
-                    <td><%=balanceGame.getAnswer1()%></td>
-                    <td><%=balanceGame.getAnswer2()%></td>
-                </tr>
-=======
                     <td colspan="4"><%=balanceGame.getQuestion()%>
                     </td>
                 </tr>
@@ -328,7 +296,6 @@
                 <%
                     }
                 %>
->>>>>>> upstream/main
             </table>
         </div>
     </main>

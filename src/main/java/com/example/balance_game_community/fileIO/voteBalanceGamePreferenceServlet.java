@@ -32,13 +32,9 @@ public class voteBalanceGamePreferenceServlet extends HttpServlet {
         BalanceGameDAO balanceGameDAO = testAppConfig.getBalanceGameDAO();
         BalanceGameCommentDAO balanceGameCommentDAO = testAppConfig.getBalanceGameCommentDAO();
 
-        // TODO 로그인 기능 구현 후 : 로그인 된 멤버 id 사용
-        Long memberId = 10L;
-
+        Long memberId = (Long) request.getSession().getAttribute("memberId");
         Long balanceGameId = Long.parseLong(request.getParameter("balanceGameId"));
-
         Preference preference = Preference.valueOf(request.getParameter("preference"));
-
         balanceGameVoteDAO.votePreference(memberId, balanceGameId, preference);
 
         System.out.println("content = " + preference.name());
