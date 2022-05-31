@@ -33,7 +33,7 @@ public class MemberDAO extends DAO {
     }
 
     // 회원가입
-    public void signIn(Member member) {
+    public void signIn(Member member) throws Exception {
         String SQL = "INSERT INTO member VALUES (?,?,?,?)";
 
         Connection conn = null;
@@ -54,8 +54,6 @@ public class MemberDAO extends DAO {
             pstmt.setString(4, member.getNickname());
 
             pstmt.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             close(conn, pstmt, rs);
         }

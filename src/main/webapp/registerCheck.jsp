@@ -22,13 +22,14 @@
     String password = request.getParameter("passwordInput");
     String passwordCheck = request.getParameter("passwordCheck");
 
-    if(!password.equals(passwordCheck)) {
+    System.out.println("passwordCheck = " + passwordCheck);
+
+    if (!password.equals(passwordCheck)) {
         PrintWriter script = response.getWriter();
         script.println("<script>");
         script.println("alert('비밀번호가 일치하지 않습니다.')");
         script.println("history.back()");
         script.println("</script>");
-        return;
     }
 
     AppConfig testAppConfig = new AppConfig(new TestDataSource());
@@ -37,7 +38,20 @@
     member.setEmail(email);
     member.setNickname(nickname);
     member.setPassword(password);
-    memberDAO.signIn(member);
+
+    PrintWriter script = response.getWriter();
+    try {
+        memberDAO.signIn(member);
+        script.println("<script>");
+        script.println("location.href = 'home.jsp'");
+        script.println("</script>");
+    } catch (Exception e) {
+        e.printStackTrace();
+        script.println("<script>");
+        script.println("alert('회원을 생성할 수 없습니다.')");
+        script.println("history.back()");
+        script.println("</script>");
+    }
 %>
 </body>
 </html>

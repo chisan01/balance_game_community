@@ -28,7 +28,7 @@ class MemberDAOTest {
 
     @Test
     @DisplayName("이메일 중복 여부 체크 기능")
-    void emailDuplicateCheck() {
+    void emailDuplicateCheck() throws Exception {
         // given
         Member member = new Member();
         member.setEmail("test@gmail.com");
@@ -43,7 +43,7 @@ class MemberDAOTest {
 
     @Test
     @DisplayName("로그인 정상 동작 확인")
-    void logIn() {
+    void logIn() throws Exception {
         // given
         String email = "test@gmail.com";
         String password = "1234";
@@ -60,7 +60,7 @@ class MemberDAOTest {
 
     @Test
     @DisplayName("로그인 - 잘못된 비밀번호 입력시")
-    void logIn2() {
+    void logIn2() throws Exception {
         // given
         String email = "test@gmail.com";
         String password = "1234";
@@ -78,7 +78,7 @@ class MemberDAOTest {
 
     @Test
     @DisplayName("로그인 - 존재하지 않는 이메일 사용시")
-    void logIn3() {
+    void logIn3() throws Exception {
         // given
         String email = "test@gmail.com";
         String email2 = "test2@gmail.com";
