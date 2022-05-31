@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <link rel="stylesheet" href="css/laundry.css">
     <link rel="stylesheet" href="css/login.css">
     <title>세상의 모든 밸런스 게임</title>
@@ -31,7 +32,7 @@
                         <button id="login" type="submit">로그인</button>
                     </div>
 
-                    <button type="button" id="register" onclick="location.href='register.jsp'">회원가입</button>
+                    <button type="button" id="register" onclick="registerPage();">회원가입</button>
                 </form>
             </div>
 
@@ -56,6 +57,12 @@ function show () {
             document.querySelector("#loginMaintainCheckbox").src = "./image/checkbox_blank.png";
         else if (src.indexOf('blank') != -1)
             document.querySelector("#loginMaintainCheckbox").src = "./image/checkbox_filled.png";
+    }
+
+    function registerPage() {
+        $(document).ready(function(){
+            $(".content").load("register.html");
+        });
     }
 
     //document.querySelector("#loginFormOpen").addEventListener('click', show);
