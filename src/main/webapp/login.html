@@ -17,35 +17,46 @@
             </div>
 
             <div class="content">
-                <img class="loginFormBackground laundry" src="./image/laundry_towel(1).png" alt="background">
-                <form class="loginForm" action="" method="post">
+                <div class="sticky-line">
+                    <svg viewBox="0 0 145 6" preserveAspectRatio="none" fill="white">
+                        <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0"
+                              fill="transparent"
+                              style="stroke:rgb(0, 0, 0); stroke-width: 2px;"></path>
+                    </svg>
+                </div>
+                <div class="logincontent">
+                    <img class="loginFormBackground laundry" src="./image/laundry_towel(1).png" alt="background">
+                    <form class="loginForm" action="" method="post">
 
-                    <h2 style="font-size: 48px; color: #564c4d; margin-bottom: 90px;">Login</h2>
-                    <div class="container">
-                        <div class="input">
+                        <h2 style="font-size: 48px; color: #564c4d; margin-bottom: 90px;">Login</h2>
+                        <div class="container">
                             <div class="input">
-                                <input type="text" placeholder="ID" name="userId" required>
+                                <div class="input">
+                                    <input type="text" placeholder="ID" name="userId" required>
+                                </div>
                             </div>
+
+                            <div class="input">
+                                <input type="password" placeholder="Password" name="userPassword" requrired>
+                            </div>
+
+                            <div class="checkbox" align="left" style="margin: 20px 60px;">
+                                <button onclick="toggleImage()" style="vertical-align: middle;">
+                                    <img id="loginMaintainCheckbox" src="./image/checkbox_blank.png" alt="check box">
+                                </button>
+                                <span style="vertical-align: middle; font-size: 14px; color: #BDBDBD;">로그인 유지하기</span>
+                            </div>
+
+                            <button id="login" type="submit">로그인</button>
                         </div>
 
-                        <div class="input">
-                            <input type="password" placeholder="Password" name="userPassword" requrired>
-                        </div>
-
-                        <div class="checkbox" align="left" style="margin: 20px 60px;">
-                            <button onclick="toggleImage()" style="vertical-align: middle;">
-                                <img id="loginMaintainCheckbox" src="./image/checkbox_blank.png" alt="check box">
-                            </button>
-                            <span style="vertical-align: middle; font-size: 14px; color: #BDBDBD;">로그인 유지하기</span>
-                        </div>
-
-                        <button id="login" type="submit">로그인</button>
-                    </div>
-
-                    <button type="button" id="register" onclick="location.href='register.jsp'">회원가입</button>
+                        <button type="button" id="register" onclick="location.href='register.jsp'">회원가입</button>
 
 
-                </form>
+                    </form>
+                </div>
+
+
             </div>
 
         </div>
