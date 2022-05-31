@@ -82,12 +82,11 @@
         <div id="newWriting">
             <p style="font-size: 50px; padding-top: 20px; padding-bottom: 20px;"><%=balanceGame.getQuestion()%>
             </p>
-
             <div class="create-game-vs" style="padding-right: 50px;">
                 <img src="/files/<%=balanceGame.getAnswer1PictureUrl()%>" alt="picture1"
                      width="800px" height="800px">
                 <img src="/files/<%=balanceGame.getAnswer2PictureUrl()%>" alt="picture2"
-                     width="800px" height="800px">
+                     width="1000px" height="1000px">
             </div>
 
             <div class="create-game-vs" style="padding-right: 50px;">
