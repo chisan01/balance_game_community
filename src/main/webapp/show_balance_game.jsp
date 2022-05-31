@@ -80,9 +80,9 @@
             </p>
             <div class="create-game-vs" style="padding-right: 50px;">
                 <img src="/files/<%=balanceGame.getAnswer1PictureUrl()%>" alt="picture1"
-                     width="800px" height="800px">
+                     width="900px" height="900px">
                 <img src="/files/<%=balanceGame.getAnswer2PictureUrl()%>" alt="picture2"
-                     width="1000px" height="1000px">
+                     width="900px" height="900px">
             </div>
 
             <div class="create-game-vs" style="padding-right: 50px;">

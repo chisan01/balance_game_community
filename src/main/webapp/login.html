@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <link rel="stylesheet" href="css/laundry.css">
     <link rel="stylesheet" href="css/login.css">
     <title>세상의 모든 밸런스 게임</title>
@@ -18,30 +17,38 @@
             </div>
 
             <div class="content">
-                <div class="sticky-line">
-                    <svg viewBox="0 0 145 6" preserveAspectRatio="none" fill="white">
-                        <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0"
-                              fill="transparent"
-                              style="stroke:rgb(0, 0, 0); stroke-width: 2px;"></path>
-                    </svg>
-                </div>
                 <div class="logincontent">
-                    <img class="loginFormBackground laundry" src="./image/laundry_towel(1).png" alt="background">
-                    <form class="loginForm" action="/loginServlet" method="post">
-                        <h2 style="font-size: 48px; color: #564c4d; margin-bottom: 90px;">Login</h2>
-                        <div class="container">
-                            <div class="input">
-                                <input type="text" placeholder="ID" name="email" required>
-                            </div>
-                            <div class="input">
-                                <input type="password" placeholder="Password" name="password" required>
+
+                    <div class="sticky-line">
+                        <svg viewBox="0 0 145 6" preserveAspectRatio="none" fill="white">
+                            <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0"
+                                  fill="transparent"
+                                  style="stroke:rgb(0, 0, 0); stroke-width: 2px;"></path>
+                        </svg>
+                    </div>
+
+                    <div class="register_page">
+                        <img class="loginFormBackground laundry" src="./image/laundry_towel(1).png" alt="background">
+                        <form class="loginForm" action="/loginServlet" method="post">
+                            <h2 style="font-size: 48px; color: #564c4d; margin-bottom: 90px;">Login</h2>
+                            <div class="container">
+                                <div class="input">
+                                    <label>
+                                        <input type="text" placeholder="ID" name="email" required>
+                                    </label>
+                                </div>
+                                <div class="input">
+                                    <label>
+                                        <input type="password" placeholder="Password" name="password" required>
+                                    </label>
+                                </div>
+
+                                <button id="login" type="submit">로그인</button>
                             </div>
 
-                            <button id="login" type="submit">로그인</button>
-                        </div>
-
-                        <button type="button" id="register" onclick="registerPage();">회원가입</button>
-                    </form>
+                            <button type="button" id="register" onclick="registerPage();">회원가입</button>
+                        </form>
+                    </div>
                 </div>
             </div>
 
@@ -49,13 +56,14 @@
     </div>
 </div>
 </body>
+
+<script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
 
     /*
 function show () {
   document.querySelector(".background").className = "background show";
 }*/
-
     function close() {
         document.querySelector(".background").className = "background";
     }
@@ -70,7 +78,7 @@ function show () {
 
     function registerPage() {
         $(document).ready(function(){
-            $(".content").load("register.html");
+            $(".register_page").load("register.html");
         });
     }
 
