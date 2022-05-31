@@ -37,13 +37,7 @@ public class addBalanceGameServlet extends HttpServlet {
         BalanceGameCommentDAO balanceGameCommentDAO = testAppConfig.getBalanceGameCommentDAO();
 //        testAppConfig.resetAll();
 
-        // TODO 로그인 기능 구현 후 : 로그인 된 멤버 id 사용
-        Member member = new Member();
-        member.setId(1L);
-        member.setPassword("1234");
-        member.setEmail("test@gmail.com");
-        member.setNickname("test");
-        memberDAO.signIn(member);
+        Long memberId = (Long) request.getSession().getAttribute("memberId");
 
         BalanceGame balanceGame = new BalanceGame();
         balanceGame.setQuestion(request.getParameter("question"));
@@ -60,7 +54,7 @@ public class addBalanceGameServlet extends HttpServlet {
         Part filePart = request.getPart("picture1");
         if (filePart != null) {
             InputStream inputStream = filePart.getInputStream();
-            String fileName = member.getId() + LocalDateTime.now().toString().trim().replaceAll("[:.]", "-") + "1.png";
+            String fileName = memberId + LocalDateTime.now().toString().trim().replaceAll("[:.]", "-") + "1.png";
             File file = new File(AppConfig.IMAGE_FOLDER_PATH + "//" + fileName);
             copyInputStreamToFile(inputStream, file);
             balanceGame.setAnswer1PictureUrl(fileName);
@@ -70,13 +64,13 @@ public class addBalanceGameServlet extends HttpServlet {
         Part filePart2 = request.getPart("picture2");
         if (filePart2 != null) {
             InputStream inputStream2 = filePart2.getInputStream();
-            String fileName2 = member.getId() + LocalDateTime.now().toString().trim().replaceAll("[:.]", "-") + "2.png";
+            String fileName2 = memberId + LocalDateTime.now().toString().trim().replaceAll("[:.]", "-") + "2.png";
             File file2 = new File(AppConfig.IMAGE_FOLDER_PATH + "//" + fileName2);
             copyInputStreamToFile(inputStream2, file2);
             balanceGame.setAnswer2PictureUrl(fileName2);
         }
 
-        balanceGameDAO.addBalanceGame(member.getId(), balanceGame);
+        balanceGameDAO.addBalanceGame(memberId, balanceGame);
 
         RequestDispatcher rd = request.getRequestDispatcher("/show_balance_game.jsp?balanceGameId=" + balanceGameDAO.getLastBalanceGameId());
         rd.forward(request, response);

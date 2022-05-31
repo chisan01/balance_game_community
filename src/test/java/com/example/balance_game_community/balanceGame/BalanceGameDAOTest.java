@@ -37,7 +37,7 @@ class BalanceGameDAOTest {
     }
 
     @Test
-    void addBalanceGame() {
+    void addBalanceGame() throws Exception {
         Member member = new Member();
         member.setId(10L);
         member.setEmail("test@gmail.com");
@@ -57,7 +57,7 @@ class BalanceGameDAOTest {
 
     @Test
     @DisplayName("마지막 밸런스 게임 id 반환")
-    public void getLastBalanceGameId() {
+    public void getLastBalanceGameId() throws Exception {
         // given
         Member member = new Member();
         member.setId(1L);
@@ -89,7 +89,7 @@ class BalanceGameDAOTest {
 
     @Test
     @DisplayName("현재 게임을 제외한 랜덤한 밸런스 게임 id 반환")
-    public void getOtherRandomBalanceGameId() {
+    public void getOtherRandomBalanceGameId() throws Exception {
         // given
         Member member = new Member();
         member.setId(1L);
@@ -126,7 +126,7 @@ class BalanceGameDAOTest {
 
     @Test
     @DisplayName("findById() 좋아요/싫어요 개수 확인")
-    public void findById() {
+    public void findById() throws Exception {
         // given
         Member member = new Member();
         member.setId(2L);
@@ -181,7 +181,7 @@ class BalanceGameDAOTest {
     }
 
     @Test
-    public void findAllByDifficulty() {
+    public void findAllByDifficulty() throws Exception {
         // given
         Member member = new Member();
         member.setId(2L);
@@ -246,7 +246,7 @@ class BalanceGameDAOTest {
 
     @Test
     @DisplayName("난이도 반올림 계산 확인")
-    public void findAllByDifficulty2() {
+    public void findAllByDifficulty2() throws Exception {
         // given
         Member member = new Member();
         member.setId(2L);
@@ -291,7 +291,7 @@ class BalanceGameDAOTest {
     }
 
     @Test
-    public void findAll() {
+    public void findAll() throws Exception {
         // given
         Member member = new Member();
         member.setId(2L);

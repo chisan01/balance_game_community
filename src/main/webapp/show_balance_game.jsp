@@ -5,13 +5,12 @@
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGameDAO" %>
 <%@ page import="com.example.balance_game_community.balanceGameComment.BalanceGameCommentDAO" %>
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGame" %>
-<%@ page import="com.example.balance_game_community.member.Member" %>
 <%@ page import="com.example.balance_game_community.balanceGameVote.BalanceGameVote" %>
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGameResult" %>
-<%@ page import="com.example.balance_game_community.balanceGameVote.Preference" %>
-<%@ page import="com.example.balance_game_community.balanceGameVote.Difficulty" %>
 <%@ page import="com.example.balance_game_community.balanceGameComment.BalanceGameComment" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.example.balance_game_community.balanceGameVote.Difficulty" %>
+<%@ page import="com.example.balance_game_community.balanceGameVote.Preference" %>
 <%--
   Created by IntelliJ IDEA.
   User: chisanahn
@@ -62,17 +61,14 @@
         </div>
 
         <%
-            Long balanceGameId = Long.parseLong(request.getParameter("balanceGameId"));
-
             AppConfig testAppConfig = new AppConfig(new TestDataSource());
             MemberDAO memberDAO = testAppConfig.getMemberDAO();
             BalanceGameVoteDAO balanceGameVoteDAO = testAppConfig.getBalanceGameVoteDAO();
             BalanceGameDAO balanceGameDAO = testAppConfig.getBalanceGameDAO();
             BalanceGameCommentDAO balanceGameCommentDAO = testAppConfig.getBalanceGameCommentDAO();
 
-            // TODO 로그인 기능 구현 후 : 로그인 된 멤버 id 사용
-            Long memberId = 10L;
-
+            Long memberId = (Long) request.getSession().getAttribute("memberId");
+            Long balanceGameId = Long.parseLong(request.getParameter("balanceGameId"));
             BalanceGame balanceGame = balanceGameDAO.findById(balanceGameId);
 
             Long balanceGameVoteId = balanceGameVoteDAO.findByMemberIdAndBalanceGameId(memberId, balanceGameId);

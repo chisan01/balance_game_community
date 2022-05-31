@@ -35,7 +35,7 @@ class BalanceGameVoteDAOTest {
     }
 
     @Test
-    void findByMemberIdAndBalanceGameId() {
+    void findByMemberIdAndBalanceGameId() throws Exception {
         // given
         Member member = new Member();
         member.setId(2L);
@@ -68,7 +68,7 @@ class BalanceGameVoteDAOTest {
 
     @Test
     @DisplayName("특정 밸런스 게임의 사람들 선택 결과 반환 & 결과 투표")
-    void getBalanceGameResult() {
+    void getBalanceGameResult() throws Exception {
         // given
         Member member = new Member();
         member.setId(2L);

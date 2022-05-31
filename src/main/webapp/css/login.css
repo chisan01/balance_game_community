@@ -87,7 +87,7 @@ button#login:hover {
     background-color: #493F40;
 }
 
-button#register {
+button.togglePage {
     color: #CCD1D2;
 }
 

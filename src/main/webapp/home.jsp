@@ -26,7 +26,6 @@
     BalanceGameVoteDAO balanceGameVoteDAO = appConfig.getBalanceGameVoteDAO();
     BalanceGameDAO balanceGameDAO = appConfig.getBalanceGameDAO();
     BalanceGameCommentDAO balanceGameCommentDAO = appConfig.getBalanceGameCommentDAO();
-
 %>
 
 <div id="layoutDefault">
@@ -37,9 +36,22 @@
                 <a class="navbar-brand" href="home.jsp">세모밸</a>
                 <div class="navbarSupportedContent">
                     <ul class="navbar-nav">
+                        <%
+                            Long memberId = (Long) session.getAttribute("memberId");
+                            if (memberId == null) {
+                        %>
                         <li class="nav-item">
                             <a class="nav-link" href="login.html">로그인</a>
                         </li>
+                        <%
+                        } else {
+                        %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout.jsp">로그아웃</a>
+                        </li>
+                        <%
+                            }
+                        %>
                         <li class="nav-item">
                             <a class="nav-link" href="index.jsp">랜덤 시작</a>
                         </li>
@@ -57,35 +69,24 @@
             <div class="header-start">
                 <a href="create_balance_game.html">
                     <svg id=sun" height="400" width="400" viewBox="-10 -10 410 410">
-                        <circle cx="200" cy="200" r="130" fill="#edaa3b"></circle>
-                        <ellipse cx="200" cy="260" rx="35" ry="30" fill="red" stroke="red" stroke-width="1"></ellipse>
+                        <circle cx="200" cy="200" r="130" fill="#edaa3b" ></circle>
+                        <ellipse cx="200" cy="260" rx="35" ry="30"  fill="red" stroke="red" stroke-width="1" ></ellipse>
                         <rect x="160" y="205" width="80" height="37" style="fill: #edaa3b;"></rect>
-                        <circle cx="245" cy="200" r="14" fill="black"></circle>
-                        <circle cx="155" cy="200" r="14" fill="black"></circle>
+                        <circle cx="245" cy="200" r="14"  fill="black" ></circle>
+                        <circle cx="155" cy="200" r="14"  fill="black" ></circle>
 
                         <rect x="200" y="350" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b;"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
-                              style="fill: #edaa3b; transform-origin: center; transform: rotate(30deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
-                              style="fill: #edaa3b; transform-origin: center; transform: rotate(60deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
-                              style="fill: #edaa3b; transform-origin: center; transform: rotate(90deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
-                              style="fill: #edaa3b; transform-origin: center; transform: rotate(120deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
-                              style="fill: #edaa3b; transform-origin: center; transform: rotate(150deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
-                              style="fill: #edaa3b; transform-origin: center; transform: rotate(180deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
-                              style="fill: #edaa3b; transform-origin: center; transform: rotate(210deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
-                              style="fill: #edaa3b; transform-origin: center; transform: rotate(240deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
-                              style="fill: #edaa3b; transform-origin: center; transform: rotate(270deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
-                              style="fill: #edaa3b; transform-origin: center; transform: rotate(300deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
-                              style="fill: #edaa3b; transform-origin: center; transform: rotate(330deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(30deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(60deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(90deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(120deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(150deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(180deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(210deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(240deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(270deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(300deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(330deg);"></rect>
                     </svg>
                 </a>
             </div>
@@ -158,7 +159,7 @@
                         ang = -5;
                     }%>
 
-                <a class="towel-page" href="index.jsp" style="transform: rotate(<%=ang%>deg)">
+                <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=i%>" style="transform: rotate(<%=ang%>deg)">
                     <div class="towel">
                         <%
                             Random rand = new Random();
