@@ -68,8 +68,7 @@ public class addBalanceGameServlet extends HttpServlet {
 
         balanceGameDAO.addBalanceGame(memberId, balanceGame);
 
-        RequestDispatcher rd = request.getRequestDispatcher("/show_balance_game.jsp?balanceGameId=" + balanceGameDAO.getLastBalanceGameId());
-        rd.forward(request, response);
+        response.sendRedirect("/show_balance_game.jsp?balanceGameId=" + balanceGameDAO.getLastBalanceGameId());
     }
 
     // file system에 저장
