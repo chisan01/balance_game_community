@@ -1,5 +1,4 @@
 <%@ page import="com.example.balance_game_community.AppConfig" %>
-<%@ page import="com.example.balance_game_community.TestDataSource" %>
 <%@ page import="com.example.balance_game_community.member.MemberDAO" %>
 <%@ page import="com.example.balance_game_community.balanceGameVote.BalanceGameVoteDAO" %>
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGameDAO" %>
@@ -11,6 +10,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.balance_game_community.balanceGameVote.Difficulty" %>
 <%@ page import="com.example.balance_game_community.balanceGameVote.Preference" %>
+<%@ page import="com.example.balance_game_community.DataSource" %>
 <%--
   Created by IntelliJ IDEA.
   User: chisanahn
@@ -57,7 +57,7 @@
         </div>
 
         <%
-            AppConfig testAppConfig = new AppConfig(new TestDataSource());
+            AppConfig testAppConfig = new AppConfig(new DataSource());
             MemberDAO memberDAO = testAppConfig.getMemberDAO();
             BalanceGameVoteDAO balanceGameVoteDAO = testAppConfig.getBalanceGameVoteDAO();
             BalanceGameDAO balanceGameDAO = testAppConfig.getBalanceGameDAO();

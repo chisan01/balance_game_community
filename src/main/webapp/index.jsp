@@ -5,7 +5,6 @@
 <%@ page import="com.example.balance_game_community.balanceGameComment.BalanceGameCommentDAO" %>
 <%@ page import="com.example.balance_game_community.DataSource" %>
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGame" %>
-<%@ page import="com.example.balance_game_community.TestDataSource" %>
 <%@ page import="java.util.Random" %><%--
   Created by IntelliJ IDEA.
   User: kmj
@@ -21,7 +20,7 @@
 </head>
 <body>
 <%
-    AppConfig appConfig = new AppConfig(new TestDataSource());
+    AppConfig appConfig = new AppConfig(new DataSource());
     MemberDAO memberDAO = appConfig.getMemberDAO();
     BalanceGameVoteDAO balanceGameVoteDAO = appConfig.getBalanceGameVoteDAO();
     BalanceGameDAO balanceGameDAO = appConfig.getBalanceGameDAO();

@@ -1,8 +1,8 @@
 <%@ page import="com.example.balance_game_community.AppConfig" %>
-<%@ page import="com.example.balance_game_community.TestDataSource" %>
 <%@ page import="com.example.balance_game_community.member.MemberDAO" %>
 <%@ page import="com.example.balance_game_community.member.Member" %>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="com.example.balance_game_community.DataSource" %>
 <%--
   Created by IntelliJ IDEA.
   User: chisanahn
@@ -32,7 +32,7 @@
         script.println("</script>");
     }
 
-    AppConfig testAppConfig = new AppConfig(new TestDataSource());
+    AppConfig testAppConfig = new AppConfig(new DataSource());
     MemberDAO memberDAO = testAppConfig.getMemberDAO();
     Member member = new Member();
     member.setEmail(email);
