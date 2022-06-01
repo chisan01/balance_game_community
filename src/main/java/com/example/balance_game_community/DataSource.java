@@ -11,7 +11,7 @@ public class DataSource {
     String dbURL, dbUser, dbPassword;
 
     public DataSource() {
-        try (InputStream input = TestDataSource.class.getClassLoader().getResourceAsStream("dev.properties")) {
+        try (InputStream input = DataSource.class.getClassLoader().getResourceAsStream("deploy.properties")) {
             Properties prop = new Properties();
             if (input == null) {
                 System.out.println("Sorry, unable to find config.properties");
@@ -19,11 +19,15 @@ public class DataSource {
             }
             prop.load(input);
 
-            System.out.println("properties 파일 사용");
+            System.out.println("properties 파일 사용 2");
 
             this.dbURL = prop.getProperty("db.url");
             this.dbUser = prop.getProperty("db.user");
             this.dbPassword = prop.getProperty("db.password");
+
+            System.out.println("dbURL = " + dbURL);
+            System.out.println("dbUser = " + dbUser);
+            System.out.println("dbPassword = " + dbPassword);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

@@ -137,7 +137,7 @@ fabric.properties
 
 # Package Files #
 *.jar
-*.war
+#*.war
 *.nar
 *.ear
 *.zip
@@ -150,7 +150,11 @@ replay_pid*
 
 ### Gradle ###
 .gradle
-**/build/
+#**/build/
+!build/libs
+build/libs/exploded
+build/**
+
 !src/**/build/
 
 # Ignore Gradle GUI config

@@ -11,7 +11,7 @@ public class AppConfig {
     private static BalanceGameVoteDAO balanceGameVoteDAO;
     private static BalanceGameCommentDAO balanceGameCommentDAO;
 
-    public static final String IMAGE_FOLDER_PATH = "c:\\balance_game_images";
+    public static final String IMAGE_FOLDER_PATH = "/balance_game_images";
 
     public AppConfig(DataSource dataSource) {
         memberDAO = new MemberDAO(dataSource);
