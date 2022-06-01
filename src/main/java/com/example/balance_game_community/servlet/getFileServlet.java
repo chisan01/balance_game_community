@@ -1,8 +1,7 @@
-package com.example.balance_game_community.fileIO;
+package com.example.balance_game_community.servlet;
 
 import com.example.balance_game_community.AppConfig;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +15,7 @@ import java.nio.file.Files;
 public class getFileServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String filename = URLDecoder.decode(request.getPathInfo().substring(1), "UTF-8");
         File file = new File(AppConfig.IMAGE_FOLDER_PATH, filename);
         response.setHeader("Content-Type", getServletContext().getMimeType(filename));
