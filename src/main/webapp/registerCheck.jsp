@@ -27,7 +27,7 @@
     if (!password.equals(passwordCheck)) {
         PrintWriter script = response.getWriter();
         script.println("<script>");
-        script.println("alert('비밀번호가 일치하지 않습니다.')");
+        script.println("alert('password check failed')");
         script.println("history.back()");
         script.println("</script>");
     }
@@ -48,7 +48,7 @@
     } catch (Exception e) {
         e.printStackTrace();
         script.println("<script>");
-        script.println("alert('회원을 생성할 수 없습니다.')");
+        script.println("alert('" + e.getMessage() + "')");
         script.println("history.back()");
         script.println("</script>");
     }
