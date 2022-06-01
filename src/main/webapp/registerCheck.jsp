@@ -1,8 +1,8 @@
 <%@ page import="com.example.balance_game_community.AppConfig" %>
-<%@ page import="com.example.balance_game_community.TestDataSource" %>
 <%@ page import="com.example.balance_game_community.member.MemberDAO" %>
 <%@ page import="com.example.balance_game_community.member.Member" %>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="com.example.balance_game_community.DataSource" %>
 <%--
   Created by IntelliJ IDEA.
   User: chisanahn
@@ -27,12 +27,12 @@
     if (!password.equals(passwordCheck)) {
         PrintWriter script = response.getWriter();
         script.println("<script>");
-        script.println("alert('비밀번호가 일치하지 않습니다.')");
+        script.println("alert('password check failed')");
         script.println("history.back()");
         script.println("</script>");
     }
 
-    AppConfig testAppConfig = new AppConfig(new TestDataSource());
+    AppConfig testAppConfig = new AppConfig(new DataSource());
     MemberDAO memberDAO = testAppConfig.getMemberDAO();
     Member member = new Member();
     member.setEmail(email);
@@ -43,12 +43,12 @@
     try {
         memberDAO.signIn(member);
         script.println("<script>");
-        script.println("location.href = 'home.jsp'");
+        script.println("location.href = 'index.jsp'");
         script.println("</script>");
     } catch (Exception e) {
         e.printStackTrace();
         script.println("<script>");
-        script.println("alert('회원을 생성할 수 없습니다.')");
+        script.println("alert('" + e.getMessage() + "')");
         script.println("history.back()");
         script.println("</script>");
     }
