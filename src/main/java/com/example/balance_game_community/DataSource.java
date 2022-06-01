@@ -19,15 +19,9 @@ public class DataSource {
             }
             prop.load(input);
 
-            System.out.println("properties 파일 사용 2");
-
             this.dbURL = prop.getProperty("db.url");
             this.dbUser = prop.getProperty("db.user");
             this.dbPassword = prop.getProperty("db.password");
-
-            System.out.println("dbURL = " + dbURL);
-            System.out.println("dbUser = " + dbUser);
-            System.out.println("dbPassword = " + dbPassword);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
