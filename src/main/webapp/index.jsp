@@ -52,7 +52,10 @@
                             }
                         %>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.jsp">랜덤 시작</a>
+                            <%
+                                Long randomBalanceGameId = balanceGameDAO.getOtherRandomBalanceGameId(-1L);
+                            %>
+                            <a class="nav-link" href="show_balance_game.jsp?balanceGameId=<%=randomBalanceGameId%>">랜덤 시작</a>
                         </li>
                         <li class="nav-item">
                             <!--방울 메뉴창(마이페이지, 글쓰기 등) 띄우는 링크? -->
