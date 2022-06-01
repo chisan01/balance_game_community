@@ -41,7 +41,7 @@ public class MemberDAO extends DAO {
         ResultSet rs = null;
 
         try {
-            if(emailDuplicateCheck(member.getEmail())) {
+            if (emailDuplicateCheck(member.getEmail())) {
                 throw new Exception("already exist email");
             }
 
@@ -84,7 +84,7 @@ public class MemberDAO extends DAO {
     }
 
     // 로그인 (user_id 반환)
-    public Long logIn(String email, String password) {
+    public Long logIn(String email, String password) throws Exception {
         String SQL = "SELECT id, password FROM member WHERE email = ?";
 
         Connection conn = null;
@@ -105,12 +105,9 @@ public class MemberDAO extends DAO {
                     throw new Exception("wrong password");
                 }
             }
-            throw new Exception("이메일 존재하지않음");
-        } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception("not exist email");
         } finally {
             close(conn, pstmt, rs);
         }
-        return null;
     }
 }
