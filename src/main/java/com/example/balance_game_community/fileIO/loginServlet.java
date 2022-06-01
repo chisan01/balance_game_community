@@ -43,6 +43,6 @@ public class loginServlet extends HttpServlet {
         System.out.println("password = " + password);
         System.out.println("memberId = " + memberId);
 
-        response.sendRedirect("/home.jsp");
+        response.sendRedirect("/index.jsp");
     }
 }

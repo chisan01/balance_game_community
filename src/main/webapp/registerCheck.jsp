@@ -43,7 +43,7 @@
     try {
         memberDAO.signIn(member);
         script.println("<script>");
-        script.println("location.href = 'home.jsp'");
+        script.println("location.href = 'index.jsp'");
         script.println("</script>");
     } catch (Exception e) {
         e.printStackTrace();
