@@ -5,10 +5,7 @@
 <%@ page import="com.example.balance_game_community.balanceGameComment.BalanceGameCommentDAO" %>
 <%@ page import="com.example.balance_game_community.DataSource" %>
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGame" %>
-<%@ page import="java.util.Random" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Arrays" %>
-<%@ page import="java.util.Collections" %><%--
+<%@ page import="java.util.Random" %><%--
   Created by IntelliJ IDEA.
   User: kmj
   Date: 2022-05-22
@@ -109,31 +106,25 @@
         </div>
 
         <span class="svg-border-rounded">
-                        <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
-                            <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0"
-                                  fill="transparent"
-                                  style="stroke:rgb(0, 0, 0);"></path>
-                        </svg>
-                    </span>
+            <!--최신순 정렬-->
+        <h2 class="balancegameTitle">따근따근한 밸런스 게임들</h2>
+            <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
+                <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0"
+                      fill="transparent"
+                      style="stroke:rgb(0, 0, 0);"></path>
+            </svg>
+        </span>
 
         <!--모든 밸런스게임-->
-        <section class="today-best">
+        <section class="today-best" style="position: relative;">
             <div class="container">
                 <%
                     long maxIndex = balanceGameDAO.getLastBalanceGameId();
-                    Integer[] balanceGameIndex = new Integer[Math.toIntExact(balanceGameDAO.getLastBalanceGameId())];
-                    for(int i = 0; i < maxIndex; i++) {
-                        balanceGameIndex[i] = i + 1;
-                    }
-                    List<Integer> balanceGameList = (List<Integer>) Arrays.asList(balanceGameIndex);
-                    Collections.shuffle(balanceGameList);
-                    balanceGameList.toArray(balanceGameIndex);
-
                     int index = 4;
                     int flag = 2;
                     int ang = 0;
                     for (int i = 1; i <= maxIndex; i++) {
-                        BalanceGame balanceGame = balanceGameDAO.findById((long) balanceGameIndex[i - 1]);
+                        BalanceGame balanceGame = balanceGameDAO.findById((long) i);
                         if (i == index) {
                             index += flag;
                             if (flag == 2) {
