@@ -48,19 +48,15 @@
         String clientIP = getClientIP(request);
         // 해당 IP에 대한 임시 계정이 존재하지 않는 경우, 새로 생성
         if (!memberDAO.emailDuplicateCheck(clientIP)) {
-            Member newTempMember = new Member();
-            newTempMember.setNickname(clientIP);
-            newTempMember.setEmail(clientIP);
-            newTempMember.setPassword(clientIP);
             try {
-                memberDAO.signInTempUser(newTempMember);
+                memberDAO.signInTempUser(clientIP);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         // 임시 계정으로 로그인
         try {
-            memberId = memberDAO.logIn(clientIP, clientIP);
+            memberId = memberDAO.logInTempUser(clientIP);
             session.setAttribute("memberId", memberId);
         } catch (Exception e) {
             e.printStackTrace();
