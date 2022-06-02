@@ -64,6 +64,10 @@
             BalanceGameCommentDAO balanceGameCommentDAO = testAppConfig.getBalanceGameCommentDAO();
 
             Long memberId = (Long) request.getSession().getAttribute("memberId");
+
+            // 로그인이 안되어있는 경우
+            if(memberId == null) response.sendRedirect("/");
+
             Long balanceGameId = Long.parseLong(request.getParameter("balanceGameId"));
             BalanceGame balanceGame = balanceGameDAO.findById(balanceGameId);
 

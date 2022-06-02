@@ -14,8 +14,6 @@ public class TestDataSource extends DataSource {
             }
             prop.load(input);
 
-            System.out.println("properties 파일 사용");
-
             this.dbURL = prop.getProperty("test_db.url");
             this.dbUser = prop.getProperty("test_db.user");
             this.dbPassword = prop.getProperty("test_db.password");

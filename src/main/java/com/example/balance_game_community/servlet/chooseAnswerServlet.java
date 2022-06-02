@@ -25,13 +25,13 @@ public class chooseAnswerServlet extends HttpServlet {
         BalanceGameVoteDAO balanceGameVoteDAO = testAppConfig.getBalanceGameVoteDAO();
 
         Long memberId = (Long) request.getSession().getAttribute("memberId");
+
+        // 로그인이 안되어있는 경우
+        if(memberId == null) response.sendRedirect("/");
+
         Long balanceGameId = Long.parseLong(request.getParameter("balanceGameId"));
         int answer = Integer.parseInt(request.getParameter("answer"));
         balanceGameVoteDAO.chooseAnswer(memberId, balanceGameId, answer);
-
-        System.out.println("answer = " + answer);
-        System.out.println("memberId = " + memberId);
-        System.out.println("balanceGameId = " + balanceGameId);
 
         response.sendRedirect(request.getHeader("referer"));
     }

@@ -42,9 +42,6 @@ public class loginServlet extends HttpServlet {
             }
 
             request.getSession().setAttribute("memberId", memberId);
-            System.out.println("email = " + email);
-            System.out.println("password = " + password);
-            System.out.println("memberId = " + memberId);
 
             response.sendRedirect("/index.jsp");
         } catch (Exception e) {
