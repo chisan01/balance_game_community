@@ -5,7 +5,8 @@
 <%@ page import="com.example.balance_game_community.balanceGameComment.BalanceGameCommentDAO" %>
 <%@ page import="com.example.balance_game_community.DataSource" %>
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGame" %>
-<%@ page import="java.util.Random" %><%--
+<%@ page import="java.util.Random" %>
+<%@ page import="com.example.balance_game_community.member.Member" %><%--
   Created by IntelliJ IDEA.
   User: kmj
   Date: 2022-05-22
@@ -19,12 +20,52 @@
     <link href="css/home_styles.css" rel="stylesheet"/>
 </head>
 <body>
+<%!
+    public String getClientIP(HttpServletRequest request) {
+        String ip = request.getHeader("X-FORWARDED-FOR");
+        if (ip == null || ip.length() == 0) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0) {
+            ip = request.getRemoteAddr();
+        }
+        return ip;
+    }
+%>
 <%
     AppConfig appConfig = new AppConfig(new DataSource());
     MemberDAO memberDAO = appConfig.getMemberDAO();
     BalanceGameVoteDAO balanceGameVoteDAO = appConfig.getBalanceGameVoteDAO();
     BalanceGameDAO balanceGameDAO = appConfig.getBalanceGameDAO();
     BalanceGameCommentDAO balanceGameCommentDAO = appConfig.getBalanceGameCommentDAO();
+
+    Long memberId = (Long) session.getAttribute("memberId");
+
+    if (memberId == null) {
+        String clientIP = getClientIP(request);
+        // 해당 IP에 대한 임시 계정이 존재하지 않는 경우, 새로 생성
+        if (!memberDAO.emailDuplicateCheck(clientIP)) {
+            Member newTempMember = new Member();
+            newTempMember.setNickname(clientIP);
+            newTempMember.setEmail(clientIP);
+            newTempMember.setPassword(clientIP);
+            try {
+                memberDAO.signInTempUser(newTempMember);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        // 임시 계정으로 로그인
+        try {
+            memberId = memberDAO.logIn(clientIP, clientIP);
+            session.setAttribute("memberId", memberId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 %>
 
 <div id="layoutDefault">
@@ -36,8 +77,7 @@
                 <div class="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <%
-                            Long memberId = (Long) session.getAttribute("memberId");
-                            if (memberId == null) {
+                            if (memberDAO.isTempMember(memberId)) {
                         %>
                         <li class="nav-item">
                             <a class="nav-link" href="login.html">로그인</a>
@@ -68,24 +108,35 @@
             <div class="header-start">
                 <a href="create_balance_game.html">
                     <svg id=sun" height="400" width="400" viewBox="-10 -10 410 410">
-                        <circle cx="200" cy="200" r="130" fill="#edaa3b" ></circle>
-                        <ellipse cx="200" cy="260" rx="35" ry="30"  fill="red" stroke="red" stroke-width="1" ></ellipse>
+                        <circle cx="200" cy="200" r="130" fill="#edaa3b"></circle>
+                        <ellipse cx="200" cy="260" rx="35" ry="30" fill="red" stroke="red" stroke-width="1"></ellipse>
                         <rect x="160" y="205" width="80" height="37" style="fill: #edaa3b;"></rect>
-                        <circle cx="245" cy="200" r="14"  fill="black" ></circle>
-                        <circle cx="155" cy="200" r="14"  fill="black" ></circle>
+                        <circle cx="245" cy="200" r="14" fill="black"></circle>
+                        <circle cx="155" cy="200" r="14" fill="black"></circle>
 
                         <rect x="200" y="350" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b;"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(30deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(60deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(90deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(120deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(150deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(180deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(210deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(240deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(270deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(300deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(330deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
+                              style="fill: #edaa3b; transform-origin: center; transform: rotate(30deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
+                              style="fill: #edaa3b; transform-origin: center; transform: rotate(60deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
+                              style="fill: #edaa3b; transform-origin: center; transform: rotate(90deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
+                              style="fill: #edaa3b; transform-origin: center; transform: rotate(120deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
+                              style="fill: #edaa3b; transform-origin: center; transform: rotate(150deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
+                              style="fill: #edaa3b; transform-origin: center; transform: rotate(180deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
+                              style="fill: #edaa3b; transform-origin: center; transform: rotate(210deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
+                              style="fill: #edaa3b; transform-origin: center; transform: rotate(240deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
+                              style="fill: #edaa3b; transform-origin: center; transform: rotate(270deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
+                              style="fill: #edaa3b; transform-origin: center; transform: rotate(300deg);"></rect>
+                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5"
+                              style="fill: #edaa3b; transform-origin: center; transform: rotate(330deg);"></rect>
                     </svg>
                 </a>
             </div>
@@ -145,7 +196,7 @@
                         ang = 6;
                     } else if (i % 5 == 2) {
                         ang = 0;
-                    }else if (i % 5 == 3) {
+                    } else if (i % 5 == 3) {
                         ang = -6;
                     } else if (i % 5 == 4) {
                         ang = 5;
@@ -153,7 +204,8 @@
                         ang = -5;
                     }%>
 
-                <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=i%>" style="transform: rotate(<%=ang%>deg)">
+                <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=i%>"
+                   style="transform: rotate(<%=ang%>deg)">
                     <div class="towel">
                         <%
                             Random rand = new Random();
