@@ -6,7 +6,10 @@
 <%@ page import="com.example.balance_game_community.DataSource" %>
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGame" %>
 <%@ page import="java.util.Random" %>
+<%--
+=======
 <%@ page import="com.example.balance_game_community.member.Member" %><%--
+>>>>>>> upstream/main
   Created by IntelliJ IDEA.
   User: kmj
   Date: 2022-05-22
@@ -91,7 +94,12 @@
                             <%
                                 Long randomBalanceGameId = balanceGameDAO.getOtherRandomBalanceGameId(-1L);
                             %>
-                            <a class="nav-link" href="show_balance_game.jsp?balanceGameId=<%=randomBalanceGameId%>">랜덤 시작</a>
+                            <a class="nav-link" href="show_balance_game.jsp?balanceGameId=<%=randomBalanceGameId%>">랜덤
+                                시작</a>
+                        </li>
+                        <li class="nav-item">
+                        <img src="image/menu_btn.png" width="165px" height="165px"
+                             style="position: absolute; top:-35px; opacity: 70%; z-index:101;"/>
                         </li>
                         <li class="nav-item">
                             <!--방울 메뉴창(마이페이지, 글쓰기 등) 띄우는 링크? -->
@@ -147,9 +155,12 @@
             <div class="bubble x3">
                 <div class="menu">
                     <h1>메뉴</h1>
-                    <a href="create_balance_game.jsp">인기순</a>
-                    <a href="index.jsp">마이페이지</a>
-                    <a href="create_balance_game.jsp">글쓰기</a>
+                    <p><br/></p>
+                    <a href="create_balance_game.html">글쓰기</a>
+                    <a href="index.jsp">오늘의 밸런스게임</a>
+                    <a href="create_balance_game.html">인기순 밸런스게임</a>
+                    <a href="create_balance_game.html">최신순 밸런스게임</a>
+                    <a href="create_balance_game.html">난이도별 밸런스게임</a>
                 </div>
             </div>
             <div class="bubble x4"></div>

@@ -18,8 +18,22 @@ button {
 }
 
 .content {
-    margin: 50px 210px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
+.sticky-line{
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    top: 100px;
+}
+
+.logincontent{
+    display: flex;
+    justify-content: center;
 }
 
 .loginFormBackground {
