@@ -8,35 +8,31 @@
     font-size: inherit;
 }
 
-a{
+a {
     text-decoration: none;
     color: black;
-}
-
-p{
-    font-size: 20px;
 }
 
 html {
     font-family: 'Jua', sans-serif;
     /* `font` 속성 리셋 */
-    font-size                  : 16px;
+    font-size: 16px;
     /* 기본 글꼴 사이즈 정의            : 16x => 1rem */
-    font-weight                : normal;
-    line-height                : 1.5;
-    color                      : #4d5058;
+    font-weight: normal;
+    line-height: 1.5;
+    color: #4d5058;
     /* 글꼴 크기 조정을 방지 */
-    -webkit-text-size-adjust   : 100%;
+    -webkit-text-size-adjust: 100%;
     /* 폰트를 부드럽게 */
-    -webkit-font-smoothing     : antialiased;
-    -moz-osx-font-smoothing    : grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     /* 웹킷 마음대로 눌림 하이라이트 막음 */
     -webkit-tap-highlight-color: transparent;
     background-color: #80e0ff;
 }
 
 /*navbar*/
-.navbar{
+.navbar {
     padding-top: 20px;
     padding-bottom: 20px;
     display: flex;
@@ -54,7 +50,7 @@ html {
     z-index: 100;
 }
 
-.nav-container{
+.nav-container {
     width: 100%;
     display: flex;
     flex-wrap: inherit;
@@ -65,7 +61,7 @@ html {
     padding-left: 10rem !important;
 }
 
-.navbar-brand{
+.navbar-brand {
     font-size: 1.2rem;
     font-weight: bold;
 
@@ -73,28 +69,29 @@ html {
     padding-right: 30px;
 }
 
-.navbarSupportedContent{
+.navbarSupportedContent {
 }
 
-.navbar-nav{
+.navbar-nav {
     display: flex;
     padding-left: 0;
     list-style: none;
 
     margin-left: auto !important;
-    margin-right: 2.5rem; !important;
+    margin-right: 2.5rem;
+!important;
 }
 
-.nav-item{
+.nav-item {
     display: inline-block;
     margin-right: 1rem;
 }
 
-.nav-link{
+.nav-link {
     color: rgba(0, 0, 0, 0.55);
 }
 
-.cloudbtn{
+.cloudbtn { /*메뉴 버튼 */
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -107,7 +104,7 @@ html {
     border-color: #0061f2;
 }
 
-#newWriting{
+#newWriting {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -116,38 +113,157 @@ html {
     top: 70px;
 }
 
-.data{
+.data {
     width: 100%;
     height: 100%;
 
     border-bottom-color: #493F40;
 }
 
-.create-game-vs{
-    display: flex;
-    flex-direction: row;
+.bgtitle-w {
+    position: absolute;
+    width: 100%;
+
+    background-color: white;
+    opacity: 0.6;
+    z-index: 1;
 }
 
-.create-game-answer{
+.bgtitle {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    z-index: 2;
+}
+
+.next{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 4;
+}
+
+.create-game-vs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.create-game-answer {
     display: flex;
     flex-direction: column;
     text-align: center;
 }
 
-#chooseFile, #chooseFile1{
+.show-game-vs {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px 50px;
+}
+
+
+.darkness {
+    position: absolute;
+    width: 100%;
+    height: 900px;
+}
+
+.game-result {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    height: 900px;
+    cursor: pointer;
+    background: #000000;
+    opacity: 1;
+}
+
+.result-explanation {
+    width: 100%;
+    height: 900px;
+    position: absolute;
+    opacity: 0; /*게임 결과 안보임? */
+    padding: 35px;
+    padding-top: 300px;
+}
+
+.result-explanation-font {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    color: white;
+}
+
+/*선호도 조사*/
+/*.checked{
+    border-color: red;
+}*/
+
+.show-game-feedback{
+    width: 65%;
+}
+
+.preference{
+    padding-top: 10px;
+}
+.post-feedback-buttons{
+    display: flex;
+    flex-direction: row;
+}
+.like-btn .dislike-btn{
+    padding: 30px;
+}
+.difficulty{
+    display: flex;
+    padding-top: 20px;
+}
+.post-difficulty-buttons{
+    display: flex;
+    flex-direction: row;
+}
+.create-comment{
+    padding-top: 20px;
+}
+
+input::placeholder{
+    vertical-align: top;
+}
+
+.commentTable{
+    border-left: none;
+    border-right: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+    margin-bottom: 100px;
+}
+
+/*사진 선택 */
+#chooseFile, #chooseFile1 {
     visibility: hidden;
     height: 10px;
 }
 
 /*page header */
-.page-header{
+.page-header {
     padding-top: 8rem;
     padding-bottom: 8rem;
     display: flex;
     justify-content: center;
 }
 
-.startimgcontent{
+.startimgcontent {
     vertical-align: middle;
     max-width: 100%;
     height: auto;
@@ -161,7 +277,7 @@ section{
 */
 
 /*비눗방울*/
-#background-wrap{
+#background-wrap {
     bottom: 0;
     left: 0;
     position: fixed;
@@ -198,38 +314,40 @@ section{
     z-index: 103;
 }
 
-.x1{
+.x1 {
     right: 700px;
     bottom: 100px;
     animation: animate_x1 2s linear;
 }
 
 @keyframes animate_x1 {
-    0%{
+    0% {
         transform: translateY(50%);
         opacity: 1;
     }
-    100%{
+    100% {
         transform: translateY(0%);
         opacity: 1;
     }
 }
 
-.x2{
+.x2 {
     right: 1000px;
     bottom: -200px;
     animation: animate_x2 2s linear;
 }
+
 @keyframes animate_x2 {
-    20%{
+    20% {
         transform: translateY(50%);
         opacity: 1;
     }
-    100%{
+    100% {
         transform: translateY(0%);
         opacity: 1;
     }
 }
+
 .x3 {
     width: 1500px;
     height: 1500px;
@@ -239,15 +357,16 @@ section{
 }
 
 @keyframes animate_x3 {
-    40%{
+    40% {
         transform: translateY(10%);
         opacity: 1;
     }
-    100%{
+    100% {
         transform: translateY(0%);
         opacity: 1;
     }
 }
+
 .menu {
     display: flex;
     flex-direction: column;
@@ -260,6 +379,7 @@ section{
     bottom: 600px;
     font-size: 50px;
 }
+
 .x4 {
     width: 100px;
     height: 100px;
@@ -269,11 +389,11 @@ section{
 }
 
 @keyframes animate_x4 {
-    0%{
+    0% {
         transform: translateY(50%);
         opacity: 1;
     }
-    100%{
+    100% {
         transform: translateY(0%);
         opacity: 1;
     }
@@ -281,12 +401,12 @@ section{
 
 
 /*빨래줄*/
-svg{
+svg {
     position: relative;
-    top:35px;
+    top: 35px;
 }
 
-.container{
+.container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -294,7 +414,7 @@ svg{
     margin-right: 5%;
 }
 
-.towel-page{
+.towel-page {
     display: flex;
     justify-items: center;
     align-items: center;
@@ -302,11 +422,12 @@ svg{
     cursor: pointer;
     padding-bottom: 100px;
 }
-.towel{
+
+.towel {
     display: flex;
 }
 
-.balancegame{
+.balancegame {
     width: 450px;
     height: 470px;
     position: absolute;

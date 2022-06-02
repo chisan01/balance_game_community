@@ -5,7 +5,8 @@
 <%@ page import="com.example.balance_game_community.balanceGameComment.BalanceGameCommentDAO" %>
 <%@ page import="com.example.balance_game_community.DataSource" %>
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGame" %>
-<%@ page import="java.util.Random" %><%--
+<%@ page import="java.util.Random" %>
+<%--
   Created by IntelliJ IDEA.
   User: kmj
   Date: 2022-05-22

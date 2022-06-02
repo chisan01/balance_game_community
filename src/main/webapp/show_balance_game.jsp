@@ -47,7 +47,8 @@
             <div class="bubble x2"></div>
             <div class="bubble x3">
                 <div class="menu">
-                    <h1>메뉴</h1><p><br/></p>
+                    <h1>메뉴</h1>
+                    <p><br/></p>
                     <a href="create_balance_game.html">글쓰기</a>
                     <a href="index.jsp">오늘의 밸런스게임</a>
                     <a href="create_balance_game.html">인기순 밸런스게임</a>
@@ -56,7 +57,7 @@
                 </div>
             </div>
             <div class="bubble x4">
-                <img src="image/white%20x.png" width="100px" height="100px" style="opacity: 70%;"/>
+                <img src="image/white%20x.png" width="100px" height="100px" style="opacity: 70%;" alt=""/>
             </div>
         </div>
 
@@ -76,222 +77,261 @@
         %>
 
         <div id="newWriting">
-            <p style="font-size: 50px; padding-top: 20px; padding-bottom: 20px;"><%=balanceGame.getQuestion()%>
-            </p>
-            <div class="create-game-vs" style="padding-right: 50px;">
-                <img src="/files/<%=balanceGame.getAnswer1PictureUrl()%>" alt="picture1"
-                     width="900px" height="900px">
-                <img src="/files/<%=balanceGame.getAnswer2PictureUrl()%>" alt="picture2"
-                     width="900px" height="900px">
-            </div>
+            <!--사진 내부-->
+            <div class="game-result">
+                <!--제목-->
+                <div class="bgtitle-w" style="height: 100px; top: 0;">
+                </div>
+                <div class="bgtitle" style="top: 0;">
+                    <p style="font-size: 50px;"><%=balanceGame.getQuestion()%>
+                    </p>
+                    <div style="padding-left: 40px; padding-top: 5px; display: flex;">
+                        <p style="font-size: 40px; padding-right: 15px;">난이도:  </p>
+                        <img src="image/difficulty.png" width="40px" height="40px" alt=""/>
+                    </div>
+                </div>
 
-            <div class="create-game-vs" style="padding-right: 50px;">
+                <!--사진-->
+                <div class="create-game-vs">
+                    <img src="/files/<%=balanceGame.getAnswer1PictureUrl()%>" alt="picture1"
+                         width="950px" height="900px">
+                    <img src="/files/<%=balanceGame.getAnswer2PictureUrl()%>" alt="picture2"
+                         width="950px" height="900px">
+                </div>
+
+                <!--이전 질문, 다음 질문-->
+                <div class="next">
+                    <a href="show_balance_game.jsp?balanceGameId=<%=balanceGameDAO.getOtherRandomBalanceGameId(balanceGameId)%>"
+                       style="background-color: white">
+                        이전 게임</a>
+                    <a href="show_balance_game.jsp?balanceGameId=<%=balanceGameDAO.getOtherRandomBalanceGameId(balanceGameId)%>"
+                       style="background-color: white">다음
+                        게임</a>
+                </div>
+
+                <%--게임 결과 출력--%>
                 <%
                     if (balanceGameVote != null) {
                         BalanceGameResult balanceGameResult = balanceGameVoteDAO.getBalanceGameResult(balanceGameId);
-                        if (balanceGameVote.getAnswerNumber() == 1) {
+
                 %>
-                <p bgcolor="#ff8c00"><%=balanceGame.getAnswer1()%></p>
-                <p><%=balanceGame.getAnswer2()%></p>
-                <%
-                } else {
-                %>
-                <p><%=balanceGame.getAnswer1()%></p>
-                <p bgcolor="#ff8c00"><%=balanceGame.getAnswer2()%></p>
+                <div class="darkness" style="background: #000000; opacity: 0.6;"></div>
+                <div class="result-explanation" style="opacity: 1; transform: scale(1);">
+                    <div class="create-game-answer">
+                        <!-- 선택 비율 -->
+                        <div class="result-explanation-font" style="font-size: 100px;">
+                            <p><%=balanceGameResult.getAnswer1percent()%> %</p>
+                            <p><%=balanceGameResult.getAnswer2percent()%> %</p>
+                        </div>
+                        <!-- 선택한 사람 수 -->
+                        <div class="result-explanation-font" style="font-size: 90px;">
+                            <p><%=balanceGameResult.getAnswer1voteCount()%> 명
+                            </p>
+                            <p><%=balanceGameResult.getAnswer2voteCount()%> 명
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <%}%>
+
+                <div class="bgtitle-w" style=" height: 200px; top: 700px;">
+                </div>
+                <div class="bgtitle" style="top: 700px; padding-top: 50px;">
+                    <%
+                        if (balanceGameVote != null) {
+                            BalanceGameResult balanceGameResult = balanceGameVoteDAO.getBalanceGameResult(balanceGameId);
+                            if (balanceGameVote.getAnswerNumber() == 1) {
+                    %>
+                    <div class="result-explanation-font" style="font-size: 50px; color: #4d5058;">
+                        <p><%=balanceGame.getAnswer1()%>
+                        </p>
+                        <p><%=balanceGame.getAnswer2()%>
+                        </p>
+                    </div>
+                    <%
+                    } else {
+                    %>
+                    <div class="result-explanation-font" style="font-size: 50px; color: #4d5058;">
+                        <p><%=balanceGame.getAnswer1()%>
+                        </p>
+                        <p><%=balanceGame.getAnswer2()%>
+                        </p>
+                    </div>
+                    <%
+                        }
+
+                    } else {  //투표 안한 경우
+                    %>
+
+                    <form action="/chooseAnswerServlet" method="post" accept-charset="UTF-8">
+                        <input type="hidden" name="balanceGameId" value="<%=balanceGameId%>"/>
+
+                        <div class="result-explanation-font" style="font-size: 50px; color: #4d5058;">
+                            <input type="radio" name="answer" value="1"><%=balanceGame.getAnswer1()%>
+                            <input type="radio" name="answer" value="2"><%=balanceGame.getAnswer2()%>
+                        </div>
+
+                        <button type="submit">선택 완료</button>
+                    </form>
+                </div>
+
                 <%
                     }
-                } else {
                 %>
-                <form action="/chooseAnswerServlet" method="post" accept-charset="UTF-8">
+            </div>
+        </div>
+
+
+        <!--게임 결과 출력 -->
+        <div class="show-game-feedback">
+            <%--좋아요/싫어요 투표 --%>
+            <%
+                if (balanceGameVote != null) {
+            %>
+            <%--                    TODO 이미 투표한 경우 투표한 위치에 표시--%>
+            <div class="preference">
+                <form action="/voteBalanceGamePreferenceServlet" method="post" accept-charset="UTF-8">
                     <input type="hidden" name="balanceGameId" value="<%=balanceGameId%>"/>
-                    <ul style="list-style: none;">
-                        <li class="nav-item">
-                            <input type="radio" name="answer" value="1"><%=balanceGame.getAnswer1()%>
-                        </li>
-                        <li class="nav-item">
-                            <input type="radio" name="answer" value="2"><%=balanceGame.getAnswer2()%>
-                        </li>
-                    </ul>
-                    <button type="submit">선택 완료</button>
+                    <div class="post-feedback-buttons">
+                        <div class="like-btn">
+                            <%
+                                if (balanceGameVote.getPreference() != null && balanceGameVote.getPreference().equals(Preference.LIKE)) {
+                            %>
+                            <input type="radio" name="preference" value="<%=Preference.LIKE.name()%>"
+                                   checked="checked">좋아요
+                            <%
+                            } else {
+                            %>
+                            <input type="radio" name="preference" value="<%=Preference.LIKE.name()%>" >좋아요
+                            <%
+                                }
+                            %>
+                        </div>
+                        <div class="dislike-btn">
+                            <%
+                                if (balanceGameVote.getPreference() != null && balanceGameVote.getPreference().equals(Preference.DISLIKE)) {
+                            %>
+                            <input type="radio" name="preference" value="<%=Preference.DISLIKE.name()%>"
+                                   checked="checked">싫어요
+                            <%
+                            } else {
+                            %>
+                            <input type="radio" name="preference" value="<%=Preference.DISLIKE.name()%>">싫어요
+                            <%
+                                }
+                            %>
+                        </div>
+
+                    </div>
+                    <button type="submit" >좋아요/싫어요 투표</button>
+                </form>
+                <%
+                    } else { }  //사용자가 아직 투표하지 않은 경우
+                %>
+            </div>
+
+            <%-- 난이도 투표--%>
+            <%-- TODO 이미 투표한 경우 투표한 위치에 표시--%>
+            <%
+                if (balanceGameVote != null) {
+                    BalanceGameResult balanceGameResult = balanceGameVoteDAO.getBalanceGameResult(balanceGameId);
+            %>
+            <div class="difficulty">
+                <p>난이도 선택 : </p>
+                <form action="/voteBalanceGameDifficultyServlet" method="post" accept-charset="UTF-8">
+                    <input type="hidden" name="balanceGameId" value="<%=balanceGameId%>"/>
+                    <div class="post-difficulty-buttons">
+                        <div class="difficulty-level">
+                            <%
+                                if (balanceGameVote.getDifficulty() != null && balanceGameVote.getDifficulty().equals(Difficulty.HARD)) {
+                            %>
+                            <input type="radio" name="difficulty" value="<%=Difficulty.HARD.name()%>"
+                                   checked="checked">상
+                            <%
+                            } else {
+                            %>
+                            <input type="radio" name="difficulty" value="<%=Difficulty.HARD.name()%>">상
+                            <%
+                                }
+                            %>
+                        </div>
+                        <div class="difficulty-level">
+                            <%
+                                if (balanceGameVote.getDifficulty() != null && balanceGameVote.getDifficulty().equals(Difficulty.NORMAL)) {
+                            %>
+                            <input type="radio" name="difficulty" value="<%=Difficulty.NORMAL.name()%>"
+                                   checked="checked">중
+                            <%
+                            } else {
+                            %>
+                            <input type="radio" name="difficulty" value="<%=Difficulty.NORMAL.name()%>">중
+                            <%
+                                }
+                            %>
+                        </div>
+                        <div class="difficulty-level">
+                            <%
+                                if (balanceGameVote.getDifficulty() != null && balanceGameVote.getDifficulty().equals(Difficulty.EASY)) {
+                            %>
+                            <input type="radio" name="difficulty" value="<%=Difficulty.EASY.name()%>"
+                                   checked="checked">하
+                            <%
+                            } else {
+                            %>
+                            <input type="radio" name="difficulty" value="<%=Difficulty.EASY.name()%>">하
+                            <%
+                                }
+                            %>
+                        </div>
+                    </div>
+                    <button type="submit">난이도 투표</button>
                 </form>
                 <%
                     }
                 %>
             </div>
 
-            <table border="1">
-
-                <%--            게임 결과 출력--%>
-                <%
-                    if (balanceGameVote != null) {
-                        BalanceGameResult balanceGameResult = balanceGameVoteDAO.getBalanceGameResult(balanceGameId);
-                %>
-                <tr height="100px">
-                    <td colspan="2"><%=balanceGameResult.getAnswer1percent()%>%</td>
-                    <td colspan="2"><%=balanceGameResult.getAnswer2percent()%>%</td>
-                </tr>
-                <tr height="50px">
-                    <td colspan="2"><%=balanceGameResult.getAnswer1voteCount()%>
-                    </td>
-                    <td colspan="2"><%=balanceGameResult.getAnswer2voteCount()%>
-                    </td>
-                </tr>
-
-                <%--            난이도 투표--%>
-                <%--            TODO 이미 투표한 경우 투표한 위치에 표시--%>
-                <tr>
-                    <td colspan="4"><p>난이도 선택 : </p>
-                        <form action="/voteBalanceGameDifficultyServlet" method="post" accept-charset="UTF-8">
-                            <input type="hidden" name="balanceGameId" value="<%=balanceGameId%>"/>
-                            <ul style="list-style: none;">
-                                <li class="nav-item">
-                                    <%
-                                        if (balanceGameVote.getDifficulty() != null && balanceGameVote.getDifficulty().equals(Difficulty.HARD)) {
-                                    %>
-                                    <input type="radio" name="difficulty" value="<%=Difficulty.HARD.name()%>"
-                                           checked="checked">상
-                                    <%
-                                    } else {
-                                    %>
-                                    <input type="radio" name="difficulty" value="<%=Difficulty.HARD.name()%>">상
-                                    <%
-                                        }
-                                    %>
-                                </li>
-                                <li class="nav-item">
-                                    <%
-                                        if (balanceGameVote.getDifficulty() != null && balanceGameVote.getDifficulty().equals(Difficulty.NORMAL)) {
-                                    %>
-                                    <input type="radio" name="difficulty" value="<%=Difficulty.NORMAL.name()%>"
-                                           checked="checked">중
-                                    <%
-                                    } else {
-                                    %>
-                                    <input type="radio" name="difficulty" value="<%=Difficulty.NORMAL.name()%>">중
-                                    <%
-                                        }
-                                    %>
-                                </li>
-                                <li class="nav-item">
-                                    <%
-                                        if (balanceGameVote.getDifficulty() != null && balanceGameVote.getDifficulty().equals(Difficulty.EASY)) {
-                                    %>
-                                    <input type="radio" name="difficulty" value="<%=Difficulty.EASY.name()%>"
-                                           checked="checked">하
-                                    <%
-                                    } else {
-                                    %>
-                                    <input type="radio" name="difficulty" value="<%=Difficulty.EASY.name()%>">하
-                                    <%
-                                        }
-                                    %>
-                                </li>
-                            </ul>
-                            <button type="submit">난이도 투표</button>
-                        </form>
-                    </td>
-                </tr>
+            <%--            댓글 작성    --%>
+            <%
+                if (balanceGameVote != null) {
+                    BalanceGameResult balanceGameResult = balanceGameVoteDAO.getBalanceGameResult(balanceGameId);
+            %>
+            <div class="create-comment">
+                <form action="/addBalanceGameCommentServlet" method="post" accept-charset="UTF-8">
+                    <input type="hidden" name="balanceGameId" value="<%=balanceGameId%>"/>
+                    <label>
+                        <input class="data" type="text" name="content" placeholder="댓글 입력" style="height: 100px;" />
+                    </label>
+                    <button type="submit" style="width: 100%; height: 30px;">확인 ( Enter )</button>
+                </form>
                 <%
                     }
                 %>
-                <%--                이전/다음 질문. 좋아요/싫어요 투표 --%>
-                <tr>
-                    <td>
-                        <a href="show_balance_game.jsp?balanceGameId=<%=balanceGameDAO.getOtherRandomBalanceGameId(balanceGameId)%>">
-                            이전 게임</a>
-                    </td>
-                    <%
-                        if (balanceGameVote != null) {
-                    %>
-                    <%--                    TODO 이미 투표한 경우 투표한 위치에 표시--%>
-                    <td colspan="2"><p>좋아요/싫어요 투표</p>
-                        <form action="/voteBalanceGamePreferenceServlet" method="post" accept-charset="UTF-8">
-                            <input type="hidden" name="balanceGameId" value="<%=balanceGameId%>"/>
-                            <ul style="list-style: none;">
-                                <li class="nav-item">
-                                    <%
-                                        if (balanceGameVote.getPreference() != null && balanceGameVote.getPreference().equals(Preference.LIKE)) {
-                                    %>
-                                    <input type="radio" name="preference" value="<%=Preference.LIKE.name()%>"
-                                           checked="checked">좋아요
-                                    <%
-                                    } else {
-                                    %>
-                                    <input type="radio" name="preference" value="<%=Preference.LIKE.name()%>">좋아요
-                                    <%
-                                        }
-                                    %>
-                                </li>
-                                <li class="nav-item">
-                                    <%
-                                        if (balanceGameVote.getPreference() != null && balanceGameVote.getPreference().equals(Preference.DISLIKE)) {
-                                    %>
-                                    <input type="radio" name="preference" value="<%=Preference.DISLIKE.name()%>"
-                                           checked="checked">싫어요
-                                    <%
-                                    } else {
-                                    %>
-                                    <input type="radio" name="preference" value="<%=Preference.DISLIKE.name()%>">싫어요
-                                    <%
-                                        }
-                                    %>
-                                </li>
-                            </ul>
-                            <button type="submit">좋아요/싫어요 투표</button>
-                        </form>
-                    </td>
-                    <%
-                    } else {
-                    %>
-                    <td colspan="2"></td>
+            </div>
+
+            <%--            댓글 출력    --%>
+            <%
+                List<BalanceGameComment> balanceGameComments = balanceGameCommentDAO.findAllByBalanceGameId(balanceGameId);
+            %>
+            <div class="show-comment">
+                <table class="commentTable" border="1" width="100%" >
+                    <tr height="50px" style="border-left: none; border-right: none;">
+                        <td style="border-left: none; border-right: none;">댓글 : <%=balanceGameComments.size()%>개</td>
+                    </tr>
+                    <tr height="100%">
+                        <%
+                            for (BalanceGameComment balanceGameComment : balanceGameComments) {
+                        %>
+                        <td style="padding: 30px; padding-left: 10px; border-left: none; border-right: none; border-bottom: none;"><%=balanceGameComment.getContent()%>
+                        </td>
+                    </tr>
                     <%
                         }
                     %>
-                    <td>
-                        <a href="show_balance_game.jsp?balanceGameId=<%=balanceGameDAO.getOtherRandomBalanceGameId(balanceGameId)%>">다음
-                            게임</a>
-                    </td>
-                </tr>
-
-                <%--            댓글 작성    --%>
-                <%
-                    if (balanceGameVote != null) {
-                        BalanceGameResult balanceGameResult = balanceGameVoteDAO.getBalanceGameResult(balanceGameId);
-                %>
-                <tr height="100px">
-                    <td colspan="4">
-                        <form action="/addBalanceGameCommentServlet" method="post" accept-charset="UTF-8">
-                            <input type="hidden" name="balanceGameId" value="<%=balanceGameId%>"/>
-                            <label>
-                                <input class="data" type="text" name="content" placeholder="댓글을 입력하세요."/>
-                            </label>
-                            <button type="submit">댓글 작성</button>
-                        </form>
-                    </td>
-                </tr>
-                <%
-                    }
-                %>
-
-                <%--            댓글 출력    --%>
-                <%
-                    List<BalanceGameComment> balanceGameComments = balanceGameCommentDAO.findAllByBalanceGameId(balanceGameId);
-                %>
-                <tr height="50px">
-                    <td colspan="4">댓글 : <%=balanceGameComments.size()%>개</td>
-                </tr>
-                <%
-                    for (BalanceGameComment balanceGameComment : balanceGameComments) {
-                %>
-                <tr height="50px">
-                    <td colspan="4"><%=balanceGameComment.getContent()%>
-                    </td>
-                </tr>
-                <%
-                    }
-                %>
-            </table>
+                </table>
+            </div>
         </div>
+
     </main>
 </div>
 </body>
@@ -308,6 +348,8 @@
             $("#background-wrap").hide("slow");
         });
     });
+
+
 
 </script>
 </html>
