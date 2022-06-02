@@ -19,6 +19,7 @@
 <head>
     <title>세상의 모든 밸런스 게임</title>
     <link href="css/home_styles.css" rel="stylesheet"/>
+    <link href="css/laundry.css" rel="stylesheet"/>
 </head>
 <body>
 <%
@@ -88,18 +89,18 @@
                         <circle cx="245" cy="200" r="14"  fill="black" ></circle>
                         <circle cx="155" cy="200" r="14"  fill="black" ></circle>
 
-                        <rect x="200" y="350" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b;"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(30deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(60deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(90deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(120deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(150deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(180deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(210deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(240deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(270deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(300deg);"></rect>
-                        <rect x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(330deg);"></rect>
+                        <rect class="rect1" x="200" y="350" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center;"></rect>
+                        <rect class="rect2" x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(30deg);"></rect>
+                        <rect class="rect3" x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(60deg);"></rect>
+                        <rect class="rect4" x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(90deg);"></rect>
+                        <rect class="rect5" x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(120deg);"></rect>
+                        <rect class="rect6" x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(150deg);"></rect>
+                        <rect class="rect7" x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(180deg);"></rect>
+                        <rect class="rect8" x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(210deg);"></rect>
+                        <rect class="rect9" x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(240deg);"></rect>
+                        <rect class="rect10" x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(270deg);"></rect>
+                        <rect class="rect11" x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(300deg);"></rect>
+                        <rect class="rect12" x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(330deg);"></rect>
                     </svg>
                 </a>
             </div>
@@ -120,15 +121,18 @@
         </div>
 
         <span class="svg-border-rounded">
-                        <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
-                            <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0"
-                                  fill="transparent"
-                                  style="stroke:rgb(0, 0, 0);"></path>
-                        </svg>
-                    </span>
+            <!--인기순 정렬-->
+        <h2 class="balancegameTitle"
+            >지금 인기 많은 밸런스 게임은?</h2>
+            <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
+                <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0"
+                      fill="transparent"
+                      style="stroke:rgb(0, 0, 0);"></path>
+            </svg>
+        </span>
 
         <!--모든 밸런스게임-->
-        <section class="today-best">
+        <section class="today-best" style="position: relative;">
             <div class="container">
                 <%
                     int index = 4;
@@ -173,9 +177,14 @@
                             String[] clothes = {"clothes", "clothes1", "clothes2", "clothes3", "clothes4", "clothes5", "clothes6", "clothes7", "clothes8", "clothes9", "towel"};
                             randnum = rand.nextInt(11);
                             String selectclothes = "./img/" + clothes[randnum] + ".png";
+                            int laundryClass = (int)((Math.random()*10)%3)+1;
+                            if(laundryClass == 1) {%>
+                        <image class="laundry_1" src="<%=selectclothes%>" width="450" height="470"></image> <%}
 
-                        %>
-                        <image class="towel" src="<%=selectclothes%>" width="450" height="470"></image>
+                            if(laundryClass == 2) {%>
+                        <image class="laundry_2" src="<%=selectclothes%>" width="450" height="470"></image> <%}
+                            if(laundryClass == 3) {%>
+                        <image class="laundry_3" src="<%=selectclothes%>" width="450" height="470"></image> <%}%>
                         <div class="balancegame">
                             <p style="font-size: 22px;"><%=popularBalanceGames[i - 1].getQuestion()%>
                             </p>
@@ -229,5 +238,6 @@
         });
     });
 
+    $(".balancegameTitle").circleType
 </script>
 </html>
