@@ -1,11 +1,16 @@
 USE balance_game_community_test;
 
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS member, balanceGame, balanceGameComment, balanceGameVote;
+SET FOREIGN_KEY_CHECKS = 1;
+
 CREATE TABLE member
 (
     id BIGINT AUTO_INCREMENT,
     email VARCHAR(30) NOT NULL,
     password VARCHAR(30) NOT NULL,
     nickname VARCHAR(30) NOT NULL,
+    isTempMember BOOL NOT NULL,
 
     PRIMARY KEY (id)
 );

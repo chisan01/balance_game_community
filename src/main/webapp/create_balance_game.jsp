@@ -1,11 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page import="com.example.balance_game_community.balanceGameComment.BalanceGameCommentDAO" %>
+<%@ page import="com.example.balance_game_community.member.MemberDAO" %>
+<%@ page import="com.example.balance_game_community.AppConfig" %>
+<%@ page import="com.example.balance_game_community.balanceGameVote.BalanceGameVoteDAO" %>
+<%@ page import="com.example.balance_game_community.balanceGame.BalanceGameDAO" %>
+<%@ page import="com.example.balance_game_community.DataSource" %>
+<%@ page import="java.io.PrintWriter" %><%--
+  Created by IntelliJ IDEA.
+  User: chisanahn
+  Date: 6/2/2022
+  Time: 10:22 AM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
     <meta charset="UTF-8">
     <title>새로운 게임 등록</title>
     <link href="css/home_styles.css" rel="stylesheet"/>
 </head>
 <body>
+<%
+    AppConfig appConfig = new AppConfig(new DataSource());
+    MemberDAO memberDAO = appConfig.getMemberDAO();
+    BalanceGameVoteDAO balanceGameVoteDAO = appConfig.getBalanceGameVoteDAO();
+    BalanceGameDAO balanceGameDAO = appConfig.getBalanceGameDAO();
+    BalanceGameCommentDAO balanceGameCommentDAO = appConfig.getBalanceGameCommentDAO();
+
+    Long memberId = (Long) session.getAttribute("memberId");
+
+    // 로그인이 안되어있는 경우
+    if(memberId == null) response.sendRedirect("/");
+
+    if(memberDAO.isTempMember(memberId)) {
+        PrintWriter script = response.getWriter();
+        script.println("<script>");
+        script.println("alert('" + "You should login to create game" + "')");
+        script.println("location.href='login.html'");
+        script.println("</script>");
+    }
+%>
 <div id="layoutDefault">
     <main>
         <!--nav bar -->
@@ -29,9 +62,9 @@
             <div class="bubble x3">
                 <div class="menu">
                     <h1>메뉴</h1>
-                    <a href="create_balance_game.html">인기순</a>
+                    <a href="create_balance_game.jsp">인기순</a>
                     <a href="index.jsp">마이페이지</a>
-                    <a href="create_balance_game.html">글쓰기</a>
+                    <a href="create_balance_game.jsp">글쓰기</a>
                 </div>
             </div>
             <div class="bubble x4"></div>

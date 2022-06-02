@@ -48,9 +48,9 @@
             <div class="bubble x3">
                 <div class="menu">
                     <h1>메뉴</h1>
-                    <a href="create_balance_game.html">인기순</a>
+                    <a href="create_balance_game.jsp">인기순</a>
                     <a href="index.jsp">마이페이지</a>
-                    <a href="create_balance_game.html">글쓰기</a>
+                    <a href="create_balance_game.jsp">글쓰기</a>
                 </div>
             </div>
             <div class="bubble x4"></div>
@@ -64,6 +64,10 @@
             BalanceGameCommentDAO balanceGameCommentDAO = testAppConfig.getBalanceGameCommentDAO();
 
             Long memberId = (Long) request.getSession().getAttribute("memberId");
+
+            // 로그인이 안되어있는 경우
+            if(memberId == null) response.sendRedirect("/");
+
             Long balanceGameId = Long.parseLong(request.getParameter("balanceGameId"));
             BalanceGame balanceGame = balanceGameDAO.findById(balanceGameId);
 
