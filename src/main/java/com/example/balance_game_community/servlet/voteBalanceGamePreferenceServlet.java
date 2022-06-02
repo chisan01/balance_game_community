@@ -25,13 +25,13 @@ public class voteBalanceGamePreferenceServlet extends HttpServlet {
         BalanceGameVoteDAO balanceGameVoteDAO = testAppConfig.getBalanceGameVoteDAO();
 
         Long memberId = (Long) request.getSession().getAttribute("memberId");
+
+        // 로그인이 안되어있는 경우
+        if(memberId == null) response.sendRedirect("/");
+
         Long balanceGameId = Long.parseLong(request.getParameter("balanceGameId"));
         Preference preference = Preference.valueOf(request.getParameter("preference"));
         balanceGameVoteDAO.votePreference(memberId, balanceGameId, preference);
-
-        System.out.println("content = " + preference.name());
-        System.out.println("memberId = " + memberId);
-        System.out.println("balanceGameId = " + balanceGameId);
 
         response.sendRedirect(request.getHeader("referer"));
     }

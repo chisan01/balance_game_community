@@ -34,7 +34,7 @@ public class MemberDAO extends DAO {
 
     // 회원가입
     public void signIn(Member member) throws Exception {
-        String SQL = "INSERT INTO member VALUES (?,?,?,?)";
+        String SQL = "INSERT INTO member VALUES (?,?,?,?,?)";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -52,6 +52,7 @@ public class MemberDAO extends DAO {
             pstmt.setString(2, member.getEmail());
             pstmt.setString(3, member.getPassword());
             pstmt.setString(4, member.getNickname());
+            pstmt.setBoolean(5, false);
 
             pstmt.executeUpdate();
         } finally {
@@ -106,6 +107,83 @@ public class MemberDAO extends DAO {
                 }
             }
             throw new Exception("not exist email");
+        } finally {
+            close(conn, pstmt, rs);
+        }
+    }
+
+    public boolean isTempMember(Long memberId) {
+        String SQL = "SELECT isTempMember FROM member WHERE id = ?";
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setLong(1, memberId);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getBoolean(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(conn, pstmt, rs);
+        }
+        return false;
+    }
+
+    // 회원가입 (임시 계정 생성)
+    public void signInTempUser(String clientIP) throws Exception {
+        String SQL = "INSERT INTO member VALUES (?,?,?,?,?)";
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            if (emailDuplicateCheck(clientIP)) {
+                throw new Exception("already exist email");
+            }
+
+            conn = getConnection();
+            pstmt = conn.prepareStatement(SQL);
+
+            pstmt.setObject(1, null); // id가 auto_increment filed 라서 column 명을 생략하고 insert 문을 사용하는 경우, null 값을 넣어주면 된다,
+            pstmt.setString(2, clientIP);
+            pstmt.setString(3, clientIP);
+            pstmt.setString(4, clientIP);
+            pstmt.setBoolean(5, true);
+
+            pstmt.executeUpdate();
+        } finally {
+            close(conn, pstmt, rs);
+        }
+    }
+
+    // 로그인 (user_id 반환)
+    public Long logInTempUser(String clientIP) throws Exception {
+        String SQL = "SELECT id FROM member WHERE email = ?";
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, clientIP);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getLong(1);
+            }
+            throw new Exception("not exist clientIP");
         } finally {
             close(conn, pstmt, rs);
         }

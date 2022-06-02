@@ -24,13 +24,13 @@ public class addBalanceGameCommentServlet extends HttpServlet {
         BalanceGameCommentDAO balanceGameCommentDAO = testAppConfig.getBalanceGameCommentDAO();
 
         Long memberId = (Long) request.getSession().getAttribute("memberId");
+
+        // 로그인이 안되어있는 경우
+        if(memberId == null) response.sendRedirect("/");
+
         Long balanceGameId = Long.parseLong(request.getParameter("balanceGameId"));
         String content = request.getParameter("content");
         balanceGameCommentDAO.addComment(memberId, balanceGameId, content);
-
-        System.out.println("content = " + content);
-        System.out.println("memberId = " + memberId);
-        System.out.println("balanceGameId = " + balanceGameId);
 
         response.sendRedirect(request.getHeader("referer"));
     }
