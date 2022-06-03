@@ -20,6 +20,7 @@
 <head>
     <title>세상의 모든 밸런스 게임</title>
     <link href="css/home_styles.css" rel="stylesheet"/>
+    <link href="css/laundry.css" rel="stylesheet"/>
 </head>
 <body>
 <%
@@ -172,9 +173,14 @@
                             String[] clothes = {"clothes", "clothes1", "clothes2", "clothes3", "clothes4", "clothes5", "clothes6", "clothes7", "clothes8", "clothes9", "towel"};
                             randnum = rand.nextInt(11);
                             String selectclothes = "./img/" + clothes[randnum] + ".png";
+                            int laundryClass = (int)((Math.random()*10)%3)+1;
+                            if(laundryClass == 1) {%>
+                        <image class="laundry_1" src="<%=selectclothes%>" width="450" height="470"></image> <%}
 
-                        %>
-                        <image class="towel" src="<%=selectclothes%>" width="450" height="470"></image>
+                        if(laundryClass == 2) {%>
+                        <image class="laundry_2" src="<%=selectclothes%>" width="450" height="470"></image> <%}
+                        if(laundryClass == 3) {%>
+                        <image class="laundry_3" src="<%=selectclothes%>" width="450" height="470"></image> <%}%>
                         <div class="balancegame">
                             <p style="font-size: 22px;"><%=balanceGame.getQuestion()%>
                             </p>
