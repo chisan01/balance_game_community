@@ -27,17 +27,24 @@ public class loginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
+        PrintWriter script = response.getWriter();
         try {
             Long memberId = memberDAO.logIn(email, password);
-            if (memberId != null) request.getSession().setAttribute("memberId", memberId);
+            if(memberId == null) return;
 
-            System.out.println("email = " + email);
-            System.out.println("password = " + password);
-            System.out.println("memberId = " + memberId);
+            // 임시 계정에 직접적으로 로그인하려고 한 경우
+            if(memberDAO.isTempMember(memberId)) {
+                script.println("<script>");
+                script.println("alert('" + "not allowed access" + "')");
+                script.println("history.back()");
+                script.println("</script>");
+                return;
+            }
+
+            request.getSession().setAttribute("memberId", memberId);
 
             response.sendRedirect("/index.jsp");
         } catch (Exception e) {
-            PrintWriter script = response.getWriter();
             script.println("<script>");
             script.println("alert('" + e.getMessage() + "')");
             script.println("history.back()");

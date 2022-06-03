@@ -23,12 +23,48 @@
     <link href="css/laundry.css" rel="stylesheet"/>
 </head>
 <body>
+<%!
+    public String getClientIP(HttpServletRequest request) {
+        String ip = request.getHeader("X-FORWARDED-FOR");
+        if (ip == null || ip.length() == 0) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0) {
+            ip = request.getRemoteAddr();
+        }
+        return ip;
+    }
+%>
 <%
     AppConfig appConfig = new AppConfig(new DataSource());
     MemberDAO memberDAO = appConfig.getMemberDAO();
     BalanceGameVoteDAO balanceGameVoteDAO = appConfig.getBalanceGameVoteDAO();
     BalanceGameDAO balanceGameDAO = appConfig.getBalanceGameDAO();
     BalanceGameCommentDAO balanceGameCommentDAO = appConfig.getBalanceGameCommentDAO();
+
+    Long memberId = (Long) session.getAttribute("memberId");
+
+    if (memberId == null) {
+        String clientIP = getClientIP(request);
+        // 해당 IP에 대한 임시 계정이 존재하지 않는 경우, 새로 생성
+        if (!memberDAO.emailDuplicateCheck(clientIP)) {
+            try {
+                memberDAO.signInTempUser(clientIP);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        // 임시 계정으로 로그인
+        try {
+            memberId = memberDAO.logInTempUser(clientIP);
+            session.setAttribute("memberId", memberId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 %>
 
 <div id="layoutDefault">
@@ -40,8 +76,7 @@
                 <div class="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <%
-                            Long memberId = (Long) session.getAttribute("memberId");
-                            if (memberId == null) {
+                            if (memberDAO.isTempMember(memberId)) {
                         %>
                         <li class="nav-item">
                             <a class="nav-link" href="login.html">로그인</a>
@@ -56,7 +91,15 @@
                             }
                         %>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.jsp">랜덤 시작</a>
+                            <%
+                                Long randomBalanceGameId = balanceGameDAO.getOtherRandomBalanceGameId(-1L);
+                            %>
+                            <a class="nav-link" href="show_balance_game.jsp?balanceGameId=<%=randomBalanceGameId%>">랜덤
+                                시작</a>
+                        </li>
+                        <li class="nav-item">
+                        <img src="image/menu_btn.png" width="165px" height="165px"
+                             style="position: absolute; top:-35px; opacity: 70%; z-index:101;"/>
                         </li>
                         <li class="nav-item">
                             <!--방울 메뉴창(마이페이지, 글쓰기 등) 띄우는 링크? -->
@@ -70,13 +113,13 @@
         <!--page header : 바로 게임 시작 햇님 버튼 -->
         <header class="page-header">
             <div class="header-start">
-                <a href="create_balance_game.html">
+                <a href="create_balance_game.jsp">
                     <svg id=sun" height="400" width="400" viewBox="-10 -10 410 410">
-                        <circle cx="200" cy="200" r="130" fill="#edaa3b" ></circle>
-                        <ellipse cx="200" cy="260" rx="35" ry="30"  fill="red" stroke="red" stroke-width="1" ></ellipse>
+                        <circle cx="200" cy="200" r="130" fill="#edaa3b"></circle>
+                        <ellipse cx="200" cy="260" rx="35" ry="30" fill="red" stroke="red" stroke-width="1"></ellipse>
                         <rect x="160" y="205" width="80" height="37" style="fill: #edaa3b;"></rect>
-                        <circle cx="245" cy="200" r="14"  fill="black" ></circle>
-                        <circle cx="155" cy="200" r="14"  fill="black" ></circle>
+                        <circle cx="245" cy="200" r="14" fill="black"></circle>
+                        <circle cx="155" cy="200" r="14" fill="black"></circle>
 
                         <rect class="rect1" x="200" y="350" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center;"></rect>
                         <rect class="rect2" x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(30deg);"></rect>
@@ -101,9 +144,12 @@
             <div class="bubble x3">
                 <div class="menu">
                     <h1>메뉴</h1>
-                    <a href="sort_balance_game_by_like.jsp">인기순</a>
-                    <a href="index.jsp">마이페이지</a>
+                    <p><br/></p>
                     <a href="create_balance_game.html">글쓰기</a>
+                    <a href="index.jsp">오늘의 밸런스게임</a>
+                    <a href="sort_balance_game_by_like.jsp">인기순 밸런스게임</a>
+                    <a href="sort_balance_game_by_newest.jsp">최신순 밸런스게임</a>
+                    <a href="sort_balance_game_by_difficulty.jsp">난이도별 밸런스게임</a>
                 </div>
             </div>
             <div class="bubble x4"></div>
@@ -157,7 +203,7 @@
                         ang = 6;
                     } else if (i % 5 == 2) {
                         ang = 0;
-                    }else if (i % 5 == 3) {
+                    } else if (i % 5 == 3) {
                         ang = -6;
                     } else if (i % 5 == 4) {
                         ang = 5;
@@ -165,7 +211,8 @@
                         ang = -5;
                     }%>
 
-                <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=i%>" style="transform: rotate(<%=ang%>deg)">
+                <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=i%>"
+                   style="transform: rotate(<%=ang%>deg)">
                     <div class="towel">
                         <%
                             Random rand = new Random();
