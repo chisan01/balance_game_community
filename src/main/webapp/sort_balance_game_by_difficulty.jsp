@@ -5,10 +5,9 @@
 <%@ page import="com.example.balance_game_community.balanceGameComment.BalanceGameCommentDAO" %>
 <%@ page import="com.example.balance_game_community.DataSource" %>
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGame" %>
-<%@ page import="java.util.Random" %>
-<%@ page import="java.util.Arrays" %>
-<%@ page import="java.util.Comparator" %>
-<%@ page import="com.example.balance_game_community.balanceGameVote.Difficulty" %><%--
+<%@ page import="com.example.balance_game_community.balanceGameVote.Difficulty" %>
+<%@ page import="jdk.internal.org.jline.utils.DiffHelper" %>
+<%@ page import="java.util.*" %><%--
   Created by IntelliJ IDEA.
   User: kmj
   Date: 2022-05-22
@@ -30,30 +29,43 @@
     BalanceGameDAO balanceGameDAO = appConfig.getBalanceGameDAO();
     BalanceGameCommentDAO balanceGameCommentDAO = appConfig.getBalanceGameCommentDAO();
 
+//    List<BalanceGame> balanceGames = new ArrayList<>();
+//    balanceGames.addAll(balanceGameDAO.findAllByDifficulty(Difficulty.EASY));
+//    balanceGames.addAll(balanceGameDAO.findAllByDifficulty(Difficulty.NORMAL));
+//    balanceGames.addAll(balanceGameDAO.findAllByDifficulty(Difficulty.HARD));
+//
+//    balanceGameVoteDAO.calculateDifficulty((long)1);
     long maxIndex = balanceGameDAO.getLastBalanceGameId();
-    BalanceGame[] simpleBalanceGames = new BalanceGame[Math.toIntExact(maxIndex)];
+    BalanceGame[] balanceGames = new BalanceGame[(int)maxIndex];
     for (int i = 1; i <= maxIndex; i++) {
-        simpleBalanceGames[i-1] = balanceGameDAO.findById((long)i);
+        balanceGames[i-1] = balanceGameDAO.findById((long)i);
     }
     Comparator<BalanceGame> comparator = (b1, b2) -> {
-        // 인기순 내림차순으로 정렬
-        int b1_difficulty, b2_difficulty;
-
+        // 난이도 오름차순으로 정렬
+        float b1_difficulty;
         if(b1.getDifficulty() == Difficulty.EASY) b1_difficulty = 1;
-        else if(b1.getDifficulty() == Difficulty.NORMAL) b1_difficulty = 2;
-        else b1_difficulty =3;
+        else if(b1.getDifficulty() == Difficulty.NORMAL) b1_difficulty = 5;
+        else b1_difficulty = 10;
+        b1_difficulty +=  balanceGameVoteDAO.totalVotedDifficultyToFloat(b1.getId());
+        b1_difficulty /= 2;
+        if(b1_difficulty >= 7) b1.setTotalDifficulty(Difficulty.HARD);
+        else if(b1_difficulty >= 3) b1.setTotalDifficulty(Difficulty.NORMAL);
+        else b1.setTotalDifficulty(Difficulty.EASY);
 
+        float b2_difficulty;
         if(b2.getDifficulty() == Difficulty.EASY) b2_difficulty = 1;
-        if(b2.getDifficulty() == Difficulty.NORMAL) b2_difficulty = 2;
-        else b2_difficulty = 3;
-
-        System.out.println("B2: " + b2.getQuestion() + " 난이도: " + b2.getDifficulty());
-        System.out.println();
+        else if(b2.getDifficulty() == Difficulty.NORMAL) b2_difficulty = 5;
+        else b2_difficulty = 10;
+        b2_difficulty +=  balanceGameVoteDAO.totalVotedDifficultyToFloat(b2.getId());
+        b2_difficulty /= 2;
+        if(b2_difficulty >= 7) b2.setTotalDifficulty(Difficulty.HARD);
+        else if(b2_difficulty >= 3) b2.setTotalDifficulty(Difficulty.NORMAL);
+        else b2.setTotalDifficulty(Difficulty.EASY);
 
         if(b1_difficulty > b2_difficulty) return 1;
         else return -1;
     };
-    Arrays.sort(simpleBalanceGames, comparator);
+    Arrays.sort(balanceGames, comparator);
 %>
 
 <div id="layoutDefault">
@@ -136,7 +148,7 @@
 
         <span class="svg-border-rounded">
             <!--인기순 정렬-->
-        <h2 class="balancegameTitle">어려운 밸런스 게임에 도전해볼까?</h2>
+        <h2 class="balancegameTitle">맛보기로 쉬운 밸런스 게임부터?</h2>
             <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
                 <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0"
                       fill="transparent"
@@ -145,14 +157,14 @@
         </span>
 
         <!--모든 밸런스게임-->
-        <section class="today-best" style="position: relative;">
+        <section class="today-best">
             <div class="container">
                 <%
+                    int difficulty = 0;
                     int index = 4;
                     int flag = 2;
                     int ang = 0;
-                    for (int i = 1; i <= simpleBalanceGames.length; i++) {
-                        System.out.println(simpleBalanceGames[i-1].getDifficulty());
+                    for (int i = 1; i <= maxIndex; i++) {
                         if (i == index) {
                             index += flag;
                             if (flag == 2) {
@@ -160,8 +172,22 @@
                             } else {
                                 flag = 2;
                             }
+                            %>
+                <span class="svg-border-rounded"  style="position: relative;">
+                    <%
+                    if(difficulty == 0 && balanceGames[i - 1].getTotalDifficulty() == Difficulty.NORMAL) {
+                                difficulty = 1;
                 %>
-                <span class="svg-border-rounded">
+                <h2 class="balancegameTitle" style="position: absolute;">좀 더 어려운 밸런스 게임은 없을까?</h2>
+                <%
+                }
+                else if(difficulty == 1 && balanceGames[i - 1].getTotalDifficulty() == Difficulty.HARD) {
+                    difficulty = 2;
+                %>
+                <h2 class="balancegameTitle" style="position: absolute;">최고난도 밸런스 게임에 도전해보자!</h2>
+                <%
+                    }
+                %>
                         <svg width="100vw" height="auto" viewBox="0 0 144.54 5.5" preserveAspectRatio="none"
                              fill="white">
                             <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0"
@@ -183,7 +209,7 @@
                         ang = -5;
                     }%>
 
-                <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=simpleBalanceGames[i - 1].getId()%>" style="transform: rotate(<%=ang%>deg)">
+                <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=balanceGames[i - 1].getId()%>" style="transform: rotate(<%=ang%>deg)">
                     <div class="towel">
                         <%
                             Random rand = new Random();
@@ -200,13 +226,13 @@
                         if(laundryClass == 3) {%>
                         <image class="laundry_3" src="<%=selectclothes%>" width="450" height="470"></image> <%}%>
                         <div class="balancegame">
-                            <p style="font-size: 22px;"><%=simpleBalanceGames[i - 1].getQuestion()%>
+                            <p style="font-size: 22px;"><%=balanceGames[i - 1].getQuestion()%>
                             </p>
                             <h4><br/></h4>
-                            <p><%=simpleBalanceGames[i - 1].getAnswer1()%>
+                            <p><%=balanceGames[i - 1].getAnswer1()%>
                             </p>
                             <p style="color: saddlebrown">vs</p>
-                            <p><%=simpleBalanceGames[i - 1].getAnswer2()%>
+                            <p><%=balanceGames[i - 1].getAnswer2()%>
                             </p>
                         </div>
                     </div>

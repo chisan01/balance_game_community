@@ -20,6 +20,8 @@ public class BalanceGame {
     private Long likeCount;
     private Long dislikeCount;
 
+    private Difficulty totalDifficulty; // 투표받은 것까지 계산된 난이도
+
     public BalanceGame() {}
 
     public BalanceGame(ResultSet rs) throws SQLException {
@@ -35,6 +37,8 @@ public class BalanceGame {
         this.difficulty = Difficulty.values()[rs.getInt(9)];
         this.likeCount = rs.getLong(10);
         this.dislikeCount = rs.getLong(11);
+
+        this.totalDifficulty = Difficulty.EASY;
     }
 
     public Long getId() {
@@ -124,4 +128,8 @@ public class BalanceGame {
     public void setDislikeCount(Long dislikeCount) {
         this.dislikeCount = dislikeCount;
     }
+
+    public Difficulty getTotalDifficulty() { return totalDifficulty; }
+
+    public void setTotalDifficulty(Difficulty difficulty) { this.totalDifficulty = difficulty; }
 }

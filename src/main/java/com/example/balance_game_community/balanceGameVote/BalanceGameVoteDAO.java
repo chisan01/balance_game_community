@@ -194,4 +194,62 @@ public class BalanceGameVoteDAO extends DAO {
             close(conn, pstmt, rs);
         }
     }
+
+    // 사람들이 투표한 난이도를 float형으로 나타냄
+    public float totalVotedDifficultyToFloat(Long balanceGameId) { // 0: easy, 1: normal 2: hard
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            String SQL = "SELECT difficulty, COUNT(*) AS hardCount\n" +
+                    "FROM balancegamevote\n" +
+                    "WHERE balanceGameId = ? AND difficulty = 2\n" +
+                    "GROUP BY difficulty\n" +
+                    "ORDER BY difficulty;";
+            conn = getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setLong(1, balanceGameId);
+            rs = pstmt.executeQuery();
+            int hardCount = 0;
+            while (rs.next()) {
+                hardCount = (int)rs.getLong(2);
+            }
+
+            SQL = "SELECT difficulty, COUNT(*) AS noramlCount\n" +
+                    "FROM balancegamevote\n" +
+                    "WHERE balanceGameId = ? AND difficulty = 1\n" +
+                    "GROUP BY difficulty\n" +
+                    "ORDER BY difficulty;";
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setLong(1, balanceGameId);
+            rs = pstmt.executeQuery();
+            int normalCount = 0;
+            while (rs.next()) {
+                normalCount = (int)rs.getLong(2);
+            }
+
+            SQL = "SELECT difficulty, COUNT(*) AS easyCount\n" +
+                    "FROM balancegamevote\n" +
+                    "WHERE balanceGameId = ? AND difficulty = 0\n" +
+                    "GROUP BY difficulty\n" +
+                    "ORDER BY difficulty;";
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setLong(1, balanceGameId);
+            rs = pstmt.executeQuery();
+            int easyCount = 0;
+            while (rs.next()) {
+                easyCount = (int)rs.getLong(2);
+            }
+
+            if(hardCount + normalCount + easyCount == 0) return 0;
+
+            return (hardCount * 10 + normalCount * 5 + easyCount * 1) / (float)(hardCount + normalCount + easyCount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(conn, pstmt, rs);
+        }
+        return 0;
+    }
 }
