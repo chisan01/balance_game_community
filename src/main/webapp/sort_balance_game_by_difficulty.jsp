@@ -5,10 +5,9 @@
 <%@ page import="com.example.balance_game_community.balanceGameComment.BalanceGameCommentDAO" %>
 <%@ page import="com.example.balance_game_community.DataSource" %>
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGame" %>
-<%@ page import="java.util.Random" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Arrays" %>
-<%@ page import="java.util.Collections" %><%--
+<%@ page import="com.example.balance_game_community.balanceGameVote.Difficulty" %>
+<%@ page import="jdk.internal.org.jline.utils.DiffHelper" %>
+<%@ page import="java.util.*" %><%--
   Created by IntelliJ IDEA.
   User: kmj
   Date: 2022-05-22
@@ -23,48 +22,15 @@
     <link href="css/laundry.css" rel="stylesheet"/>
 </head>
 <body>
-<%!
-    public String getClientIP(HttpServletRequest request) {
-        String ip = request.getHeader("X-FORWARDED-FOR");
-        if (ip == null || ip.length() == 0) {
-            ip = request.getHeader("Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0) {
-            ip = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0) {
-            ip = request.getRemoteAddr();
-        }
-        return ip;
-    }
-%>
 <%
     AppConfig appConfig = new AppConfig(new DataSource());
     MemberDAO memberDAO = appConfig.getMemberDAO();
     BalanceGameVoteDAO balanceGameVoteDAO = appConfig.getBalanceGameVoteDAO();
     BalanceGameDAO balanceGameDAO = appConfig.getBalanceGameDAO();
     BalanceGameCommentDAO balanceGameCommentDAO = appConfig.getBalanceGameCommentDAO();
-
-    Long memberId = (Long) session.getAttribute("memberId");
-
-    if (memberId == null) {
-        String clientIP = getClientIP(request);
-        // 해당 IP에 대한 임시 계정이 존재하지 않는 경우, 새로 생성
-        if (!memberDAO.emailDuplicateCheck(clientIP)) {
-            try {
-                memberDAO.signInTempUser(clientIP);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        // 임시 계정으로 로그인
-        try {
-            memberId = memberDAO.logInTempUser(clientIP);
-            session.setAttribute("memberId", memberId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    long maxIndex = balanceGameDAO.getLastBalanceGameId();
+    List<BalanceGame> difficultBalanceGames;
+    difficultBalanceGames = balanceGameDAO.findAllSortedBy("difficulty");
 %>
 
 <div id="layoutDefault">
@@ -76,7 +42,8 @@
                 <div class="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <%
-                            if (memberDAO.isTempMember(memberId)) {
+                            Long memberId = (Long) session.getAttribute("memberId");
+                            if (memberId == null) {
                         %>
                         <li class="nav-item">
                             <a class="nav-link" href="login.html">로그인</a>
@@ -91,15 +58,7 @@
                             }
                         %>
                         <li class="nav-item">
-                            <%
-                                Long randomBalanceGameId = balanceGameDAO.getOtherRandomBalanceGameId(-1L);
-                            %>
-                            <a class="nav-link" href="show_balance_game.jsp?balanceGameId=<%=randomBalanceGameId%>">랜덤
-                                시작</a>
-                        </li>
-                        <li class="nav-item">
-                        <img src="image/menu_btn.png" width="165px" height="165px"
-                             style="position: absolute; top:-35px; opacity: 70%; z-index:101;"/>
+                            <a class="nav-link" href="index.jsp">랜덤 시작</a>
                         </li>
                         <li class="nav-item">
                             <!--방울 메뉴창(마이페이지, 글쓰기 등) 띄우는 링크? -->
@@ -113,13 +72,13 @@
         <!--page header : 바로 게임 시작 햇님 버튼 -->
         <header class="page-header">
             <div class="header-start">
-                <a href="create_balance_game.jsp">
+                <a href="create_balance_game.html">
                     <svg id=sun" height="400" width="400" viewBox="-10 -10 410 410">
-                        <circle cx="200" cy="200" r="130" fill="#edaa3b"></circle>
-                        <ellipse cx="200" cy="260" rx="35" ry="30" fill="red" stroke="red" stroke-width="1"></ellipse>
+                        <circle cx="200" cy="200" r="130" fill="#edaa3b" ></circle>
+                        <ellipse cx="200" cy="260" rx="35" ry="30"  fill="red" stroke="red" stroke-width="1" ></ellipse>
                         <rect x="160" y="205" width="80" height="37" style="fill: #edaa3b;"></rect>
-                        <circle cx="245" cy="200" r="14" fill="black"></circle>
-                        <circle cx="155" cy="200" r="14" fill="black"></circle>
+                        <circle cx="245" cy="200" r="14"  fill="black" ></circle>
+                        <circle cx="155" cy="200" r="14"  fill="black" ></circle>
 
                         <rect class="rect1" x="200" y="350" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center;"></rect>
                         <rect class="rect2" x="200" y="360" width="12" height="50" rx="5" ry="5" style="fill: #edaa3b; transform-origin: center; transform: rotate(30deg);"></rect>
@@ -144,43 +103,33 @@
             <div class="bubble x3">
                 <div class="menu">
                     <h1>메뉴</h1>
-                    <p><br/></p>
+                    <a href="create_balance_game.html">인기순</a>
+                    <a href="index.jsp">마이페이지</a>
                     <a href="create_balance_game.html">글쓰기</a>
-                    <a href="index.jsp">오늘의 밸런스게임</a>
-                    <a href="sort_balance_game_by_like.jsp">인기순 밸런스게임</a>
-                    <a href="sort_balance_game_by_newest.jsp">최신순 밸런스게임</a>
-                    <a href="sort_balance_game_by_difficulty.jsp">난이도별 밸런스게임</a>
                 </div>
             </div>
             <div class="bubble x4"></div>
         </div>
 
         <span class="svg-border-rounded">
-                        <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
-                            <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0"
-                                  fill="transparent"
-                                  style="stroke:rgb(0, 0, 0);"></path>
-                        </svg>
-                    </span>
+            <!--인기순 정렬-->
+        <h2 class="balancegameTitle">맛보기로 쉬운 밸런스 게임부터?</h2>
+            <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
+                <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0"
+                      fill="transparent"
+                      style="stroke:rgb(0, 0, 0);"></path>
+            </svg>
+        </span>
 
         <!--모든 밸런스게임-->
         <section class="today-best">
             <div class="container">
                 <%
-                    long maxIndex = balanceGameDAO.getLastBalanceGameId();
-                    Integer[] balanceGameIndex = new Integer[Math.toIntExact(balanceGameDAO.getLastBalanceGameId())];
-                    for(int i = 0; i < maxIndex; i++) {
-                        balanceGameIndex[i] = i + 1;
-                    }
-                    List<Integer> balanceGameList = (List<Integer>) Arrays.asList(balanceGameIndex);
-                    Collections.shuffle(balanceGameList);
-                    balanceGameList.toArray(balanceGameIndex);
-
+                    int difficulty = 0;
                     int index = 4;
                     int flag = 2;
                     int ang = 0;
                     for (int i = 1; i <= maxIndex; i++) {
-                        BalanceGame balanceGame = balanceGameDAO.findById((long) balanceGameIndex[i - 1]);
                         if (i == index) {
                             index += flag;
                             if (flag == 2) {
@@ -188,8 +137,22 @@
                             } else {
                                 flag = 2;
                             }
+                            %>
+                <span class="svg-border-rounded"  style="position: relative;">
+                    <%
+                    if(difficulty == 0 && difficultBalanceGames.get(i - 1).getDifficulty() == Difficulty.NORMAL) {
+                                difficulty = 1;
                 %>
-                <span class="svg-border-rounded">
+                <h2 class="balancegameTitle" style="position: absolute;">좀 더 어려운 밸런스 게임은 없을까?</h2>
+                <%
+                }
+                else if(difficulty == 1 && difficultBalanceGames.get(i - 1).getDifficulty() == Difficulty.HARD) {
+                    difficulty = 2;
+                %>
+                <h2 class="balancegameTitle" style="position: absolute;">최고난도 밸런스 게임에 도전해보자!</h2>
+                <%
+                    }
+                %>
                         <svg width="100vw" height="auto" viewBox="0 0 144.54 5.5" preserveAspectRatio="none"
                              fill="white">
                             <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0"
@@ -203,7 +166,7 @@
                         ang = 6;
                     } else if (i % 5 == 2) {
                         ang = 0;
-                    } else if (i % 5 == 3) {
+                    }else if (i % 5 == 3) {
                         ang = -6;
                     } else if (i % 5 == 4) {
                         ang = 5;
@@ -211,8 +174,7 @@
                         ang = -5;
                     }%>
 
-                <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=i%>"
-                   style="transform: rotate(<%=ang%>deg)">
+                <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=difficultBalanceGames.get(i - 1).getId()%>" style="transform: rotate(<%=ang%>deg)">
                     <div class="towel">
                         <%
                             Random rand = new Random();
@@ -229,13 +191,13 @@
                         if(laundryClass == 3) {%>
                         <image class="laundry_3" src="<%=selectclothes%>" width="450" height="470"></image> <%}%>
                         <div class="balancegame">
-                            <p style="font-size: 22px;"><%=balanceGame.getQuestion()%>
+                            <p style="font-size: 22px;"><%=difficultBalanceGames.get(i - 1).getQuestion()%>
                             </p>
                             <h4><br/></h4>
-                            <p><%=balanceGame.getAnswer1()%>
+                            <p><%=difficultBalanceGames.get(i - 1).getAnswer1()%>
                             </p>
                             <p style="color: saddlebrown">vs</p>
-                            <p><%=balanceGame.getAnswer2()%>
+                            <p><%=difficultBalanceGames.get(i - 1).getAnswer2()%>
                             </p>
                         </div>
                     </div>
@@ -281,5 +243,6 @@
         });
     });
 
+    $(".balancegameTitle").circleType
 </script>
 </html>

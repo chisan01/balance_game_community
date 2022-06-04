@@ -519,7 +519,14 @@ svg {
     display: flex;
 }
 
-.balancegame {
+h2.balancegameTitle {
+    font-size: 30px;
+    position: absolute;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, 80%);
+}
+
     width: 450px;
     height: 470px;
     position: absolute;
@@ -528,5 +535,125 @@ svg {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.rect1 {
+    animation: rect-spinning1 16s infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rect-spinning1 {
+    0% {transform:rotate(0deg);}
+    100% {transform:rotate(360deg);}
+}
+
+.rect2 {
+    animation: rect-spinning2 16s infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rect-spinning2 {
+    0% {transform:rotate(30deg);}
+    100% {transform:rotate(390deg);}
+}
+
+.rect3 {
+    animation: rect-spinning3 16s infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rect-spinning3 {
+    0% {transform:rotate(60deg);}
+    100% {transform:rotate(420deg);}
+}
+
+.rect4 {
+    animation: rect-spinning4 16s infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rect-spinning4 {
+    0% {transform:rotate(90deg);}
+    100% {transform:rotate(450deg);}
+}
+
+.rect5 {
+    animation: rect-spinning5 16s infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rect-spinning5 {
+    0% {transform:rotate(120deg);}
+    100% {transform:rotate(480deg);}
+}
+
+.rect6 {
+    animation: rect-spinning6 16s infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rect-spinning6 {
+    0% {transform:rotate(150deg);}
+    100% {transform:rotate(510deg);}
+}
+
+.rect7 {
+    animation: rect-spinning7 16s infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rect-spinning7 {
+    0% {transform:rotate(180deg);}
+    100% {transform:rotate(540deg);}
+}
+
+.rect8 {
+    animation: rect-spinning8 16s infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rect-spinning8 {
+    0% {transform:rotate(210deg);}
+    100% {transform:rotate(570deg);}
+}
+
+.rect9 {
+    animation: rect-spinning9 16s infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rect-spinning9 {
+    0% {transform:rotate(240deg);}
+    100% {transform:rotate(600deg);}
+}
+
+.rect10 {
+    animation: rect-spinning10 16s infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rect-spinning10 {
+    0% {transform:rotate(270deg);}
+    100% {transform:rotate(630deg);}
+}
+
+.rect11 {
+    animation: rect-spinning11 16s infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rect-spinning11 {
+    0% {transform:rotate(300deg);}
+    100% {transform:rotate(660deg);}
+}
+
+.rect12 {
+    animation: rect-spinning12 16s infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rect-spinning12 {
+    0% {transform:rotate(330deg);}
+    100% {transform:rotate(690deg);}
 }
 
