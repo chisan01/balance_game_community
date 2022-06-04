@@ -32,7 +32,7 @@
 
     long maxIndex = balanceGameDAO.getLastBalanceGameId();
     List<BalanceGame> popularBalanceGames;
-    popularBalanceGames = balanceGameDAO.findAllSortedBy("likeCount");
+    popularBalanceGames = balanceGameDAO.findAllSortedBy("likeCount DESC");
 %>
 
 <div id="layoutDefault">
