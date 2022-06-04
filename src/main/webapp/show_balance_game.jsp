@@ -220,11 +220,11 @@
             <%--                    TODO 이미 투표한 경우 투표한 위치에 표시--%>
             <div class="preference">
                 <div class="preference-btn">
-                    <div class="preference-icon">
+                    <div class="preference-icon" id="preference-icon-good">
                         <img src="image/good_icon.png" width="40px" height="40px"/>
                         <p>좋아요</p>
                     </div>
-                    <div class="preference-icon">
+                    <div class="preference-icon" id="preference-icon-bad">
                         <img src="image/bad_icon.png" width="40px" height="40px"/>
                         <p>싫어요</p>
                     </div>
@@ -237,8 +237,13 @@
                                 <%
                                     if (balanceGameVote.getPreference() != null && balanceGameVote.getPreference().equals(Preference.LIKE)) {
                                 %>
+                                <script>
+                                    var target= document.getElementById("preference-icon-good");
+                                    target.style.backgroundColor="#AAD361";
+                                    target.style.opacity="80%";
+                                </script>
                                 <input type="submit" name="preference" value="<%=Preference.LIKE.name()%>"
-                                       checked="checked" style="width: 140px; height: 70px; z-index: 100; opacity: 0;">
+                                       checked="checked" style="width: 140px; height: 70px; z-index: 100; opacity: 0%;" >
                                 <%
                                 } else {
                                 %>
@@ -252,6 +257,11 @@
                                 <%
                                     if (balanceGameVote.getPreference() != null && balanceGameVote.getPreference().equals(Preference.DISLIKE)) {
                                 %>
+                                <script>
+                                    var target= document.getElementById("preference-icon-bad");
+                                    target.style.backgroundColor="#E33C30";
+                                    target.style.opacity="90%";
+                                </script>
                                 <input type="submit" name="preference" value="<%=Preference.DISLIKE.name()%>"
                                        checked="checked" style="width: 140px; height: 70px; z-index: 100; opacity: 0;">
                                 <%
@@ -282,15 +292,15 @@
             <div class="difficulty">
                 <div class="difficulty-btn">
                     <p>난이도 선택 : </p>
-                    <div class="difficulty-icon">
+                    <div class="difficulty-icon" id="difficult-easy">
                         <img src="image/difficult_icon.png" width="25px" height="25px"/>
                         <p>어려워요</p>
                     </div>
-                    <div class="difficulty-icon" >
+                    <div class="difficulty-icon" id="difficult-middle" >
                         <img src="image/middle_icon.png" width="25px" height="25px"/>
                         <p>보통이에요</p>
                     </div>
-                    <div class="difficulty-icon" >
+                    <div class="difficulty-icon" id="difficult-hard">
                         <img src="image/easy_icon.png" width="25px" height="25px"/>
                         <p>쉬워요</p>
                     </div>
@@ -304,6 +314,11 @@
                                 <%
                                     if (balanceGameVote.getDifficulty() != null && balanceGameVote.getDifficulty().equals(Difficulty.HARD)) {
                                 %>
+                                <script>
+                                    var target= document.getElementById("difficult-easy");
+                                    target.style.backgroundColor="#F4E6A2";
+                                    target.style.opacity="80%";
+                                </script>
                                 <input type="submit" name="difficulty" value="<%=Difficulty.HARD.name()%>"
                                        checked="checked" style="width: 100px; height: 40px; z-index: 100; opacity: 0;">
                                 <%
@@ -318,6 +333,11 @@
                                 <%
                                     if (balanceGameVote.getDifficulty() != null && balanceGameVote.getDifficulty().equals(Difficulty.NORMAL)) {
                                 %>
+                                <script>
+                                    var target= document.getElementById("difficult-middle");
+                                    target.style.backgroundColor="#F4E6A2";
+                                    target.style.opacity="80%";
+                                </script>
                                 <input type="submit" name="difficulty" value="<%=Difficulty.NORMAL.name()%>"
                                        checked="checked"  style="width: 100px; height: 40px; z-index: 100; opacity: 0;">
                                 <%
@@ -332,6 +352,11 @@
                                 <%
                                     if (balanceGameVote.getDifficulty() != null && balanceGameVote.getDifficulty().equals(Difficulty.EASY)) {
                                 %>
+                                <script>
+                                    var target= document.getElementById("difficult-hard");
+                                    target.style.backgroundColor="#F4E6A2";
+                                    target.style.opacity="80%";
+                                </script>
                                 <input type="submit" name="difficulty" value="<%=Difficulty.EASY.name()%>"
                                        checked="checked" style="width: 100px; height: 40px; z-index: 100; opacity: 0;">
                                 <%
@@ -359,9 +384,10 @@
                 <form action="/addBalanceGameCommentServlet" method="post" accept-charset="UTF-8">
                     <input type="hidden" name="balanceGameId" value="<%=balanceGameId%>"/>
                     <label>
-                        <input class="data" type="text" name="content" placeholder="댓글 입력" style="height: 100px;"/>
+                        <input class="data" type="text" name="content" placeholder="댓글 입력"
+                               style="height: 100px; border-bottom-left-radius: 0px; border-bottom-right-radius:0px; opacity: 80%;"/>
                     </label>
-                    <button type="submit" style="width: 100%; height: 30px;">확인 ( Enter )</button>
+                    <button type="submit" style="width: 100%; height: 40px; border: 0px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">확인 ( Enter )</button>
                 </form>
                 <%
                     }

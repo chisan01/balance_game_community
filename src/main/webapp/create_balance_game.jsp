@@ -83,9 +83,7 @@
         <div id="newWriting">
             <form action="/addBalanceGameServlet" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
                 <h1 style="padding-top: 20px; padding-bottom: 20px;">질문? </h1>
-                <input class="data" type="text" name="question" placeholder="Question" style=" padding-left: 20px; height: 50px; opacity: 50%; border-top: none;
-    border-left: none;
-    border-right: none;"/>
+                <input class="data" type="text" name="question" placeholder="Question" style=" padding-left: 20px; height: 50px; opacity: 50%; border-bottom: solid"/>
 
                 <div class="create-game-vs">
                     <div class="create-game-answer" style="padding-right: 50px;">
@@ -100,7 +98,7 @@
                         <label id="fileName" style="padding-bottom: 10px;"></label>
                         <img id="img" src="image/preview.svg" style="width: 500px; height: 500px;"/>
 
-                        <input class="data" type="text" name="answer1" placeholder="Choice1" style="padding-left: 20px; height: 100px; margin-top: 20px; margin-bottom: 20px; opacity: 50%;"/>
+                        <input class="data" type="text" name="answer1" placeholder="Choice1" style="padding-left: 20px; height: 100px; margin-top: 20px; margin-bottom: 20px; opacity: 50%; border-bottom: solid"/>
                     </div>
 
                     <div class="create-game-answer" style="padding-left: 50px;">
@@ -115,7 +113,7 @@
                         <label id="fileName2" style="padding-bottom: 10px;"></label>
                         <img id="img2" src="image/preview.svg" style="width: 500px; height: 500px;"/>
 
-                        <input class="data" type="text" name="answer2" placeholder="Choice2" style="padding-left: 20px; height: 100px; margin-top: 20px; margin-bottom: 20px; opacity: 50%;"/>
+                        <input class="data" type="text" name="answer2" placeholder="Choice2" style="padding-left: 20px; height: 100px; margin-top: 20px; margin-bottom: 20px; opacity: 50%; border-bottom: solid"/>
                     </div>
                 </div>
 
@@ -133,7 +131,7 @@
                         </li>
                     </ul>
                 </div>
-                <input class="data" type="submit" value="Save" style="height: 50px; margin-top: 30px; margin-bottom: 100px; opacity: 50%;">
+                <input class="data" type="submit" value="Save" style="height: 50px; margin-top: 30px; margin-bottom: 100px; opacity: 50%; border: solid">
             </form>
         </div>
     </main>

@@ -169,7 +169,9 @@
                     <a href="create_balance_game.html">난이도별 밸런스게임</a>
                 </div>
             </div>
-            <div class="bubble x4"></div>
+            <div class="bubble x4">
+                <img src="image/white%20x.png" width="100px" height="100px" style="opacity: 70%;"/>
+            </div>
         </div>
 
         <span class="svg-border-rounded">
@@ -257,13 +259,7 @@
             </svg>
         </div>
 
-        <!--지금 사람들이 많이 하고 있는 밸런스 게임-->
-        <section class="this-time-best">
-            <div class="container">
-
-            </div>
-        </section>
-        <div class="svg-border-rounded">
+        <div class="svg-border-rounded" style="padding-bottom: 100px;">
             <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
                 <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0" fill="transparent"
                       style="stroke:rgb(0, 0, 0);"></path>
