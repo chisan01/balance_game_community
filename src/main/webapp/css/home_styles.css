@@ -97,10 +97,25 @@ html {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-left: 60px;
+    margin-left: 62px;
 
     color: black;
     z-index: 105;
+}
+
+.go_up{
+    position: fixed;
+    bottom: 38px;
+    right: 21px;
+    z-index: 101;
+}
+
+.go_up_btn{
+    position: fixed;
+    bottom: -5px;
+    right: -5px;
+    z-index: 100;
+    opacity: 80%;
 }
 
 #newWriting {

@@ -98,16 +98,22 @@
                                 시작</a>
                         </li>
                         <li class="nav-item">
-                        <img src="image/menu_btn.png" width="165px" height="165px"
-                             style="position: absolute; top:-35px; opacity: 70%; z-index:101;"/>
+                        <img src="image/menu_btn.png" width="65px" height="65px"
+                             style="position: absolute; top:-5px; right: 110px; opacity: 70%; z-index:101;"/>
                         </li>
                         <li class="nav-item">
                             <!--방울 메뉴창(마이페이지, 글쓰기 등) 띄우는 링크? -->
-                            <a class="cloudbtn" href="#">메뉴</a>
+                            <a class="cloudbtn" href="#redirect">메뉴</a>
                         </li>
                     </ul>
                 </div>
             </div>
+        </nav>
+
+        <!--위로 바로가기-->
+        <nav >
+            <img class="go_up_btn" src="image/go_up_btn.png" width="100px" height="100px" />
+            <a class="go_up" href="#">맨 위로</a>
         </nav>
 
         <!--page header : 바로 게임 시작 햇님 버튼 -->
@@ -222,7 +228,7 @@
                             int randnum = 0;
                             String[] clothes = {"clothes", "clothes1", "clothes2", "clothes3", "clothes4", "clothes5", "clothes6", "clothes7", "clothes8", "clothes9", "towel"};
                             randnum = rand.nextInt(11);
-                            String selectclothes = "./img/" + clothes[randnum] + ".png";
+                            String selectclothes = "./image/" + clothes[randnum] + ".png";
 
                         %>
                         <image class="towel" src="<%=selectclothes%>" width="450" height="470"></image>

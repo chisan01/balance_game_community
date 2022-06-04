@@ -33,11 +33,11 @@
                 <a class="navbar-brand" href="index.jsp">세모밸</a>
                 <div class="navbarSupportedContent">
                     <ul class="navbar-nav">
-                        <img src="image/menu_btn.png" width="165px" height="165px"
-                             style="position: absolute; top:-35px; opacity: 70%"/>
+                        <img src="image/menu_btn.png" width="65px" height="65px"
+                             style="position: absolute; top:-5px; right: 110px; opacity: 70%; z-index:101;"/>
                         <li class="nav-item">
                             <!--방울 메뉴창(마이페이지, 글쓰기 등) 띄우는 링크? -->
-                            <a class="cloudbtn" href="#">메뉴</a>
+                            <a class="cloudbtn" href="#redirect" style="top:23px;">메뉴</a>
                         </li>
                     </ul>
                 </div>
@@ -81,6 +81,12 @@
             Long balanceGameVoteId = balanceGameVoteDAO.findByMemberIdAndBalanceGameId(memberId, balanceGameId);
             BalanceGameVote balanceGameVote = balanceGameVoteDAO.findById(balanceGameVoteId);
         %>
+
+        <!--위로 바로가기-->
+        <nav >
+            <img class="go_up_btn" src="image/go_up_btn.png" width="100px" height="100px" />
+            <a class="go_up" href="#">맨 위로</a>
+        </nav>
 
         <div id="newWriting">
             <!--사진 내부-->

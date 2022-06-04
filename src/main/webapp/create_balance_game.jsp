@@ -48,13 +48,13 @@
                 <div class="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <img src="image/menu_btn.png" width="165px" height="165px"
-                                 style="position: absolute; top:-35px; opacity: 70%; z-index:101;"/>
+                            <img src="image/menu_btn.png" width="65px" height="65px"
+                                 style="position: absolute; top:-5px; right: 110px; opacity: 70%; z-index:101;"/>
                         </li>
 
                         <li class="nav-item">
                             <!--방울 메뉴창(마이페이지, 글쓰기 등) 띄우는 링크? -->
-                            <a class="cloudbtn" href="#">메뉴</a>
+                            <p class="cloudbtn" href="#redirect" style="top:23px;">메뉴</p>
                         </li>
                     </ul>
                 </div>
