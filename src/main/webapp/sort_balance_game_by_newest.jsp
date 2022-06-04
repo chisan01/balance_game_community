@@ -5,7 +5,8 @@
 <%@ page import="com.example.balance_game_community.balanceGameComment.BalanceGameCommentDAO" %>
 <%@ page import="com.example.balance_game_community.DataSource" %>
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGame" %>
-<%@ page import="java.util.Random" %><%--
+<%@ page import="java.util.Random" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: kmj
   Date: 2022-05-22
@@ -26,6 +27,9 @@
     BalanceGameVoteDAO balanceGameVoteDAO = appConfig.getBalanceGameVoteDAO();
     BalanceGameDAO balanceGameDAO = appConfig.getBalanceGameDAO();
     BalanceGameCommentDAO balanceGameCommentDAO = appConfig.getBalanceGameCommentDAO();
+
+    List<BalanceGame> newBalanceGames;
+    newBalanceGames = balanceGameDAO.findAllSortedBy("id");
 %>
 
 <div id="layoutDefault">
@@ -124,8 +128,7 @@
                     int index = 4;
                     int flag = 2;
                     int ang = 0;
-                    for (int i = 1; i <= maxIndex; i++) {
-                        BalanceGame balanceGame = balanceGameDAO.findById((long) i);
+                    for (int i = 1; i <= newBalanceGames.size(); i++) {
                         if (i == index) {
                             index += flag;
                             if (flag == 2) {
@@ -173,13 +176,13 @@
                         if(laundryClass == 3) {%>
                         <image class="laundry_3" src="<%=selectclothes%>" width="450" height="470"></image> <%}%>
                         <div class="balancegame">
-                            <p style="font-size: 22px;"><%=balanceGame.getQuestion()%>
+                            <p style="font-size: 22px;"><%=newBalanceGames.get(i - 1).getQuestion()%>
                             </p>
                             <h4><br/></h4>
-                            <p><%=balanceGame.getAnswer1()%>
+                            <p><%=newBalanceGames.get(i - 1).getAnswer1()%>
                             </p>
                             <p style="color: saddlebrown">vs</p>
-                            <p><%=balanceGame.getAnswer2()%>
+                            <p><%=newBalanceGames.get(i - 1).getAnswer2()%>
                             </p>
                         </div>
                     </div>
