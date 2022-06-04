@@ -19,8 +19,6 @@ public class DataSource {
             }
             prop.load(input);
 
-            System.out.println("properties 파일 사용");
-
             this.dbURL = prop.getProperty("db.url");
             this.dbUser = prop.getProperty("db.user");
             this.dbPassword = prop.getProperty("db.password");
