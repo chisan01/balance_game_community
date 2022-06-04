@@ -196,10 +196,10 @@
                         <input type="hidden" name="balanceGameId" value="<%=balanceGameId%>"/>
 
                         <div class="chooseAnswer">
-                            <input type="submit" name="answer" value="1"
-                                   style="width: 1035px; height: 900px; z-index: 100; opacity: 0;">
-                            <input type="submit" name="answer" value="2"
-                                   style="width: 1035px; height: 900px; z-index: 100; opacity: 0;">
+                            <input id="chooseAnswer1" type="submit" name="answer" value="1"
+                                   style="width: 1035px; height: 900px; z-index: 100; opacity: 0.1;">
+                            <input id="chooseAnswer2" type="submit" name="answer" value="2"
+                                   style="width: 1035px; height: 900px; z-index: 100; opacity: 0.1;">
                         </div>
                     </form>
                 </div>

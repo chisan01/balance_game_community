@@ -223,6 +223,12 @@ input {
     display: flex;
     position: relative;
 }
+#chooseAnswer1:hover, #chooseAnswer2:hover{
+    opacity: 1;
+    background-color: black;
+    border: none;
+}
+
 .result-content-font{
     width: 100%;
     position: absolute;
