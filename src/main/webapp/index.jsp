@@ -98,16 +98,22 @@
                                 시작</a>
                         </li>
                         <li class="nav-item">
-                        <img src="image/menu_btn.png" width="165px" height="165px"
-                             style="position: absolute; top:-35px; opacity: 70%; z-index:101;"/>
+                        <img src="image/menu_btn.png" width="65px" height="65px"
+                             style="position: absolute; top:-5px; right: 110px; opacity: 70%; z-index:101;"/>
                         </li>
                         <li class="nav-item">
                             <!--방울 메뉴창(마이페이지, 글쓰기 등) 띄우는 링크? -->
-                            <a class="cloudbtn" href="#">메뉴</a>
+                            <a class="cloudbtn" href="#redirect">메뉴</a>
                         </li>
                     </ul>
                 </div>
             </div>
+        </nav>
+
+        <!--위로 바로가기-->
+        <nav >
+            <img class="go_up_btn" src="image/go_up_btn.png" width="100px" height="100px" />
+            <a class="go_up" href="#">맨 위로</a>
         </nav>
 
         <!--page header : 바로 게임 시작 햇님 버튼 -->
@@ -152,7 +158,9 @@
                     <a href="sort_balance_game_by_difficulty.jsp">난이도별 밸런스게임</a>
                 </div>
             </div>
-            <div class="bubble x4"></div>
+            <div class="bubble x4">
+                <img src="image/white%20x.png" width="100px" height="100px" style="opacity: 70%;"/>
+            </div>
         </div>
 
         <span class="svg-border-rounded">
@@ -219,7 +227,7 @@
                             int randnum = 0;
                             String[] clothes = {"clothes", "clothes1", "clothes2", "clothes3", "clothes4", "clothes5", "clothes6", "clothes7", "clothes8", "clothes9", "towel"};
                             randnum = rand.nextInt(11);
-                            String selectclothes = "./img/" + clothes[randnum] + ".png";
+                            String selectclothes = "./image/" + clothes[randnum] + ".png";
                             int laundryClass = (int)((Math.random()*10)%3)+1;
                             if(laundryClass == 1) {%>
                         <image class="laundry_1" src="<%=selectclothes%>" width="450" height="470"></image> <%}
@@ -253,13 +261,7 @@
             </svg>
         </div>
 
-        <!--지금 사람들이 많이 하고 있는 밸런스 게임-->
-        <section class="this-time-best">
-            <div class="container">
-
-            </div>
-        </section>
-        <div class="svg-border-rounded">
+        <div class="svg-border-rounded" style="padding-bottom: 100px;">
             <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
                 <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0" fill="transparent"
                       style="stroke:rgb(0, 0, 0);"></path>

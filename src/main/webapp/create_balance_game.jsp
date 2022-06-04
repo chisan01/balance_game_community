@@ -48,13 +48,13 @@
                 <div class="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <img src="image/menu_btn.png" width="165px" height="165px"
-                                 style="position: absolute; top:-35px; opacity: 70%; z-index:101;"/>
+                            <img src="image/menu_btn.png" width="65px" height="65px"
+                                 style="position: absolute; top:-5px; right: 110px; opacity: 70%; z-index:101;"/>
                         </li>
 
                         <li class="nav-item">
                             <!--방울 메뉴창(마이페이지, 글쓰기 등) 띄우는 링크? -->
-                            <a class="cloudbtn" href="#">메뉴</a>
+                            <p class="cloudbtn" href="#redirect" style="top:23px;">메뉴</p>
                         </li>
                     </ul>
                 </div>
@@ -82,14 +82,12 @@
 
         <div id="newWriting">
             <form action="/addBalanceGameServlet" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
-                <h2 style="padding-top: 20px; padding-bottom: 20px;">질문? </h2>
-                <input class="data" type="text" name="question" placeholder="Question" style=" padding-left: 20px; height: 50px; opacity: 50%; border-top: none;
-    border-left: none;
-    border-right: none;"/>
+                <h1 style="padding-top: 20px; padding-bottom: 20px;">질문? </h1>
+                <input class="data" type="text" name="question" placeholder="Question" style=" padding-left: 20px; height: 50px; opacity: 50%; border-bottom: solid"/>
 
                 <div class="create-game-vs">
                     <div class="create-game-answer" style="padding-right: 50px;">
-                        <h2 style="padding-top: 20px;">Choice 1</h2>
+                        <h1 style="padding-top: 20px;">Choice 1</h1>
                         <div class="button">
                             <label for="chooseFile">
                                 👉 사진 선택 👈
@@ -100,11 +98,11 @@
                         <label id="fileName" style="padding-bottom: 10px;"></label>
                         <img id="img" src="image/preview.svg" style="width: 500px; height: 500px;"/>
 
-                        <input class="data" type="text" name="answer1" placeholder="Choice1" style="padding-left: 20px; height: 100px; margin-top: 20px; margin-bottom: 20px; opacity: 50%;"/>
+                        <input class="data" type="text" name="answer1" placeholder="Choice1" style="padding-left: 20px; height: 100px; margin-top: 20px; margin-bottom: 20px; opacity: 50%; border-bottom: solid"/>
                     </div>
 
                     <div class="create-game-answer" style="padding-left: 50px;">
-                        <h2 style="padding-top: 20px;">Choice 2</h2>
+                        <h1 style="padding-top: 20px;">Choice 2</h1>
                         <div class="button">
                             <label for="chooseFile1">
                                 👉 사진 선택 👈
@@ -115,7 +113,7 @@
                         <label id="fileName2" style="padding-bottom: 10px;"></label>
                         <img id="img2" src="image/preview.svg" style="width: 500px; height: 500px;"/>
 
-                        <input class="data" type="text" name="answer2" placeholder="Choice2" style="padding-left: 20px; height: 100px; margin-top: 20px; margin-bottom: 20px; opacity: 50%;"/>
+                        <input class="data" type="text" name="answer2" placeholder="Choice2" style="padding-left: 20px; height: 100px; margin-top: 20px; margin-bottom: 20px; opacity: 50%; border-bottom: solid"/>
                     </div>
                 </div>
 
@@ -133,7 +131,7 @@
                         </li>
                     </ul>
                 </div>
-                <input class="data" type="submit" value="Save" style="height: 50px; margin-top: 30px; margin-bottom: 100px; opacity: 50%;">
+                <input class="data" type="submit" value="Save" style="height: 50px; margin-top: 30px; margin-bottom: 100px; opacity: 50%; border: solid">
             </form>
         </div>
     </main>
