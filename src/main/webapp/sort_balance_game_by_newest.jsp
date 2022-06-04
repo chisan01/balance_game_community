@@ -176,13 +176,13 @@
                         if(laundryClass == 3) {%>
                         <image class="laundry_3" src="<%=selectclothes%>" width="450" height="470"></image> <%}%>
                         <div class="balancegame">
-                            <p style="font-size: 22px;"><%=newBalanceGames.get(i - 1).getQuestion()%>
+                            <p style="font-size: 22px;"><%=newBalanceGames.get(newBalanceGames.size() - i).getQuestion()%>
                             </p>
                             <h4><br/></h4>
-                            <p><%=newBalanceGames.get(i - 1).getAnswer1()%>
+                            <p><%=newBalanceGames.get(newBalanceGames.size() - i).getAnswer1()%>
                             </p>
                             <p style="color: saddlebrown">vs</p>
-                            <p><%=newBalanceGames.get(i - 1).getAnswer2()%>
+                            <p><%=newBalanceGames.get(newBalanceGames.size() - i).getAnswer2()%>
                             </p>
                         </div>
                     </div>
