@@ -7,7 +7,8 @@
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGame" %>
 <%@ page import="java.util.Random" %>
 <%@ page import="java.util.Arrays" %>
-<%@ page import="java.util.Comparator" %><%--
+<%@ page import="java.util.Comparator" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: kmj
   Date: 2022-05-22
@@ -30,16 +31,8 @@
     BalanceGameCommentDAO balanceGameCommentDAO = appConfig.getBalanceGameCommentDAO();
 
     long maxIndex = balanceGameDAO.getLastBalanceGameId();
-    BalanceGame[] popularBalanceGames = new BalanceGame[Math.toIntExact(maxIndex)];
-    for (int i = 1; i <= maxIndex; i++) {
-        popularBalanceGames[i-1] = balanceGameDAO.findById((long)i);
-    }
-    Comparator<BalanceGame> comparator = (b1, b2) -> {
-        // 인기순 내림차순으로 정렬
-        if(b1.getLikeCount() - b1.getDislikeCount() < b2.getLikeCount() - b2.getDislikeCount()) return 1;
-        else return -1;
-    };
-    Arrays.sort(popularBalanceGames, comparator);
+    List<BalanceGame> popularBalanceGames;
+    popularBalanceGames = balanceGameDAO.findAllSortedBy("likeCount");
 %>
 
 <div id="layoutDefault">
@@ -138,7 +131,7 @@
                     int index = 4;
                     int flag = 2;
                     int ang = 0;
-                    for (int i = 1; i <= popularBalanceGames.length; i++) {
+                    for (int i = 1; i <= popularBalanceGames.size(); i++) {
                         if (i == index) {
                             index += flag;
                             if (flag == 2) {
@@ -169,7 +162,7 @@
                         ang = -5;
                     }%>
 
-                <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=popularBalanceGames[i - 1].getId()%>" style="transform: rotate(<%=ang%>deg)">
+                <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=popularBalanceGames.get(i - 1).getId()%>" style="transform: rotate(<%=ang%>deg)">
                     <div class="towel">
                         <%
                             Random rand = new Random();
@@ -186,13 +179,13 @@
                             if(laundryClass == 3) {%>
                         <image class="laundry_3" src="<%=selectclothes%>" width="450" height="470"></image> <%}%>
                         <div class="balancegame">
-                            <p style="font-size: 22px;"><%=popularBalanceGames[i - 1].getQuestion()%>
+                            <p style="font-size: 22px;"><%=popularBalanceGames.get(i - 1).getQuestion()%>
                             </p>
                             <h4><br/></h4>
-                            <p><%=popularBalanceGames[i - 1].getAnswer1()%>
+                            <p><%=popularBalanceGames.get(i - 1).getAnswer1()%>
                             </p>
                             <p style="color: saddlebrown">vs</p>
-                            <p><%=popularBalanceGames[i - 1].getAnswer2()%>
+                            <p><%=popularBalanceGames.get(i - 1).getAnswer2()%>
                             </p>
                         </div>
                     </div>
