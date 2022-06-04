@@ -82,14 +82,14 @@
 
         <div id="newWriting">
             <form action="/addBalanceGameServlet" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
-                <h2 style="padding-top: 20px; padding-bottom: 20px;">질문? </h2>
+                <h1 style="padding-top: 20px; padding-bottom: 20px;">질문? </h1>
                 <input class="data" type="text" name="question" placeholder="Question" style=" padding-left: 20px; height: 50px; opacity: 50%; border-top: none;
     border-left: none;
     border-right: none;"/>
 
                 <div class="create-game-vs">
                     <div class="create-game-answer" style="padding-right: 50px;">
-                        <h2 style="padding-top: 20px;">Choice 1</h2>
+                        <h1 style="padding-top: 20px;">Choice 1</h1>
                         <div class="button">
                             <label for="chooseFile">
                                 👉 사진 선택 👈
@@ -104,7 +104,7 @@
                     </div>
 
                     <div class="create-game-answer" style="padding-left: 50px;">
-                        <h2 style="padding-top: 20px;">Choice 2</h2>
+                        <h1 style="padding-top: 20px;">Choice 2</h1>
                         <div class="button">
                             <label for="chooseFile1">
                                 👉 사진 선택 👈

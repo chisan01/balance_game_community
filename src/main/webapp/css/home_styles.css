@@ -15,10 +15,6 @@ a {
 
 html {
     font-family: 'Jua', sans-serif;
-    /* `font` 속성 리셋 */
-    font-size: 16px;
-    /* 기본 글꼴 사이즈 정의            : 16x => 1rem */
-    font-weight: normal;
     line-height: 1.5;
     color: #4d5058;
     /* 글꼴 크기 조정을 방지 */
@@ -30,6 +26,14 @@ html {
     -webkit-tap-highlight-color: transparent;
     background-color: #80e0ff;
 }
+
+input {
+    border-radius: 8px; }
+/*
+input[type="password"] {
+    border: none;
+    border-bottom: solid 2px #D2691E;
+}*/
 
 /*navbar*/
 .navbar {

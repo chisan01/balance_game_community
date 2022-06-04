@@ -100,6 +100,18 @@
                     <div style="padding-left: 40px; padding-top: 5px; display: flex;">
                         <p style="font-size: 40px; padding-right: 15px;">난이도: </p>
                         <img src="image/difficulty.png" width="40px" height="40px" alt=""/>
+
+                        <%
+                            if (balanceGame.getDifficulty() == Difficulty.NORMAL) {
+                                %>
+                        <img src="image/difficulty.png" width="40px" height="40px" alt=""/>
+                        <%
+                            } else if (balanceGame.getDifficulty() == Difficulty.HARD) {
+                        %>
+                        <img src="image/difficulty.png" width="40px" height="40px" alt=""/>
+                        <%
+                            }
+                        %>
                     </div>
                 </div>
 
