@@ -261,16 +261,6 @@ submit:hover{
     display: flex;
     justify-content: center;
 }
-/*
-.show-comment{
-    position: relative;
-    top:100px;
-}*/
-
-/*선호도 조사*/
-/*.checked{
-    border-color: red;
-}*/
 
 .show-game-feedback{
     width: 65%;
