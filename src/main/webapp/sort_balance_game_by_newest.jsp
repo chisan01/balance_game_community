@@ -68,6 +68,12 @@
             </div>
         </nav>
 
+        <!--위로 바로가기-->
+        <nav >
+            <img class="go_up_btn" src="image/go_up_btn.png" width="100px" height="100px" />
+            <a id="go_up" href="#">맨 위로</a>
+        </nav>
+
         <!--page header : 바로 게임 시작 햇님 버튼 -->
         <header class="page-header">
             <div class="header-start">
@@ -228,5 +234,15 @@
         });
     });
 
+    const go_up = document.querySelector('#go_up');
+    go_up.addEventListener('click', function(event) {
+        event.preventDefault(); // a tag 눌렀을 때 href 링크로 이동하지 않기 / form의 submit 버튼을 눌렀을 때 새로 실행하지 않음
+        const target = event.target; // 이벤트가 발생한 타겟
+        const body = document.querySelector('body');
+        window.scrollTo({
+            top: body.getBoundingClientRect().top + window.pageYOffset,
+            behavior: 'smooth'
+        })
+    })
 </script>
 </html>
