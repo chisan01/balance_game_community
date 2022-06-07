@@ -80,7 +80,7 @@
         <!--page header : 바로 게임 시작 햇님 버튼 -->
         <header class="page-header">
             <div class="header-start">
-                <a href="create_balance_game.html">
+                <a href="create_balance_game.jsp">
                     <svg id=sun" height="400" width="400" viewBox="-10 -10 410 410">
                         <circle cx="200" cy="200" r="130" fill="#edaa3b" ></circle>
                         <ellipse cx="200" cy="260" rx="35" ry="30"  fill="red" stroke="red" stroke-width="1" ></ellipse>
@@ -111,9 +111,11 @@
             <div class="bubble x3">
                 <div class="menu">
                     <h1>메뉴</h1>
-                    <a href="create_balance_game.html">인기순</a>
-                    <a href="index.jsp">마이페이지</a>
-                    <a href="create_balance_game.html">글쓰기</a>
+                    <a href="create_balance_game.jsp">글쓰기</a>
+                    <a href="index.jsp">오늘의 밸런스게임</a>
+                    <a href="sort_balance_game_by_like.jsp">인기순 밸런스게임</a>
+                    <a href="sort_balance_game_by_newest.jsp">최신순 밸런스게임</a>
+                    <a href="sort_balance_game_by_difficulty.jsp">난이도별 밸런스게임</a>
                 </div>
             </div>
             <div class="bubble x4"></div>

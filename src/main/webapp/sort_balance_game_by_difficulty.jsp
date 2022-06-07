@@ -6,7 +6,6 @@
 <%@ page import="com.example.balance_game_community.DataSource" %>
 <%@ page import="com.example.balance_game_community.balanceGame.BalanceGame" %>
 <%@ page import="com.example.balance_game_community.balanceGameVote.Difficulty" %>
-<%@ page import="jdk.internal.org.jline.utils.DiffHelper" %>
 <%@ page import="java.util.*" %><%--
   Created by IntelliJ IDEA.
   User: kmj
@@ -78,7 +77,7 @@
         <!--page header : 바로 게임 시작 햇님 버튼 -->
         <header class="page-header">
             <div class="header-start">
-                <a href="create_balance_game.html">
+                <a href="create_balance_game.jsp">
                     <svg id=sun" height="400" width="400" viewBox="-10 -10 410 410">
                         <circle cx="200" cy="200" r="130" fill="#edaa3b" ></circle>
                         <ellipse cx="200" cy="260" rx="35" ry="30"  fill="red" stroke="red" stroke-width="1" ></ellipse>
@@ -109,17 +108,24 @@
             <div class="bubble x3">
                 <div class="menu">
                     <h1>메뉴</h1>
-                    <a href="create_balance_game.html">인기순</a>
-                    <a href="index.jsp">마이페이지</a>
-                    <a href="create_balance_game.html">글쓰기</a>
+                    <a href="create_balance_game.jsp">글쓰기</a>
+                    <a href="index.jsp">오늘의 밸런스게임</a>
+                    <a href="sort_balance_game_by_like.jsp">인기순 밸런스게임</a>
+                    <a href="sort_balance_game_by_newest.jsp">최신순 밸런스게임</a>
+                    <a href="sort_balance_game_by_difficulty.jsp">난이도별 밸런스게임</a>
                 </div>
             </div>
             <div class="bubble x4"></div>
         </div>
 
-        <span class="svg-border-rounded">
+        <div>
+            <input type="radio" name="change-difficulty" value="상" onclick="changeDifficulty('hard')">상
+            <input type="radio" name="change-difficulty" value="중" onclick="changeDifficulty('normal')">중
+            <input type="radio" name="change-difficulty" value="하" onclick="changeDifficulty('easy')">하
+        </div>
+        <div class="difficulty-content">
+            <span class="svg-border-rounded">
             <!--인기순 정렬-->
-        <h2 class="balancegameTitle">맛보기로 쉬운 밸런스 게임부터?</h2>
             <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
                 <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0"
                       fill="transparent"
@@ -127,28 +133,28 @@
             </svg>
         </span>
 
-        <!--모든 밸런스게임-->
-        <section class="today-best">
-            <div class="container">
-                <%
-                    int difficulty = 0;
-                    int index = 4;
-                    int flag = 2;
-                    int ang = 0;
-                    for (int i = 1; i <= maxIndex; i++) {
-                        if (i == index) {
-                            index += flag;
-                            if (flag == 2) {
-                                flag = 3;
-                            } else {
-                                flag = 2;
-                            }
-                            %>
-                <span class="svg-border-rounded"  style="position: relative;">
+            <!--모든 밸런스게임-->
+            <section class="today-best">
+                <div class="container">
                     <%
-                    if(difficulty == 0 && difficultBalanceGames.get(i - 1).getDifficulty() == Difficulty.NORMAL) {
-                                difficulty = 1;
-                %>
+                        int difficulty = 0;
+                        int index = 4;
+                        int flag = 2;
+                        int ang = 0;
+                        for (int i = 1; i <= maxIndex; i++) {
+                            if (i == index) {
+                                index += flag;
+                                if (flag == 2) {
+                                    flag = 3;
+                                } else {
+                                    flag = 2;
+                                }
+                    %>
+                    <span class="svg-border-rounded"  style="position: relative;">
+                    <%
+                        if(difficulty == 0 && difficultBalanceGames.get(i - 1).getDifficulty() == Difficulty.NORMAL) {
+                            difficulty = 1;
+                    %>
                 <h2 class="balancegameTitle" style="position: absolute;">좀 더 어려운 밸런스 게임은 없을까?</h2>
                 <%
                 }
@@ -166,72 +172,73 @@
                                   style="stroke:rgb(0, 0, 0);"></path>
                         </svg>
                     </span>
-                <%
-                    }
-                    if (i % 5 == 1) {
-                        ang = 6;
-                    } else if (i % 5 == 2) {
-                        ang = 0;
-                    }else if (i % 5 == 3) {
-                        ang = -6;
-                    } else if (i % 5 == 4) {
-                        ang = 5;
-                    } else if (i % 5 == 0) {
-                        ang = -5;
-                    }%>
+                    <%
+                        }
+                        if (i % 5 == 1) {
+                            ang = 6;
+                        } else if (i % 5 == 2) {
+                            ang = 0;
+                        }else if (i % 5 == 3) {
+                            ang = -6;
+                        } else if (i % 5 == 4) {
+                            ang = 5;
+                        } else if (i % 5 == 0) {
+                            ang = -5;
+                        }%>
 
-                <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=difficultBalanceGames.get(i - 1).getId()%>" style="transform: rotate(<%=ang%>deg)">
-                    <div class="towel">
-                        <%
-                            Random rand = new Random();
-                            int randnum = 0;
-                            String[] clothes = {"clothes", "clothes1", "clothes2", "clothes3", "clothes4", "clothes5", "clothes6", "clothes7", "clothes8", "clothes9", "towel"};
-                            randnum = rand.nextInt(11);
-                            String selectclothes = "./img/" + clothes[randnum] + ".png";
-                            int laundryClass = (int)((Math.random()*10)%3)+1;
-                            if(laundryClass == 1) {%>
-                        <image class="laundry_1" src="<%=selectclothes%>" width="450" height="470"></image> <%}
+                    <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=difficultBalanceGames.get(i - 1).getId()%>" style="transform: rotate(<%=ang%>deg)">
+                        <div class="towel">
+                            <%
+                                Random rand = new Random();
+                                int randnum = 0;
+                                String[] clothes = {"clothes", "clothes1", "clothes2", "clothes3", "clothes4", "clothes5", "clothes6", "clothes7", "clothes8", "clothes9", "towel"};
+                                randnum = rand.nextInt(11);
+                                String selectclothes = "./img/" + clothes[randnum] + ".png";
+                                int laundryClass = (int)((Math.random()*10)%3)+1;
+                                if(laundryClass == 1) {%>
+                            <image class="laundry_1" src="<%=selectclothes%>" width="450" height="470"></image> <%}
 
-                        if(laundryClass == 2) {%>
-                        <image class="laundry_2" src="<%=selectclothes%>" width="450" height="470"></image> <%}
-                        if(laundryClass == 3) {%>
-                        <image class="laundry_3" src="<%=selectclothes%>" width="450" height="470"></image> <%}%>
-                        <div class="balancegame">
-                            <p style="font-size: 22px;"><%=difficultBalanceGames.get(i - 1).getQuestion()%>
-                            </p>
-                            <h4><br/></h4>
-                            <p><%=difficultBalanceGames.get(i - 1).getAnswer1()%>
-                            </p>
-                            <p style="color: saddlebrown">vs</p>
-                            <p><%=difficultBalanceGames.get(i - 1).getAnswer2()%>
-                            </p>
+                            if(laundryClass == 2) {%>
+                            <image class="laundry_2" src="<%=selectclothes%>" width="450" height="470"></image> <%}
+                            if(laundryClass == 3) {%>
+                            <image class="laundry_3" src="<%=selectclothes%>" width="450" height="470"></image> <%}%>
+                            <div class="balancegame">
+                                <p style="font-size: 22px;"><%=difficultBalanceGames.get(i - 1).getQuestion()%>
+                                </p>
+                                <h4><br/></h4>
+                                <p><%=difficultBalanceGames.get(i - 1).getAnswer1()%>
+                                </p>
+                                <p style="color: saddlebrown">vs</p>
+                                <p><%=difficultBalanceGames.get(i - 1).getAnswer2()%>
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                </a>
-                <%
-                    }
-                %>
+                    </a>
+                    <%
+                        }
+                    %>
+                </div>
+            </section>
+
+            <div class="svg-border-rounded">
+                <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
+                    <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0" fill="transparent"
+                          style="stroke:rgb(0, 0, 0);"></path>
+                </svg>
             </div>
-        </section>
 
-        <div class="svg-border-rounded">
-            <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
-                <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0" fill="transparent"
-                      style="stroke:rgb(0, 0, 0);"></path>
-            </svg>
-        </div>
+            <!--지금 사람들이 많이 하고 있는 밸런스 게임-->
+            <section class="this-time-best">
+                <div class="container">
 
-        <!--지금 사람들이 많이 하고 있는 밸런스 게임-->
-        <section class="this-time-best">
-            <div class="container">
-
+                </div>
+            </section>
+            <div class="svg-border-rounded">
+                <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
+                    <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0" fill="transparent"
+                          style="stroke:rgb(0, 0, 0);"></path>
+                </svg>
             </div>
-        </section>
-        <div class="svg-border-rounded">
-            <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
-                <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0" fill="transparent"
-                      style="stroke:rgb(0, 0, 0);"></path>
-            </svg>
         </div>
     </main>
 </div>
@@ -261,5 +268,21 @@
             behavior: 'smooth'
         })
     })
+
+    function changeDifficulty(difficulty) {
+        if(difficulty === "easy") {
+            $(document).ready(function() {
+                $(".difficulty-content").load("easy_balance_game.jsp");
+            });
+        } else if(difficulty === "normal") {
+            $(document).ready(function() {
+                $(".difficulty-content").load("normal_balance_game.jsp");
+            });
+        } else if(difficulty === "hard") {
+            $(document).ready(function() {
+                $(".difficulty-content").load("hard_balance_game.jsp");
+            });
+        }
+    }
 </script>
 </html>

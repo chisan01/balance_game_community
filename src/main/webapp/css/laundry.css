@@ -9,7 +9,7 @@
     /* 0% { transform: rotate(1deg); }
     50% { transform: rotate(-1deg); }
     100% { transform: rotate(1deg); } */
-    0% { transform:skewX(-2deg); }
+    0% { transform:skewX(2deg); }
     15% { transform:skewX(0deg); }
     20% { transform:skewX(-1deg); }
     30% { transform:skewX(0deg); }
@@ -24,7 +24,7 @@
     /* 0% { transform: rotate(1deg); }
     50% { transform: rotate(-1deg); }
     100% { transform: rotate(1deg); } */
-    0% { transform:skewX(-2deg); }
+    0% { transform:skewX(2deg); }
     15% { transform:skewX(0deg); }
     20% { transform:skewX(-1deg); }
     30% { transform:skewX(0deg); }
@@ -46,7 +46,7 @@
     /* 0% { transform: rotate(1deg); }
     50% { transform: rotate(-1deg); }
     100% { transform: rotate(1deg); } */
-    0% { transform:skewX(-2deg); }
+    0% { transform:skewX(-1deg); }
     18% { transform:skewX(0deg); }
     25% { transform:skewX(-2deg); }
     45% { transform:skewX(0deg); }
@@ -61,7 +61,7 @@
     /* 0% { transform: rotate(1deg); }
     50% { transform: rotate(-1deg); }
     100% { transform: rotate(1deg); } */
-    0% { transform:skewX(-2deg); }
+    0% { transform:skewX(-1deg); }
     18% { transform:skewX(0deg); }
     25% { transform:skewX(-1deg); }
     45% { transform:skewX(0deg); }
