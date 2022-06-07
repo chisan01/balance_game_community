@@ -219,7 +219,7 @@
                         ang = -5;
                     }%>
 
-                <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=i%>"
+                <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=balanceGame.getId()%>"
                    style="transform: rotate(<%=ang%>deg)">
                     <div class="towel">
                         <%
