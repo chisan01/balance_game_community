@@ -102,7 +102,7 @@ input {
     z-index: 105;
 }
 
-.go_up{
+#go_up{
     position: fixed;
     bottom: 38px;
     right: 21px;
@@ -541,6 +541,7 @@ h2.balancegameTitle {
     transform: translate(-50%, 80%);
 }
 
+.balancegame {
     width: 450px;
     height: 470px;
     position: absolute;
