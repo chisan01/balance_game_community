@@ -125,9 +125,10 @@
         </div>
         <div class="difficulty-content">
             <span class="svg-border-rounded">
-            <!--인기순 정렬-->
-            <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
-                <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0"
+            <!--난이도순 정렬-->
+                <h2 class="balancegameTitle">맛보기로 쉬운 밸런스 게임부터?</h2>
+                <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
+                    <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0"
                       fill="transparent"
                       style="stroke:rgb(0, 0, 0);"></path>
             </svg>
@@ -193,7 +194,7 @@
                                 int randnum = 0;
                                 String[] clothes = {"clothes", "clothes1", "clothes2", "clothes3", "clothes4", "clothes5", "clothes6", "clothes7", "clothes8", "clothes9", "towel"};
                                 randnum = rand.nextInt(11);
-                                String selectclothes = "./img/" + clothes[randnum] + ".png";
+                                String selectclothes = "./image/" + clothes[randnum] + ".png";
                                 int laundryClass = (int)((Math.random()*10)%3)+1;
                                 if(laundryClass == 1) {%>
                             <image class="laundry_1" src="<%=selectclothes%>" width="450" height="470"></image> <%}

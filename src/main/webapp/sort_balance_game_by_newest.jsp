@@ -174,7 +174,7 @@
                             int randnum = 0;
                             String[] clothes = {"clothes", "clothes1", "clothes2", "clothes3", "clothes4", "clothes5", "clothes6", "clothes7", "clothes8", "clothes9", "towel"};
                             randnum = rand.nextInt(11);
-                            String selectclothes = "./img/" + clothes[randnum] + ".png";
+                            String selectclothes = "./image/" + clothes[randnum] + ".png";
                             int laundryClass = (int)((Math.random()*10)%3)+1;
                             if(laundryClass == 1) {%>
                         <image class="laundry_1" src="<%=selectclothes%>" width="450" height="470"></image> <%}
