@@ -68,11 +68,11 @@
                 <div class="menu">
                     <h1>메뉴</h1>
                     <p><br/></p>
-                    <a href="create_balance_game.html">글쓰기</a>
+                    <a href="create_balance_game.jsp">글쓰기</a>
                     <a href="index.jsp">오늘의 밸런스게임</a>
-                    <a href="create_balance_game.html">인기순 밸런스게임</a>
-                    <a href="create_balance_game.html">최신순 밸런스게임</a>
-                    <a href="create_balance_game.html">난이도별 밸런스게임</a>
+                    <a href="sort_balance_game_by_like.jsp">인기순 밸런스게임</a>
+                    <a href="sort_balance_game_by_newest.jsp">최신순 밸런스게임</a>
+                    <a href="sort_balance_game_by_difficulty.jsp">난이도별 밸런스게임</a>
                 </div>
             </div>
             <div class="bubble x4">
