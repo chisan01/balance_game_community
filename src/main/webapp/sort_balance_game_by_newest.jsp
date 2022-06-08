@@ -68,10 +68,16 @@
             </div>
         </nav>
 
+        <!--위로 바로가기-->
+        <nav >
+            <img class="go_up_btn" src="image/go_up_btn.png" width="100px" height="100px" />
+            <a id="go_up" href="#">맨 위로</a>
+        </nav>
+
         <!--page header : 바로 게임 시작 햇님 버튼 -->
         <header class="page-header">
             <div class="header-start">
-                <a href="create_balance_game.html">
+                <a href="create_balance_game.jsp">
                     <svg id=sun" height="400" width="400" viewBox="-10 -10 410 410">
                         <circle cx="200" cy="200" r="130" fill="#edaa3b" ></circle>
                         <ellipse cx="200" cy="260" rx="35" ry="30"  fill="red" stroke="red" stroke-width="1" ></ellipse>
@@ -102,9 +108,11 @@
             <div class="bubble x3">
                 <div class="menu">
                     <h1>메뉴</h1>
-                    <a href="sort_balance_game_by_like.jsp">인기순</a>
-                    <a href="index.jsp">마이페이지</a>
-                    <a href="create_balance_game.html">글쓰기</a>
+                    <a href="create_balance_game.jsp">글쓰기</a>
+                    <a href="index.jsp">오늘의 밸런스게임</a>
+                    <a href="sort_balance_game_by_like.jsp">인기순 밸런스게임</a>
+                    <a href="sort_balance_game_by_newest.jsp">최신순 밸런스게임</a>
+                    <a href="sort_balance_game_by_difficulty.jsp">난이도별 밸런스게임</a>
                 </div>
             </div>
             <div class="bubble x4"></div>
@@ -166,7 +174,7 @@
                             int randnum = 0;
                             String[] clothes = {"clothes", "clothes1", "clothes2", "clothes3", "clothes4", "clothes5", "clothes6", "clothes7", "clothes8", "clothes9", "towel"};
                             randnum = rand.nextInt(11);
-                            String selectclothes = "./img/" + clothes[randnum] + ".png";
+                            String selectclothes = "./image/" + clothes[randnum] + ".png";
                             int laundryClass = (int)((Math.random()*10)%3)+1;
                             if(laundryClass == 1) {%>
                         <image class="laundry_1" src="<%=selectclothes%>" width="450" height="470"></image> <%}
@@ -228,5 +236,15 @@
         });
     });
 
+    const go_up = document.querySelector('#go_up');
+    go_up.addEventListener('click', function(event) {
+        event.preventDefault(); // a tag 눌렀을 때 href 링크로 이동하지 않기 / form의 submit 버튼을 눌렀을 때 새로 실행하지 않음
+        const target = event.target; // 이벤트가 발생한 타겟
+        const body = document.querySelector('body');
+        window.scrollTo({
+            top: body.getBoundingClientRect().top + window.pageYOffset,
+            behavior: 'smooth'
+        })
+    })
 </script>
 </html>

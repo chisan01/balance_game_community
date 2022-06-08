@@ -51,7 +51,7 @@
                 <div class="menu">
                     <h1>메뉴</h1>
                     <p><br/></p>
-                    <a href="create_balance_game.html">글쓰기</a>
+                    <a href="create_balance_game.jsp">글쓰기</a>
                     <a href="index.jsp">오늘의 밸런스게임</a>
                     <a href="create_balance_game.html">인기순 밸런스게임</a>
                     <a href="create_balance_game.html">최신순 밸런스게임</a>
