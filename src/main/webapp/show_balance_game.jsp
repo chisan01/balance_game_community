@@ -84,10 +84,10 @@
         <!--위로 바로가기-->
         <nav >
             <img class="go_up_btn" src="image/go_up_btn.png" width="100px" height="100px" />
-            <a class="go_up" href="#">맨 위로</a>
+            <a id="go_up" href="#">맨 위로</a>
         </nav>
 
-        <div id="newWriting">
+        <div id="newWriting" style="top:60px;">
             <!--사진 내부-->
             <div class="game-result">
                 <!--제목-->
@@ -99,7 +99,6 @@
                     <div style="padding-left: 40px; padding-top: 5px; display: flex;">
                         <p style="font-size: 40px; padding-right: 15px;">난이도: </p>
                         <img src="image/difficulty.png" width="40px" height="40px" alt=""/>
-
                         <%
                             if (balanceGame.getDifficulty() == Difficulty.NORMAL) {
                                 %>
@@ -107,6 +106,7 @@
                         <%
                             } else if (balanceGame.getDifficulty() == Difficulty.HARD) {
                         %>
+                        <img src="image/difficulty.png" width="40px" height="40px" alt=""/>
                         <img src="image/difficulty.png" width="40px" height="40px" alt=""/>
                         <%
                             }

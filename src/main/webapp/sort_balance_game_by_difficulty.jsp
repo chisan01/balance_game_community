@@ -307,20 +307,33 @@
     })
 
     function changeDifficulty(difficulty) {
+        var target1 = document.getElementById("difficult-easy");
+        target1.style.backgroundColor = "#00000000";
+        target1.style.opacity = "100%";
+        var target2 = document.getElementById("difficult-middle");
+        target2.style.backgroundColor = "#00000000";
+        target2.style.opacity = "100%";
+        var target3 = document.getElementById("difficult-hard");
+        target3.style.backgroundColor = "#00000000";
+        target3.style.opacity = "100%";
 
         if (difficulty === "easy") {
             $(document).ready(function () {
                 $(".difficulty-content").load("easy_balance_game.jsp");
+                target1.style.backgroundColor = "#F4E6A2";
+                target1.style.opacity = "80%";
             });
         } else if (difficulty === "normal") {
             $(document).ready(function () {
                 $(".difficulty-content").load("normal_balance_game.jsp");
-
+                target2.style.backgroundColor = "#F4E6A2";
+                target2.style.opacity = "80%";
             });
         } else if (difficulty === "hard") {
             $(document).ready(function () {
                 $(".difficulty-content").load("hard_balance_game.jsp");
-
+                target3.style.backgroundColor = "#F4E6A2";
+                target3.style.opacity = "80%";
             });
         }
     }

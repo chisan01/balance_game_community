@@ -78,9 +78,9 @@
             </div>
         </div>
 
-        <div id="newWriting">
+        <div id="newWriting" style="padding-top: 60px;">
             <form action="/addBalanceGameServlet" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
-                <h1 style="padding-top: 20px; padding-bottom: 20px;">질문? </h1>
+                <h1 style="padding-top: 20px; padding-bottom: 20px; font-size: 2em;">질문? </h1>
                 <input class="data" type="text" name="question" placeholder="Question" style=" padding-left: 20px; height: 50px; opacity: 50%; border-bottom: solid"/>
 
                 <div class="create-game-vs">
@@ -115,19 +115,26 @@
                     </div>
                 </div>
 
-                <div class="create-game-vs">
-                    <p style="padding-right: 20px;">난이도 선택 : </p>
-                    <ul style="list-style: none;">
-                        <li class="nav-item">
-                            <input type="radio" name="difficulty" value="top">상
-                        </li>
-                        <li class="nav-item">
-                            <input type="radio" name="difficulty" value="middle">중
-                        </li>
-                        <li class="nav-item">
-                            <input type="radio" name="difficulty" value="bottom">하
-                        </li>
-                    </ul>
+                <%-- 난이도 고르기--%>
+                <div class="difficulty" style="padding-top:0px; padding-bottom: 40px;">
+                    <div class="difficulty-btn" style="justify-content: center;">
+                        <p>난이도 선택 : </p>
+                        <div class="difficulty-icon" id="difficult-hard" onclick="changeDifficulty('hard')"
+                             style="border: none;">
+                            <img src="image/difficult_icon.png" width="25px" height="25px"/>
+                            <p>어려운</p>
+                        </div>
+                        <div class="difficulty-icon" id="difficult-middle" onclick="changeDifficulty('normal')"
+                             style="border: none;">
+                            <img src="image/middle_icon.png" width="25px" height="25px"/>
+                            <p>보통</p>
+                        </div>
+                        <div class="difficulty-icon" id="difficult-easy" onclick="changeDifficulty('easy')"
+                             style="border: none;">
+                            <img src="image/easy_icon.png" width="25px" height="25px"/>
+                            <p>쉬운</p>
+                        </div>
+                    </div>
                 </div>
                 <input class="data" type="submit" value="Save" style="height: 50px; margin-top: 30px; margin-bottom: 100px; opacity: 50%; border: solid">
             </form>
@@ -178,6 +185,35 @@
         newImage = document.getElementById('img2').lastElementChild;
         newImage.style.visibility = "visible";
     };
+
+    function changeDifficulty(difficulty) {
+        var target1= document.getElementById("difficult-easy");
+        target1.style.backgroundColor="#00000000";
+        target1.style.opacity="100%";
+        var target2= document.getElementById("difficult-middle");
+        target2.style.backgroundColor="#00000000";
+        target2.style.opacity="100%";
+        var target3= document.getElementById("difficult-hard");
+        target3.style.backgroundColor="#00000000";
+        target3.style.opacity="100%";
+
+        if (difficulty === "easy") {
+            $(document).ready(function () {
+                    target1.style.backgroundColor="#F4E6A2";
+                    target1.style.opacity="80%";
+            });
+        } else if (difficulty === "normal") {
+            $(document).ready(function () {
+                target2.style.backgroundColor="#F4E6A2";
+                target2.style.opacity="80%";
+            });
+        } else if (difficulty === "hard") {
+            $(document).ready(function () {
+                target3.style.backgroundColor="#F4E6A2";
+                target3.style.opacity="80%";
+            });
+        }
+    }
 
 </script>
 </html>
