@@ -51,7 +51,6 @@
                             <img src="image/menu_btn.png" width="65px" height="65px"
                                  style="position: absolute; top:-5px; right: 110px; opacity: 70%; z-index:101;"/>
                         </li>
-
                         <li class="nav-item">
                             <!--방울 메뉴창(마이페이지, 글쓰기 등) 띄우는 링크? -->
                             <p class="cloudbtn" href="#redirect" style="top:23px;">메뉴</p>
@@ -66,8 +65,7 @@
             <div class="bubble x2"></div>
             <div class="bubble x3">
                 <div class="menu">
-                    <h1>메뉴</h1>
-                    <p><br/></p>
+                    <h1><< 메뉴 >></h1>
                     <a href="create_balance_game.jsp">글쓰기</a>
                     <a href="index.jsp">오늘의 밸런스게임</a>
                     <a href="sort_balance_game_by_like.jsp">인기순 밸런스게임</a>

@@ -107,7 +107,7 @@
             <div class="bubble x2"></div>
             <div class="bubble x3">
                 <div class="menu">
-                    <h1>메뉴</h1>
+                    <h1><< 메뉴 >></h1>
                     <a href="create_balance_game.jsp">글쓰기</a>
                     <a href="index.jsp">오늘의 밸런스게임</a>
                     <a href="sort_balance_game_by_like.jsp">인기순 밸런스게임</a>
@@ -120,7 +120,8 @@
 
         <span class="svg-border-rounded">
             <!--최신순 정렬-->
-        <h2 class="balancegameTitle">따근따근한 밸런스 게임들</h2>
+        <h2 class="balancegameTitle">따끈따끈한 밸런스 게임들</h2>
+            <h2><br/></h2>
             <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
                 <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0"
                       fill="transparent"

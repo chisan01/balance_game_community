@@ -113,11 +113,7 @@
         <!--위로 바로가기-->
         <nav >
             <img class="go_up_btn" src="image/go_up_btn.png" width="100px" height="100px" />
-<<<<<<< HEAD
-            <a class="go_up" href="#">맨 위로</a>
-=======
             <a id="go_up" href="#">맨 위로</a>
->>>>>>> 4a8826c5a212aac98603d5903993c57bd322ee87
         </nav>
 
         <!--page header : 바로 게임 시작 햇님 버튼 -->
@@ -153,8 +149,7 @@
             <div class="bubble x2"></div>
             <div class="bubble x3">
                 <div class="menu">
-                    <h1>메뉴</h1>
-                    <p><br/></p>
+                    <h1><< 메뉴 >></h1>
                     <a href="create_balance_game.jsp">글쓰기</a>
                     <a href="index.jsp">오늘의 밸런스게임</a>
                     <a href="sort_balance_game_by_like.jsp">인기순 밸런스게임</a>
