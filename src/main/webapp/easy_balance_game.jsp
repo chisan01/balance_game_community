@@ -23,6 +23,7 @@
 <span class="svg-border-rounded">
             <!--최신순 정렬-->
         <h2 class="balancegameTitle">맛보기로 쉬운 밸런스 게임부터?</h2>
+    <h2><br/></h2>
             <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
                 <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0"
                       fill="transparent"
@@ -60,7 +61,7 @@
                 ang = 6;
             } else if (i % 5 == 2) {
                 ang = 0;
-            }else if (i % 5 == 3) {
+            } else if (i % 5 == 3) {
                 ang = -6;
             } else if (i % 5 == 4) {
                 ang = 5;
@@ -76,14 +77,21 @@
                     String[] clothes = {"clothes", "clothes1", "clothes2", "clothes3", "clothes4", "clothes5", "clothes6", "clothes7", "clothes8", "clothes9", "towel"};
                     randnum = rand.nextInt(11);
                     String selectclothes = "./image/" + clothes[randnum] + ".png";
-                    int laundryClass = (int)((Math.random()*10)%3)+1;
-                    if(laundryClass == 1) {%>
-                <image class="laundry_1" src="<%=selectclothes%>" width="450" height="470"></image> <%}
+                    int laundryClass = (int) ((Math.random() * 10) % 3) + 1;
+                    if (laundryClass == 1) {%>
+                <image class="laundry_1" src="<%=selectclothes%>" width="450" height="470"></image>
+                <%
+                    }
 
-                if(laundryClass == 2) {%>
-                <image class="laundry_2" src="<%=selectclothes%>" width="450" height="470"></image> <%}
-                if(laundryClass == 3) {%>
-                <image class="laundry_3" src="<%=selectclothes%>" width="450" height="470"></image> <%}%>
+                    if (laundryClass == 2) {
+                %>
+                <image class="laundry_2" src="<%=selectclothes%>" width="450" height="470"></image>
+                <%
+                    }
+                    if (laundryClass == 3) {
+                %>
+                <image class="laundry_3" src="<%=selectclothes%>" width="450" height="470"></image>
+                <%}%>
                 <div class="balancegame">
                     <p style="font-size: 22px;"><%=easyBalanceGames.get(easyBalanceGames.size() - i).getQuestion()%>
                     </p>
@@ -108,13 +116,6 @@
               style="stroke:rgb(0, 0, 0);"></path>
     </svg>
 </div>
-
-<!--지금 사람들이 많이 하고 있는 밸런스 게임-->
-<section class="this-time-best">
-    <div class="container">
-
-    </div>
-</section>
 <div class="svg-border-rounded">
     <svg viewBox="0 0 144.54 5.5" preserveAspectRatio="none" fill="white">
         <path d="M144.54, 17.34H144.54ZM0, 0S32.36, 5, 72.27, 5, 144.54, 0, 144.54, 0" fill="transparent"

@@ -49,13 +49,12 @@
             <div class="bubble x2"></div>
             <div class="bubble x3">
                 <div class="menu">
-                    <h1>메뉴</h1>
-                    <p><br/></p>
+                    <h1><< 메뉴 >></h1>
                     <a href="create_balance_game.jsp">글쓰기</a>
                     <a href="index.jsp">오늘의 밸런스게임</a>
-                    <a href="create_balance_game.html">인기순 밸런스게임</a>
-                    <a href="create_balance_game.html">최신순 밸런스게임</a>
-                    <a href="create_balance_game.html">난이도별 밸런스게임</a>
+                    <a href="sort_balance_game_by_like.jsp">인기순 밸런스게임</a>
+                    <a href="sort_balance_game_by_newest.jsp">최신순 밸런스게임</a>
+                    <a href="sort_balance_game_by_difficulty.jsp">난이도별 밸런스게임</a>
                 </div>
             </div>
             <div class="bubble x4">
@@ -85,10 +84,10 @@
         <!--위로 바로가기-->
         <nav >
             <img class="go_up_btn" src="image/go_up_btn.png" width="100px" height="100px" />
-            <a class="go_up" href="#">맨 위로</a>
+            <a id="go_up" href="#">맨 위로</a>
         </nav>
 
-        <div id="newWriting">
+        <div id="newWriting" style="top:60px;">
             <!--사진 내부-->
             <div class="game-result">
                 <!--제목-->
@@ -100,7 +99,6 @@
                     <div style="padding-left: 40px; padding-top: 5px; display: flex;">
                         <p style="font-size: 40px; padding-right: 15px;">난이도: </p>
                         <img src="image/difficulty.png" width="40px" height="40px" alt=""/>
-
                         <%
                             if (balanceGame.getDifficulty() == Difficulty.NORMAL) {
                                 %>
@@ -108,6 +106,7 @@
                         <%
                             } else if (balanceGame.getDifficulty() == Difficulty.HARD) {
                         %>
+                        <img src="image/difficulty.png" width="40px" height="40px" alt=""/>
                         <img src="image/difficulty.png" width="40px" height="40px" alt=""/>
                         <%
                             }
@@ -462,7 +461,6 @@
             $("#background-wrap").hide("slow");
         });
     });
-
 
 </script>
 </html>

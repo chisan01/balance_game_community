@@ -102,6 +102,7 @@ input {
     z-index: 105;
 }
 
+
 #go_up{
     position: fixed;
     bottom: 38px;
@@ -123,7 +124,7 @@ input {
     align-items: center;
     justify-content: center;
     position: relative;
-    top: 60px;
+    top: 36px;
 }
 
 .data {
@@ -423,7 +424,7 @@ section{
 .x1 {
     right: 700px;
     bottom: 100px;
-    animation: animate_x1 2s linear;
+    animation: animate_x1 1s linear;
 }
 
 @keyframes animate_x1 {
@@ -440,7 +441,7 @@ section{
 .x2 {
     right: 1000px;
     bottom: -200px;
-    animation: animate_x2 2s linear;
+    animation: animate_x2 1s linear;
 }
 
 @keyframes animate_x2 {
@@ -459,7 +460,7 @@ section{
     height: 1500px;
     right: -100px;
     bottom: -200px;
-    animation: animate_x3 2s linear;
+    animation: animate_x3 1s linear;
 }
 
 @keyframes animate_x3 {
@@ -491,12 +492,12 @@ section{
     height: 100px;
     right: 150px;
     bottom: 700px;
-    animation: animate_x4 2s linear;
+    animation: animate_x4 1s linear;
 }
 
 @keyframes animate_x4 {
     0% {
-        transform: translateY(50%);
+        transform: translateY(70%);
         opacity: 1;
     }
     100% {
