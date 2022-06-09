@@ -39,6 +39,7 @@
             int flag = 2;
             int ang = 0;
             for (int i = 1; i <= normalBalanceGames.size(); i++) {
+                BalanceGame balanceGame = normalBalanceGames.get(i - 1);
                 if (i == index) {
                     index += flag;
                     if (flag == 2) {
@@ -69,9 +70,10 @@
                 ang = -5;
             }%>
 
-        <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=i%>" style="transform: rotate(<%=ang%>deg)">
+        <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=balanceGame.getId()%>" style="transform: rotate(<%=ang%>deg)">
             <div class="towel">
                 <%
+                    System.out.println(normalBalanceGames.get(i - 1).getId());
                     Random rand = new Random();
                     int randnum = 0;
                     String[] clothes = {"clothes", "clothes1", "clothes2", "clothes3", "clothes4", "clothes5", "clothes6", "clothes7", "clothes8", "clothes9", "towel"};
@@ -93,13 +95,13 @@
                 <image class="laundry_3" src="<%=selectclothes%>" width="450" height="470"></image>
                 <%}%>
                 <div class="balancegame">
-                    <p style="font-size: 22px;"><%=normalBalanceGames.get(normalBalanceGames.size() - i).getQuestion()%>
+                    <p style="font-size: 22px;"><%=balanceGame.getQuestion()%>
                     </p>
                     <h4><br/></h4>
-                    <p><%=normalBalanceGames.get(normalBalanceGames.size() - i).getAnswer1()%>
+                    <p><%=balanceGame.getAnswer1()%>
                     </p>
                     <p style="color: saddlebrown">vs</p>
-                    <p><%=normalBalanceGames.get(normalBalanceGames.size() - i).getAnswer2()%>
+                    <p><%=balanceGame.getAnswer2()%>
                     </p>
                 </div>
             </div>

@@ -16,8 +16,8 @@
     BalanceGameDAO balanceGameDAO = appConfig.getBalanceGameDAO();
     BalanceGameCommentDAO balanceGameCommentDAO = appConfig.getBalanceGameCommentDAO();
     long maxIndex = balanceGameDAO.getLastBalanceGameId();
-    List<BalanceGame> easyBalanceGames;
-    easyBalanceGames = balanceGameDAO.findAllByDifficulty(Difficulty.HARD);
+    List<BalanceGame> hardBalanceGames;
+    hardBalanceGames = balanceGameDAO.findAllByDifficulty(Difficulty.HARD);
 %>
 
 <span class="svg-border-rounded">
@@ -38,7 +38,8 @@
             int index = 4;
             int flag = 2;
             int ang = 0;
-            for (int i = 1; i <= easyBalanceGames.size(); i++) {
+            for (int i = 1; i <= hardBalanceGames.size(); i++) {
+                BalanceGame balanceGame = hardBalanceGames.get(i - 1);
                 if (i == index) {
                     index += flag;
                     if (flag == 2) {
@@ -69,7 +70,7 @@
                 ang = -5;
             }%>
 
-        <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=i%>" style="transform: rotate(<%=ang%>deg)">
+        <a class="towel-page" href="show_balance_game.jsp?balanceGameId=<%=balanceGame.getId()%>" style="transform: rotate(<%=ang%>deg)">
             <div class="towel">
                 <%
                     Random rand = new Random();
@@ -93,13 +94,13 @@
                 <image class="laundry_3" src="<%=selectclothes%>" width="450" height="470"></image>
                 <%}%>
                 <div class="balancegame">
-                    <p style="font-size: 22px;"><%=easyBalanceGames.get(easyBalanceGames.size() - i).getQuestion()%>
+                    <p style="font-size: 22px;"><%=balanceGame.getQuestion()%>
                     </p>
                     <h4><br/></h4>
-                    <p><%=easyBalanceGames.get(easyBalanceGames.size() - i).getAnswer1()%>
+                    <p><%=balanceGame.getAnswer1()%>
                     </p>
                     <p style="color: saddlebrown">vs</p>
-                    <p><%=easyBalanceGames.get(easyBalanceGames.size() - i).getAnswer2()%>
+                    <p><%=balanceGame.getAnswer2()%>
                     </p>
                 </div>
             </div>
