@@ -13,7 +13,7 @@ public class BalanceGameResult {
     }
 
     public void updatePercent() {
-        answer1percent = (double) (answer1voteCount * 1000 / (answer1voteCount + answer2voteCount)) / 10;
+        answer1percent = Math.round(((double) answer1voteCount * 1000 / (answer1voteCount + answer2voteCount))) / 10.0;
         answer2percent = 100.0 - answer1percent;
     }
 
