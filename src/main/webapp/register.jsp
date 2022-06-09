@@ -30,6 +30,7 @@
         script.println("alert('password check failed')");
         script.println("history.back()");
         script.println("</script>");
+        return;
     }
 
     AppConfig testAppConfig = new AppConfig(new DataSource());

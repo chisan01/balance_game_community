@@ -30,7 +30,13 @@ public class loginServlet extends HttpServlet {
         PrintWriter script = response.getWriter();
         try {
             Long memberId = memberDAO.logIn(email, password);
-            if(memberId == null) return;
+            if(memberId == null) {
+                script.println("<script>");
+                script.println("alert('" + "login failed" + "')");
+                script.println("history.back()");
+                script.println("</script>");
+                return;
+            }
 
             // 임시 계정에 직접적으로 로그인하려고 한 경우
             if(memberDAO.isTempMember(memberId)) {

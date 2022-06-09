@@ -29,7 +29,10 @@
     Long memberId = (Long) session.getAttribute("memberId");
 
     // 로그인이 안되어있는 경우
-    if(memberId == null) response.sendRedirect("/");
+    if(memberId == null) {
+        response.sendRedirect("/");
+        return;
+    }
 
     if(memberDAO.isTempMember(memberId)) {
         PrintWriter script = response.getWriter();
@@ -37,6 +40,7 @@
         script.println("alert('" + "You should login to create game" + "')");
         script.println("location.href='login.html'");
         script.println("</script>");
+        return;
     }
 %>
 <div id="layoutDefault">

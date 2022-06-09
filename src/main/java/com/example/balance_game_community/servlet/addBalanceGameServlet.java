@@ -36,7 +36,10 @@ public class addBalanceGameServlet extends HttpServlet {
         Long memberId = (Long) request.getSession().getAttribute("memberId");
 
         // 로그인이 안되어있는 경우
-        if(memberId == null) response.sendRedirect("/");
+        if(memberId == null) {
+            response.sendRedirect("/");
+            return;
+        }
 
         BalanceGame balanceGame = new BalanceGame();
         balanceGame.setQuestion(request.getParameter("question"));

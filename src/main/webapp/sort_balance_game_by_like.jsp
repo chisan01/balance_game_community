@@ -45,7 +45,14 @@
                     <ul class="navbar-nav">
                         <%
                             Long memberId = (Long) session.getAttribute("memberId");
-                            if (memberId == null) {
+
+                            // 로그인이 안되어있는 경우
+                            if(memberId == null) {
+                                response.sendRedirect("/");
+                                return;
+                            }
+
+                            if (memberDAO.isTempMember(memberId)) {
                         %>
                         <li class="nav-item">
                             <a class="nav-link" href="login.html">로그인</a>

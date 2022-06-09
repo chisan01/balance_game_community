@@ -27,7 +27,10 @@ public class voteBalanceGameDifficultyServlet extends HttpServlet {
         Long memberId = (Long) request.getSession().getAttribute("memberId");
 
         // 로그인이 안되어있는 경우
-        if(memberId == null) response.sendRedirect("/");
+        if(memberId == null) {
+            response.sendRedirect("/");
+            return;
+        }
 
         Long balanceGameId = Long.parseLong(request.getParameter("balanceGameId"));
         Difficulty difficulty = Difficulty.valueOf(request.getParameter("difficulty"));

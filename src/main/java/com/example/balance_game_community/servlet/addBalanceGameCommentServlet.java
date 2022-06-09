@@ -26,7 +26,10 @@ public class addBalanceGameCommentServlet extends HttpServlet {
         Long memberId = (Long) request.getSession().getAttribute("memberId");
 
         // 로그인이 안되어있는 경우
-        if(memberId == null) response.sendRedirect("/");
+        if(memberId == null) {
+            response.sendRedirect("/");
+            return;
+        }
 
         Long balanceGameId = Long.parseLong(request.getParameter("balanceGameId"));
         String content = request.getParameter("content");
