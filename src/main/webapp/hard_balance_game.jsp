@@ -17,7 +17,7 @@
     BalanceGameCommentDAO balanceGameCommentDAO = appConfig.getBalanceGameCommentDAO();
     long maxIndex = balanceGameDAO.getLastBalanceGameId();
     List<BalanceGame> easyBalanceGames;
-    easyBalanceGames = balanceGameDAO.findAllByDifficulty(Difficulty.EASY);
+    easyBalanceGames = balanceGameDAO.findAllByDifficulty(Difficulty.HARD);
 %>
 
 <span class="svg-border-rounded">
