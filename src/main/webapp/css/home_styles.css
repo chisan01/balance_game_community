@@ -546,7 +546,8 @@ h2.balancegameTitle {
     width: 450px;
     height: 470px;
     position: absolute;
-    padding: 90px;
+    padding-left: 100px;
+    padding-right: 90px;
     padding-top: 190px;
     display: flex;
     flex-direction: column;
