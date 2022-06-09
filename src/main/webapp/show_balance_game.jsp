@@ -49,7 +49,7 @@
             <div class="bubble x2"></div>
             <div class="bubble x3">
                 <div class="menu">
-                    <h1><< 메뉴 >></h1>]
+                    <h1><< 메뉴 >></h1>
                     <a href="create_balance_game.jsp">글쓰기</a>
                     <a href="index.jsp">오늘의 밸런스게임</a>
                     <a href="sort_balance_game_by_like.jsp">인기순 밸런스게임</a>
